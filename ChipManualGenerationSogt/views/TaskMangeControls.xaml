@@ -10,33 +10,158 @@
     <UserControl.DataContext>
         <local:TaskMangeControlsViewModel/>
     </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <Style x:Key="CheckBoxTreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsSelectedInModel, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <ContentPresenter Content="{Binding}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </UserControl.Resources>
     <Grid Background="#FAFAFA">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-
-            <Border BorderBrush="#d9d9d9" BorderThickness="1">
-                <DockPanel>
-                    <Button>
-                        <Image Source="/resources/pic/search.png" Height="25" Width="25" DockPanel.Dock="Left"/>
-                    </Button>
-                    <TextBox x:Name="searchBox" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"   VerticalContentAlignment="Center"  FontSize="16"/>
-                </DockPanel>
-            </Border>
-            
-            
-            
-        </Grid>
         
-        <TabControl Grid.Column="0" x:Name="tabControl"  SelectionChanged="TabControl_SelectionChanged" >
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <Border BorderBrush="#d9d9d9" BorderThickness="1">
+                    <DockPanel>
+                        <Button>
+                            <Image Source="/resources/pic/search.png" Height="25" Width="25" DockPanel.Dock="Left"/>
+                        </Button>
+                        <TextBox x:Name="searchBox" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"   VerticalContentAlignment="Center"  FontSize="16"/>
+                    </DockPanel>
+                </Border>
+
+                <ScrollViewer  Grid.Row="1"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                       
+
+                    <Expander Header="Query Tasks">
+                        <StackPanel >
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Start DateTime:" Width="120" FontSize="14"/>
+                                <xctk:DateTimePicker 
+                             Width="200" 
+                             Format="Custom" 
+                             FormatString="yyyy/MM/dd/ HH:mm:ss"
+                             Value="{Binding StartTime}" />
+                                <Label Content=" " />
+                            </DockPanel>
+
+
+                            <!-- End DateTime -->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="End DateTime:" Width="120" FontSize="14"/>
+                                <xctk:DateTimePicker 
+                             Width="200" 
+                             Format="Custom" 
+                             FormatString="yyyy/MM/dd/ HH:mm:ss"
+                             Value="{Binding EndTime}" />
+                                <Label Content=" " />
+                            </DockPanel>
+
+                            <TreeView x:Name="TargetTreeView"
+                                        ItemsSource="{Binding DataForTreeViewA}"
+          
+                                          ItemContainerStyle="{StaticResource CheckBoxTreeViewItemStyle}">
+                                <TreeViewItem Header="All"/>
+                            </TreeView>
+
+                            <!-- Device Major -->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Device Major:" Width="120" FontSize="14"/>
+                                <xctk:CheckComboBox x:Name="_cbMajor"  Loaded="CheckComboBox_Loaded" 
+                                        Width="200"
+                                        ItemsSource="{Binding DeviceMajorSoureces}"
+                                        SelectedItemsOverride="{Binding SelectedDeviceMajors}"
+                                         />
+                                <Label Content=" "/>
+                            </DockPanel>
+
+                            <!-- Device Minor-->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Device Minor:" Width="120" FontSize="14"/>
+                                <xctk:CheckComboBox  x:Name="_cbMinor" Loaded="CheckComboBox_Loaded"
+                                     Width="200"   
+                                     ItemsSource="{Binding DeviceMinorSoureces}"
+                                     SelectedItemsOverride="{Binding SelectedDeviceMinors}"
+                                        />
+                                <Label Content=" "/>
+                            </DockPanel>
+
+                            <TreeView>
+                                
+                            </TreeView>
+                            
+
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Task Name:" Width="120" FontSize="14"/>
+                                <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
+                                <Label Content=" " />
+                            </DockPanel>
+
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Chip Number:" Width="120" FontSize="14"/>
+                                <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
+                                <Label Content=" " />
+                            </DockPanel>
+
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Level:" Width="120" FontSize="14"/>
+                                <xctk:CheckComboBox  
+                                        Width="200"
+                                        ItemsSource="{Binding Levels}"
+                                        SelectedItemsOverride="{Binding SelectedLevels}"
+                                        />
+                                <Label Content=" "/>
+                            </DockPanel>
+
+
+                           
+
+
+
+
+
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Button Content="Query" Click="Btn_Query_Click" Width="320" Height="30"/>
+                            </DockPanel>
+
+
+
+                        </StackPanel>
+
+                    </Expander>
+                            
+                        
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
+
+       
+        
+        <TabControl Grid.Column="1" x:Name="tabControl"  SelectionChanged="TabControl_SelectionChanged" >
             <TabItem Header="Current Tasks">
                 <DataGrid  x:Name="dataGrid" ItemsSource="{Binding CurrentTasks }"
                            MouseDoubleClick="doubleClick"
@@ -115,62 +240,7 @@
 
                     <DataGrid.Columns>
 
-                        <!-- Major-->
-                        <DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" >
-                                        <Label Content="Major:"/>
-                                        <ComboBox Width="120">
-                                            <ComboBoxItem Content="All"/>
-                                            <ComboBoxItem Content="Amplifier" />
-                                            <ComboBoxItem Content="Switch" />
-                                        </ComboBox>
-
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.HeaderTemplate>
-
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding YourColumnDataProperty}" 
-                           Style="{StaticResource CenteredTextBlockStyle}" 
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-
-                        </DataGridTemplateColumn>
-
-                        <!-- sub-->
-                            <DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn.HeaderTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" >
-                                        <Label Content="Minor:"/>
-                                        <ComboBox Width="120"  VerticalContentAlignment="Center">
-                                            <ComboBoxItem Content="All"/>
-                                            <ComboBoxItem Content="Amplifier" />
-                                            <ComboBoxItem Content="Switch" />
-                                        </ComboBox>
-
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.HeaderTemplate>
-
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding YourColumnDataProperty}" 
-                           Style="{StaticResource CenteredTextBlockStyle}" 
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-
-                        </DataGridTemplateColumn>
-
+               
                         <DataGridTextColumn Header="ID" Visibility="Collapsed" Binding="{Binding ID}" Width="50" Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
 
 
@@ -479,7 +549,7 @@
 
         
         <!--Right Side-->
-        <Expander   Grid.Column="1" ExpandDirection="Right">
+        <Expander   Grid.Column="2" ExpandDirection="Right">
             <Border BorderThickness="1" BorderBrush="#d9d9d9">
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto"

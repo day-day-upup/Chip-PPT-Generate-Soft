@@ -25,6 +25,7 @@ using Microsoft.Web.WebView2.Core;
 using DocumentFormat.OpenXml.Office2021.DocumentTasks;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.Presentation;
+using Xceed.Wpf.Toolkit;
 namespace ChipManualGenerationSogt
 {
     /// <summary>
@@ -614,6 +615,123 @@ namespace ChipManualGenerationSogt
             TestEvent?.Invoke(this, EventArgs.Empty);
                 
         }
+
+        private void Btn_Query_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in vm.SelectedLevels)
+            {
+                Console.WriteLine(item);
+            
+            }
+        }
+
+        //private void CheckComboBox_Minor_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    Console.WriteLine("hello");
+        //}
+
+    
+
+       
+        private void CheckComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckComboBox checkComboBox)
+            {
+                
+                // 1. 查找 CheckComboBox 模板内部的 Popup 控件
+                Popup popup = FindVisualChild<Popup>(checkComboBox);
+
+                if (popup != null)
+                {
+                    // 2. 移除旧的订阅（防止重复）
+                    popup.Opened -= Popup_Opened;
+
+                    // 3. ? 订阅 Popup 的 Opened 事件
+                    popup.Opened += Popup_Opened;
+
+                    // (可选：如果你也需要收起事件)
+                    // popup.Closed -= Popup_Closed;
+                    // popup.Closed += Popup_Closed;
+                }
+            }
+        }
+
+        private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                if (child != null && child is T typedChild)
+                {
+                    // 如果找到目标类型，直接返回
+                    return typedChild;
+                }
+                else
+                {
+                    // 递归查找子控件的子控件
+                    T result = FindVisualChild<T>(child);
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
+        }
+
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            // 这里的代码会在 CheckComboBox 的下拉列表展开时执行
+            //Console.WriteLine("CheckComboBox 下拉列表已展开！执行动态加载或更新逻辑...");
+
+            if (sender is Popup popup)
+            {
+                // 尝试向上查找 CheckComboBox 控件
+                // 在 CheckComboBox 的模板中，Popup 可能是 CheckComboBox 视觉树的直接子元素，
+                // 但更安全的方法是使用辅助函数向上查找特定类型。
+
+                // 1. 获取 Popup 的 PlacementTarget，这通常是触发下拉的那个元素，但在这里可能不直接是 CheckComboBox。
+                // 2. 向上遍历可视化树（更可靠）
+
+                CheckComboBox parentCheckComboBox = FindParent<CheckComboBox>(popup);
+
+                if (parentCheckComboBox != null)
+                {
+                    string comboBoxName = parentCheckComboBox.Name;
+
+                    if (comboBoxName == "_cbMajor")
+                    {
+                        Console.WriteLine(" major");
+                    }
+                    else if (comboBoxName == "_cbMinor")
+                    {
+                        Console.WriteLine(" minor");
+                    }
+                    //    Console.WriteLine($"CheckComboBox 名称是: {comboBoxName}");
+                    //Console.WriteLine("CheckComboBox 下拉列表已展开 (通过拦截内部 Popup 事件)。");
+
+                    // ... 其他逻辑
+                }
+            }
+        }
+
+        // 辅助方法：向上查找可视化树中的父控件(你需要将这个方法添加到你的类中)
+            // 它应该与你之前的 FindVisualChild 放在同一个类中。
+private static T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            // 从子元素开始，循环直到找到匹配的父元素或到达可视化树的根
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+
+            while (parentObject != null)
+            {
+                if (parentObject is T parent)
+                {
+                    return parent;
+                }
+
+                // 继续向上查找
+                parentObject = VisualTreeHelper.GetParent(parentObject);
+            }
+            return null;
+        }
     }
 
     public class TaskMangeControlsViewModel : ObeservableObject
@@ -639,6 +757,50 @@ namespace ChipManualGenerationSogt
 
         private TaskModel _newTask = new TaskModel();
         public TaskModel NewTask { get => _newTask; set { _newTask = value; RaisePropertyChanged(); } }
+
+        private ObservableCollection<object> _selectedLevels = new ObservableCollection<object>();
+        public ObservableCollection<object> SelectedLevels
+        {
+            get { return _selectedLevels; }
+            set
+            {
+                _selectedLevels = value;
+                // 确保你的 RaisePropertyChanged 方法存在
+                RaisePropertyChanged();
+            }
+        }
+        public ObservableCollection<string>   Levels { get; set; } = new ObservableCollection<string>() { "Low", "Medium", "High" };
+
+        private ObservableCollection<object> _selectedDeviceMajors = new ObservableCollection<object>();
+        public ObservableCollection<object> SelectedDeviceMajors
+        {
+            get { return _selectedDeviceMajors; }
+            set
+            {
+                _selectedDeviceMajors = value;
+                // 确保你的 RaisePropertyChanged 方法存在
+                RaisePropertyChanged();
+            }
+        }
+        public ObservableCollection<string> DeviceMajorSoureces { get; set; } = new ObservableCollection<string>() ;
+
+
+
+        private ObservableCollection<object> _selectedDeviceMinors = new ObservableCollection<object>();
+        public ObservableCollection<object> SelectedDeviceMinors
+        {
+            get { return _selectedDeviceMinors; }
+            set
+            {
+                _selectedDeviceMinors = value;
+                // 确保你的 RaisePropertyChanged 方法存在
+                RaisePropertyChanged();
+            }
+        }
+        public ObservableCollection<string> DeviceMinorSoureces { get; set; } = new ObservableCollection<string>() ;
+
+
+
     }
 
     public class TaskModel : ObeservableObject
