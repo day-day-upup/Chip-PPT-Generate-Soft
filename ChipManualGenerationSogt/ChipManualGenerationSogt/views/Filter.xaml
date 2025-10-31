@@ -1,0 +1,139 @@
+<UserControl x:Class="ChipManualGenerationSogt.Filter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChipManualGenerationSogt"
+             mc:Ignorable="d" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             d:DesignHeight="450" d:DesignWidth="500">
+
+    <UserControl.DataContext>
+        <local:FilterModel />
+    </UserControl.DataContext>
+
+    <xctk:BusyIndicator x:Name="busyIndicator" 
+               IsBusy="{Binding IsBusy}"
+               BusyContent="{Binding BusyMessage}"
+               DisplayAfter="0">
+        <Grid>
+        <StackPanel>
+            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                <Label Content="Start DateTime:" Width="120"/>
+                <xctk:DateTimePicker 
+                Width="200" 
+                Format="Custom" 
+                FormatString="MM/dd/yyyy HH:mm:ss"
+                Value="{Binding StartDateTime}" />
+                <Label Content=" " />
+            </DockPanel>
+
+            <!-- End DateTime -->
+            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                <Label Content="End DateTime:" Width="120"/>
+                <xctk:DateTimePicker 
+                Width="200" 
+                Format="Custom" 
+                FormatString="MM/dd/yyyy HH:mm:ss"
+                Value="{Binding EndDateTime}" />
+                <Label Content=" " />
+            </DockPanel>
+
+            <!-- PN --> 
+            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                <Label Content="PN:" Width="120"/>
+                <TextBox 
+                Width="200"  x:Name="pnTextBox"
+                VerticalContentAlignment="Center" FontSize="14"
+                Text="{Binding PN, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}" />
+                <Label Content="*" Foreground="Red"/>
+            </DockPanel>
+
+            <!-- SN --> 
+            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                <Label Content="ON:" Width="120"/>
+                <TextBox 
+                Width="200" x:Name="snTextBox"
+                VerticalContentAlignment="Center"  FontSize="14"
+                Text="{Binding SN, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}" />
+                <Label Content="*" Foreground="Red"/>
+            </DockPanel>
+
+        
+            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                    <Button x:Name="btn_excute" Content="Preprocess" Click="Btn_Next_Clicked" Width="320" Height="30"/>
+
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                <Label Content="(Fields marked with * are required)" Foreground="Red"/>
+
+            </DockPanel>
+
+
+            
+            <!-- second  part-->
+                <Border Height="50"/>
+                <StackPanel Orientation="Vertical" x:Name="secondPartStackPanel" Visibility="Hidden">
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="Parameters Levels:" Width="120"/>
+                        <ListBox Width="220"  ItemsSource="{Binding Levels}" SelectionChanged="ListBox_SelectionChanged" SelectionMode="Extended" >
+                      
+                        </ListBox>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="Selected Entrie:" Width="120"/>
+                        <TextBox Width="220" Text="{Binding SelectedEntry}" VerticalContentAlignment="Center"  FontSize="14" IsReadOnly="True"/>
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="Min Frequency:" Width="120"/>
+                        <xctk:DecimalUpDown  Width="220" FormatString="F1" Increment="0.1" DefaultValue="0.0" Minimum="0.0"
+                                              Text="{Binding MinFrequency, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
+                    </DockPanel>
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="Max Frequency:" Width="120"/>
+                        <xctk:DecimalUpDown  Width="220" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                                             Text="{Binding MaxFrequency, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="Frequency Bands " Width="120"/>
+                        <ComboBox  x:Name="combox" Width="220"
+                    
+                          SelectedIndex="1"  SelectionChanged="combox_SelectionChanged" VerticalContentAlignment="Center"  FontSize="14">
+
+                        </ComboBox>
+                    </DockPanel>
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="Frequency Band 1 " Width="120"/>
+                        <TextBox Width="220" Text="{Binding Band1}"  VerticalContentAlignment="Center"  FontSize="14"/>
+                    </DockPanel>
+
+                    <DockPanel x:Name="band1" HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="Frequency Band 2 " Width="120"/>
+                        <TextBox Width="220" Text="{Binding Band2}" VerticalContentAlignment="Center"  FontSize="14"/>
+                    </DockPanel>
+
+                    <DockPanel x:Name="band2" HorizontalAlignment="Center" Margin="0 0 0 7" Visibility="Collapsed">
+                        <Label Content="Frequency Band 3 " Width="120"/>
+                        <TextBox Width="220" Text="{Binding Band3}" VerticalContentAlignment="Center"  FontSize="14"/>
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Label Content="(Band Range Format : Min Frequency - Max Frequency eg: 5 - 10)" Foreground="Red"/>
+
+                    </DockPanel>
+                    <Button Content="Calculte" HorizontalAlignment="Center" Width="320" Height="30" Click="Btn_Calcute_Click"/>
+
+                </StackPanel>
+        </StackPanel>
+
+    </Grid>
+   </xctk:BusyIndicator>
+</UserControl>
