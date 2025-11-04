@@ -26,6 +26,7 @@ using DocumentFormat.OpenXml.Office2021.DocumentTasks;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.Presentation;
 using Xceed.Wpf.Toolkit;
+using CommunityToolkit.Mvvm.ComponentModel;
 namespace ChipManualGenerationSogt
 {
     /// <summary>
@@ -38,6 +39,7 @@ namespace ChipManualGenerationSogt
         const string K_STATUS_3 = "Not Started";//3 
         public event EventHandler<TaskModel> TaskExcute;
         public event EventHandler    TestEvent;
+        public event EventHandler    AddEvent;
         TaskMangeControlsViewModel vm;
         User _currentUser;
         public TaskMangeControls()
@@ -54,23 +56,59 @@ namespace ChipManualGenerationSogt
         private async void init()
         {
 
-            string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-            var repo = new TaskRepository(connStr);
-            var taskItems = await repo.GetAllCurrentTasksAsync();
-            foreach (var item in taskItems)
-            {
-                var uiItem = DBTaskToTaskModel(item);
-                uiItem.TaskFinish += OnTaskFinshed;
-                uiItem.PopupShow += OnPopupShow;
-                uiItem.Ok += OnOk;
+            //string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
+            //var repo = new TaskRepository(connStr);
+            //var taskItems = await repo.GetAllCurrentTasksAsync();
+            //foreach (var item in taskItems)
+            //{
+            //    var uiItem = DBTaskToTaskModel(item);
+            //    uiItem.TaskFinish += OnTaskFinshed;
+            //    uiItem.PopupShow += OnPopupShow;
+            //    uiItem.Ok += OnOk;
 
-                vm.CurrentTasks.Add(uiItem);
-            
-            }
+            //    vm.CurrentTasks.Add(uiItem);
 
-            vm.PopupTopMessage = "A: 这是一个测试.\nB: 这是一个测试回复.\nC: 这是一个测试回复.";
-            vm.PopupTitle = "增加测试记录任务的消息提示框";
+            //}
+
+            //vm.PopupTopMessage = "A: 这是一个测试.\nB: 这是一个测试回复.\nC: 这是一个测试回复.";
+            //vm.PopupTitle = "增加测试记录任务的消息提示框";
+
+            //var sqlServer = new TaskSqlServerRepository();
+            //var taskItems = await sqlServer.GetAllTasksAsync();
+            //foreach (var item in taskItems)
+            //{
+            //    //var uiItem = DBTaskToTaskModel(item);
+            //    //uiItem.TaskFinish += OnTaskFinshed;
+            //    //uiItem.PopupShow += OnPopupShow;
+            //    //uiItem.Ok += OnOk;
+
+            //    //vm.CurrentTasks.Add(uiItem);
+            //    vm.TableItemSources.Add(DBTaskToUITaskModel(item));
+            //}
+            RefreshTask();
+
+
         }
+        private TaskTableItem DBTaskToUITaskModel(TaskSqlServerModel item)
+        {
+            var uiItem = new TaskTableItem
+            {
+                PPTModel = item.PPTModel,
+                TaskName = item.TaskName,
+                Status = item.Status,
+                Level = item.Level.Trim(),
+                DataStatus = item.DataStatus,
+                FilesStatus = item.FilesStatus,
+                StartDate = item.StartDate,
+                EndDate = item.EndDate,
+                Conditions = item.Conditions,
+                Major = item.Major,
+                Minor = item.Minor,
+            };
+            return uiItem;
+        }
+
+
         private void DataGrid_Selected(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("hello");
@@ -248,9 +286,12 @@ namespace ChipManualGenerationSogt
                 await HandleReviewerFinish(repo, task, taskItem);
             }
         }
-        private void OnPopupShow(object sender, EventArgs e)
+        private void OnDetaileEvent(object sender, TaskTableItem task)
         {
             vm.PopupIsOpen = true;
+            vm.PopupTitle = task.TaskName;
+            
+            vm.PopupTopMessage = task.Conditions;
         }
 
         async private void  OnOk(object sender, TaskModel task)
@@ -324,11 +365,13 @@ namespace ChipManualGenerationSogt
             if (selectedItem == null) return;
 
             // 执行你的逻辑，例如：
-            var task = selectedItem as TaskModel; // 替换为你的实际类型
+            var task = selectedItem as TaskTableItem; // 替换为你的实际类型
             //MessageBox.Show($"双击了任务：{task.TaskName}");
             Console.WriteLine($"{task.TaskName}");
             Global.TaskModel = task;
-            TaskExcute?.Invoke(this, task);
+            
+            
+            //TaskExcute?.Invoke(this, task);
             
         }
 
@@ -343,142 +386,89 @@ namespace ChipManualGenerationSogt
             return null;
         }
 
-        private  async void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //“TabControl”是“System.Windows.Controls.TabControl”和“System.Windows.Forms.TabControl”之间的不明确的引用
-            var senderControl = sender as System.Windows.Controls.TabControl;
-            if (senderControl == null || e.AddedItems.Count == 0)
-            {
-                return; // 如果不是选中操作，或 sender 不是 TabControl，则退出
-            }
-            if (senderControl != null)
-            {
-                // 方法1：通过 SelectedItem
-                //if (tabControl.SelectedItem is TabItem selectedTab)
-                //{
-                //    Console.WriteLine($"选中的 Tab: {selectedTab.Header} (Name: {selectedTab.Name})");
-                //}
 
-                // 方法2：通过 SelectedIndex
-                int index = tabControl.SelectedIndex;
-                if (index == 1)
-                {
-                    vm.FinishedTasks.Clear();
-                    string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-                    var repo = new TaskRepository(connStr);
-                    var taskItems =await repo.GetAllFinishedTasksAsync();
-                    foreach (var item in taskItems)
-                    {
-                        var uiItem = DBTaskToTaskModel(item);
-                       
-                        vm.FinishedTasks.Add(DBTaskToTaskModel(item));
+        // 这是之前用于增加的按钮事件
+        //private async void Add_btn_Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (int.TryParse(vm.NewTask.ID, out int id))
+        //    {
 
-                    }
-                }
-                if (index == 2)
-                {
-                    try
-                    {
-                        string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-                        var repo = new TaskRepository(connStr);
-                        var lastTask = await repo.GetLastCurrentTasksAsync();
-                        if (lastTask == null)
-                            vm.NewTask.ID = "1";
-                        else
-                            vm.NewTask.ID = Convert.ToString(lastTask.ID + 1);
-                        vm.NewTask.StartDate = DateTime.Now.ToString("yyyy.MM.dd hh:mm:ss");
-                        int x = 1;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-                
-            }
-        }
+        //    }
+        //    else 
+        //    {
+        //        System.Windows.MessageBox.Show("The input is not a valid integer","", MessageBoxButton.OK, MessageBoxImage.Warning);
+        //        return;
+        //    }
 
-        private async void Add_btn_Clicked(object sender, RoutedEventArgs e)
-        {
-            if (int.TryParse(vm.NewTask.ID, out int id))
-            {
+        //    var result = System.Windows.MessageBox.Show(
+        //        $"Are you sure to add the task: {vm.NewTask.TaskName}?",
+        //        "Confirm Add", // 建议加上标题
+        //        MessageBoxButton.OKCancel, // ? 用 OKCancel，不是 OK
+        //        MessageBoxImage.Question
+        //    );
 
-            }
-            else 
-            {
-                System.Windows.MessageBox.Show("The input is not a valid integer","", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            var result = System.Windows.MessageBox.Show(
-                $"Are you sure to add the task: {vm.NewTask.TaskName}?",
-                "Confirm Add", // 建议加上标题
-                MessageBoxButton.OKCancel, // ? 用 OKCancel，不是 OK
-                MessageBoxImage.Question
-            );
-
-            if (result == MessageBoxResult.OK)
-            {
+        //    if (result == MessageBoxResult.OK)
+        //    {
               
 
                 
 
-                // 先写入数据库
+        //        // 先写入数据库
                
-                var status = vm.NewTask.Status == K_STATUS_1 ? 1 :
-                             vm.NewTask.Status == K_STATUS_2 ? 2 :
-                             vm.NewTask.Status == K_STATUS_3 ? 3 : 0;
+        //        var status = vm.NewTask.Status == K_STATUS_1 ? 1 :
+        //                     vm.NewTask.Status == K_STATUS_2 ? 2 :
+        //                     vm.NewTask.Status == K_STATUS_3 ? 3 : 0;
           
-                int idtmp = Convert.ToInt32(vm.NewTask.ID);
-                var task = new TaskModel_DB
-                {
-                    ID = idtmp,
-                    TaskName = vm.NewTask.TaskName,
-                    Status = 3,              // 假设 1=进行中，0=未开始
-                    StartDate = DateTime.Parse(vm.NewTask.StartDate),
-                    Consumed = 0,              // 已消耗时间（分钟？）
-                    DataStatus = false,          // 数据已就绪
-                    FilesStatus = false,         // 文件已下载
-                    CheckStatus = false         // 尚未审核
-                };
-                string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-                var repo = new TaskRepository(connStr);
-                var index = await repo.InsertCurrentTaskAsync(task);
-                if (index > 0)
-                {
-                    var uiItem= DBTaskToTaskModel(task);
-                    uiItem.TaskFinish += OnTaskFinshed;
-                    uiItem.PopupShow += OnPopupShow;
-                    uiItem.Ok += OnOk;
-                    vm.CurrentTasks.Add(uiItem);
+        //        int idtmp = Convert.ToInt32(vm.NewTask.ID);
+        //        var task = new TaskModel_DB
+        //        {
+        //            ID = idtmp,
+        //            TaskName = vm.NewTask.TaskName,
+        //            Status = 3,              // 假设 1=进行中，0=未开始
+        //            StartDate = DateTime.Parse(vm.NewTask.StartDate),
+        //            Consumed = 0,              // 已消耗时间（分钟？）
+        //            DataStatus = false,          // 数据已就绪
+        //            FilesStatus = false,         // 文件已下载
+        //            CheckStatus = false         // 尚未审核
+        //        };
+        //        string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
+        //        var repo = new TaskRepository(connStr);
+        //        var index = await repo.InsertCurrentTaskAsync(task);
+        //        if (index > 0)
+        //        {
+        //            var uiItem= DBTaskToTaskModel(task);
+        //            uiItem.TaskFinish += OnTaskFinshed;
+        //            uiItem.PopupShow += OnPopupShow;
+        //            uiItem.Ok += OnOk;
+        //            vm.CurrentTasks.Add(uiItem);
                 
-                }
-                var sqlServer = new TaskRepository();
-                var opModel = new OperationModel
-                {
-                    TaskID = idtmp,
-                    TaskName = vm.NewTask.TaskName,
-                    TimeStamp = DateTime.Now,
-                };
-                await sqlServer.InsertOperationAsync(opModel);
+        //        }
+        //        var sqlServer = new TaskRepository();
+        //        var opModel = new OperationModel
+        //        {
+        //            TaskID = idtmp,
+        //            TaskName = vm.NewTask.TaskName,
+        //            TimeStamp = DateTime.Now,
+        //        };
+        //        await sqlServer.InsertOperationAsync(opModel);
 
-                var logModel = new LogModel
-                {
-                    TimeStamp =DateTime.Now,
-                    UserName = vm.NewTask.TaskName,
-                    Level = LogLevels.Info,
-                    TaskId = vm.NewTask.ID,
-                    TaskName = vm.NewTask.TaskName,
-                    Message = $"The task {vm.NewTask.TaskName} has been generate by {vm.NewTask.TaskName}."
+        //        var logModel = new LogModel
+        //        {
+        //            TimeStamp =DateTime.Now,
+        //            UserName = vm.NewTask.TaskName,
+        //            Level = LogLevels.Info,
+        //            TaskId = vm.NewTask.ID,
+        //            TaskName = vm.NewTask.TaskName,
+        //            Message = $"The task {vm.NewTask.TaskName} has been generate by {vm.NewTask.TaskName}."
 
-                };
+        //        };
 
-                await sqlServer.InsertLogAsync(logModel);
+        //        await sqlServer.InsertLogAsync(logModel);
 
-            }
+        //    }
 
 
-        }
+        //}
 
 
         private TaskModel DBTaskToTaskModel(TaskModel_DB task)
@@ -491,12 +481,10 @@ namespace ChipManualGenerationSogt
                              task.Status == 2 ? K_STATUS_2 :
                              task.Status == 3 ? K_STATUS_3 : "Unknown",
                 StartDate = task.StartDate.ToString("yyyy.MM.dd hh:mm:ss"),
-                Timeing = task.Consumed.ToString(),
+                //Timeing = task.Consumed.ToString(),
                 DataStatus = task.DataStatus.ToString(),
                 FilesStatus = task.FilesStatus.ToString(),
-                CheckStatus = task.CheckStatus.ToString()
-
-
+                //CheckStatus = task.CheckStatus.ToString()
             };
             
             return resoult;
@@ -610,28 +598,19 @@ namespace ChipManualGenerationSogt
             }
         }
 
-        private void Btn_Test_Click(object sender, RoutedEventArgs e)
+        private async void Btn_Test_Click(object sender, RoutedEventArgs e)
         {
-            TestEvent?.Invoke(this, EventArgs.Empty);
-                
+
+
+            string ftpRootPath = "Amplifier/MML806";
+
+            //string folderPath = "F:\\PROJECT\\ChipManualGeneration\\原始数据\\MML004X 手册数据-3";
+            //await FtpClient.UploadFolderAsync(folderPath, ftpRootPath);
+
+            await FtpClient.DownloadFolderAsync(ftpRootPath, Global.FileBasePath);
+           
+
         }
-
-        private void Btn_Query_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var item in vm.SelectedLevels)
-            {
-                Console.WriteLine(item);
-            
-            }
-        }
-
-        //private void CheckComboBox_Minor_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    Console.WriteLine("hello");
-        //}
-
-    
-
        
         private void CheckComboBox_Loaded(object sender, RoutedEventArgs e)
         {
@@ -680,7 +659,7 @@ namespace ChipManualGenerationSogt
         private void Popup_Opened(object sender, EventArgs e)
         {
             // 这里的代码会在 CheckComboBox 的下拉列表展开时执行
-            //Console.WriteLine("CheckComboBox 下拉列表已展开！执行动态加载或更新逻辑...");
+            Console.WriteLine("CheckComboBox 下拉列表已展开！执行动态加载或更新逻辑...");
 
             if (sender is Popup popup)
             {
@@ -715,7 +694,7 @@ namespace ChipManualGenerationSogt
 
         // 辅助方法：向上查找可视化树中的父控件(你需要将这个方法添加到你的类中)
             // 它应该与你之前的 FindVisualChild 放在同一个类中。
-private static T FindParent<T>(DependencyObject child) where T : DependencyObject
+        private static T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
             // 从子元素开始，循环直到找到匹配的父元素或到达可视化树的根
             DependencyObject parentObject = VisualTreeHelper.GetParent(child);
@@ -731,6 +710,28 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
                 parentObject = VisualTreeHelper.GetParent(parentObject);
             }
             return null;
+        }
+
+        private void Btn_Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        public async void RefreshTask()
+        {
+            vm.TableItemSources.Clear();
+            var sqlServer = new TaskSqlServerRepository();
+            var taskItems = await sqlServer.GetAllTasksAsync();
+            foreach (var item in taskItems)
+            {
+                var uiItem = DBTaskToUITaskModel(item);
+                //uiItem.TaskFinish += OnTaskFinshed;
+                //uiItem.PopupShow += OnPopupShow;
+                //uiItem.Ok += OnOk;
+                uiItem.DetaileEvent += OnDetaileEvent;
+                //vm.CurrentTasks.Add(uiItem);
+                vm.TableItemSources.Add(uiItem);
+            }
         }
     }
 
@@ -800,6 +801,21 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
         public ObservableCollection<string> DeviceMinorSoureces { get; set; } = new ObservableCollection<string>() ;
 
 
+        private TaskTableItem _selectTableItem;
+        public TaskTableItem SelectTableItem
+        {
+            get { return _selectTableItem; }
+            set
+            {
+                _selectTableItem = value;
+                // 确保你的 RaisePropertyChanged 方法存在
+                RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<TaskTableItem> TableItemSources { get; set; } = new ObservableCollection<TaskTableItem>();
+        // 新的表格
+
 
     }
 
@@ -816,8 +832,15 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
             set { _id = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
         }
 
+        private string _chipNumber;
+        public string ChipNumber
+        {
+            get { return _chipNumber; }
+            set { _chipNumber = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
+        }
+
         public string _taskName;
-       public string TaskName
+        public string TaskName
         {
             get { return _taskName; }
             set { _taskName = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
@@ -830,8 +853,33 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
             get { return _status; }
             set { _status = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
         }
-        
-     
+
+        private string _level;
+        public string Level
+        {
+            get { return _status; }
+            set { _status = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
+        }
+
+        private string _major;
+
+        public string Major
+        {
+            get { return _major; } 
+            set{_major = value; RaisePropertyChanged(); }
+ 
+        }
+
+
+        private string _minor;
+
+        public string Minor
+        {
+            get { return _minor; }
+            set { _minor = value; RaisePropertyChanged(); }
+
+        }
+
         public string _startDate;
         public string StartDate
         {
@@ -839,17 +887,23 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
             set { _startDate = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
         }
 
+        public string _endDate;
+        public string EndDate
+        {
+            get { return _endDate; }
+            set { _endDate = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
+        }
 
-        public string Timeing{ get; set; }
    
-        public string _dataStatus;
-        public string DataStatus
+        private string _dataStatus;
+        public string DataStatus        
         {
             get { return _dataStatus; }
             set { _dataStatus = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
         }
 
-        public string _filesStatus;
+
+        private string _filesStatus;
         public string FilesStatus
         {
             get { return _filesStatus; }
@@ -857,16 +911,15 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
             set { _filesStatus = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
         }
 
-        public string _checkStatus;
-        public string CheckStatus
+        private string _condition;
+
+        public  string Condition
         {
-            get { return _checkStatus; }
-            set { _checkStatus = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
+           get { return _condition; }
+            set { _condition = value; RaisePropertyChanged(); } // ← 没有 RaisePropertyChanged()！
+
         }
 
-        //public string DataStatus { get; set; }
-        //public string FilesStatus { get; set; }
-        //public string CheckStatus { get; set; }
 
         public ICommand FinishCommand { get; }
 
@@ -880,12 +933,11 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
             Status = "Not Started";
 
             StartDate = DateTime.Now.ToString("yyyy.MM.dd");
-            Timeing = "0 ";
-
+            EndDate = "NULL";
 
             DataStatus = "Not Started";
             FilesStatus = "Not Started";
-            CheckStatus = "Not Started";
+
             FinishCommand = new RelayCommand<TaskModel>(OnFinishTask);
             PopupShowCommand = new RelayCommand(OnShowPopup);
             OkCommand = new RelayCommand<TaskModel>(OnOk);
@@ -941,5 +993,140 @@ private static T FindParent<T>(DependencyObject child) where T : DependencyObjec
 
     }
 
+    // 假设您使用的是 Community Toolkit MVVM
+// using CommunityToolkit.Mvvm.ComponentModel; 
 
+
+    public class TaskTableItem : ObservableObject
+    {
+       
+        public TaskSqlServerModel DataModel { get; private set; }
+
+        
+        public TaskTableItem(TaskSqlServerModel model = null)
+        {
+            // 如果提供了模型，则使用它；否则创建新实例
+            DataModel = model ?? new TaskSqlServerModel();
+            DetailShowCommand = new RelayCommand<TaskTableItem>(OnShowPopup);
+
+        }
+
+        // --- 封装所有需要通知 UI 的属性 ---
+
+
+        public int ID
+        {
+            get => DataModel.ID;
+           
+        }
+
+        // 2. PPTModel
+        public string PPTModel
+        {
+            get => DataModel.PPTModel;
+            set => SetProperty(DataModel.PPTModel, value, DataModel, (model, val) => model.PPTModel = val);
+            // 或者更简洁的标准方法：
+            // set
+            // {
+            //     if (DataModel.PPTModel != value)
+            //     {
+            //         DataModel.PPTModel = value;
+            //         OnPropertyChanged(); // 通知 UI
+            //     }
+            // }
+        }
+
+        // 3. TaskName
+        public string TaskName
+        {
+            get => DataModel.TaskName;
+            set
+            {
+                if (SetProperty(DataModel.TaskName, value, (val) => DataModel.TaskName = val))
+                {
+                    
+                }
+            }
+        }
+
+        // 4. Status
+        public string Status
+        {
+            get => DataModel.Status;
+            set => SetProperty(DataModel.Status, value, DataModel, (model, val) => model.Status = val);
+        }
+
+        // 5. Level
+        public string Level
+        {
+            get => DataModel.Level;
+            set => SetProperty(DataModel.Level, value, DataModel, (model, val) => model.Level = val.Trim());
+        }
+
+        // 6. Major
+        public string Major
+        {
+            get => DataModel.Major;
+            set => SetProperty(DataModel.Major, value, DataModel, (model, val) => model.Major = val);
+        }
+
+        // 7. Minor
+        public string Minor
+        {
+            get => DataModel.Minor;
+            set => SetProperty(DataModel.Minor, value, DataModel, (model, val) => model.Minor = val);
+        }
+
+        // 8. StartDate
+        public DateTime StartDate
+        {
+            get => DataModel.StartDate;
+            set => SetProperty(DataModel.StartDate, value, DataModel, (model, val) => model.StartDate = val);
+        }
+
+        // 9. EndDate
+        public DateTime? EndDate
+        {
+            get => DataModel.EndDate;
+            set => SetProperty(DataModel.EndDate, value, DataModel, (model, val) => model.EndDate = val);
+        }
+
+        // 10. DataStatus
+        public bool DataStatus
+        {
+            get => DataModel.DataStatus;
+            
+            set => SetProperty(DataModel.DataStatus, value, DataModel, (model, val) => model.DataStatus = val);
+        }
+
+        // 11. FilesStatus
+        public bool FilesStatus
+        {
+            get => DataModel.FilesStatus;
+            set => SetProperty(DataModel.FilesStatus, value, DataModel, (model, val) => model.FilesStatus = val);
+        }
+
+        // 12. Conditions
+        public string Conditions
+        {
+            get => DataModel.Conditions;
+            set => SetProperty(DataModel.Conditions, value, DataModel, (model, val) => model.Conditions = val);
+        }
+
+        public event EventHandler<TaskTableItem> DetaileEvent;
+
+        public ICommand DetailShowCommand { get; }
+
+        [RelayCommand]
+
+        private void OnShowPopup(TaskTableItem item)
+        {
+            DetaileEvent?.Invoke(this, item);
+
+        }
+
+        //public TaskTableItem()
+        //{
+        //}
+    }
 }

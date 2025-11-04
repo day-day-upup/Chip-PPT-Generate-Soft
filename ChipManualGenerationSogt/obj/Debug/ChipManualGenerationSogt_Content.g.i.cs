@@ -10,6 +10,7 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/t_mml806_v3.pptx")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/mml806_v3.pptx")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/newtask.json")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libharfbuzzsharp.dylib")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libharfbuzzsharp.dylib")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libharfbuzzsharp.dll")]

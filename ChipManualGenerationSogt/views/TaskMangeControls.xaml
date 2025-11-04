@@ -56,7 +56,7 @@
                     <StackPanel>
                        
 
-                    <Expander Header="Query Tasks">
+                    <Expander Header="Query Tasks"  IsExpanded="True">
                         <StackPanel >
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
                                 <Label Content="Start DateTime:" Width="120" FontSize="14"/>
@@ -80,39 +80,8 @@
                                 <Label Content=" " />
                             </DockPanel>
 
-                            <TreeView x:Name="TargetTreeView"
-                                        ItemsSource="{Binding DataForTreeViewA}"
-          
-                                          ItemContainerStyle="{StaticResource CheckBoxTreeViewItemStyle}">
-                                <TreeViewItem Header="All"/>
-                            </TreeView>
 
-                            <!-- Device Major -->
-                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                <Label Content="Device Major:" Width="120" FontSize="14"/>
-                                <xctk:CheckComboBox x:Name="_cbMajor"  Loaded="CheckComboBox_Loaded" 
-                                        Width="200"
-                                        ItemsSource="{Binding DeviceMajorSoureces}"
-                                        SelectedItemsOverride="{Binding SelectedDeviceMajors}"
-                                         />
-                                <Label Content=" "/>
-                            </DockPanel>
-
-                            <!-- Device Minor-->
-                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                <Label Content="Device Minor:" Width="120" FontSize="14"/>
-                                <xctk:CheckComboBox  x:Name="_cbMinor" Loaded="CheckComboBox_Loaded"
-                                     Width="200"   
-                                     ItemsSource="{Binding DeviceMinorSoureces}"
-                                     SelectedItemsOverride="{Binding SelectedDeviceMinors}"
-                                        />
-                                <Label Content=" "/>
-                            </DockPanel>
-
-                            <TreeView>
-                                
-                            </TreeView>
-                            
+                            <!--task name-->
 
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
                                 <Label Content="Task Name:" Width="120" FontSize="14"/>
@@ -120,22 +89,51 @@
                                 <Label Content=" " />
                             </DockPanel>
 
+
+                            <!--status-->
+
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                <Label Content="Chip Number:" Width="120" FontSize="14"/>
+                                <Label Content="Status:" Width="120" FontSize="14"/>
+                                <xctk:CheckComboBox   Loaded="CheckComboBox_Loaded"
+                                        Width="200"
+                                        ItemsSource="{Binding Levels}"
+                                        SelectedItemsOverride="{Binding SelectedLevels}"
+                                            />
+                                <Label Content=" "/>
+                            </DockPanel>
+
+
+                            <!--ppt Model-->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="PPT Model:" Width="120" FontSize="14"/>
                                 <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
                                 <Label Content=" " />
                             </DockPanel>
 
+                            <!-- Level -->
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
                                 <Label Content="Level:" Width="120" FontSize="14"/>
-                                <xctk:CheckComboBox  
-                                        Width="200"
-                                        ItemsSource="{Binding Levels}"
-                                        SelectedItemsOverride="{Binding SelectedLevels}"
-                                        />
+                                <xctk:CheckComboBox   Loaded="CheckComboBox_Loaded"
+                                            Width="200"
+                                            ItemsSource="{Binding Levels}"
+                                            SelectedItemsOverride="{Binding SelectedLevels}"
+                                            />
                                 <Label Content=" "/>
                             </DockPanel>
 
+
+                            <!-- Device Type -->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Device Type:" Width="120" FontSize="14"/>
+                                <TreeView x:Name="TargetTreeView" Width="200"
+                                        ItemsSource="{Binding DataForTreeViewA}"
+          
+                                    ItemContainerStyle="{StaticResource CheckBoxTreeViewItemStyle}">
+                                </TreeView>
+                                <Label Content=" " />
+                            </DockPanel>
+                           
+                            
 
                            
 
@@ -144,7 +142,7 @@
 
 
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                <Button Content="Query" Click="Btn_Query_Click" Width="320" Height="30"/>
+                                <Button Content="Query"  Width="320" Height="30"/>
                             </DockPanel>
 
 
@@ -152,21 +150,35 @@
                         </StackPanel>
 
                     </Expander>
-                            
-                        
-                    </StackPanel>
+
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Button Content="Add New Task" Click="Btn_Add_Click" Width="320" Height="30"/>
+                    </DockPanel>
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Button Content="Test" Click="Btn_Test_Click" Width="320" Height="30"/>
+                    </DockPanel>
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Button Content="Query Log" Click="Btn_Add_Click" Width="320" Height="30"/>
+                    </DockPanel>
+
+                </StackPanel>
                 </ScrollViewer>
 
             </Grid>
 
-       
-        
-        <TabControl Grid.Column="1" x:Name="tabControl"  SelectionChanged="TabControl_SelectionChanged" >
-            <TabItem Header="Current Tasks">
-                <DataGrid  x:Name="dataGrid" ItemsSource="{Binding CurrentTasks }"
+
+         <DataGrid  x:Name="dataGrid" ItemsSource="{Binding TableItemSources}"  SelectedItem="{Binding SelectTableItem, Mode=TwoWay}"
+                           Grid.Column="1" Margin="1 0 0 0"
                            MouseDoubleClick="doubleClick"
                            AutoGenerateColumns="False"
                            IsReadOnly="True"
+                           
                            HeadersVisibility="Column"
                            RowHeight="40"
                            ColumnHeaderHeight="35"
@@ -237,14 +249,16 @@
                             </Style.Triggers>
                         </Style>
                     </DataGrid.RowStyle>
-
                     <DataGrid.Columns>
 
                
+                        <!--ID-->
                         <DataGridTextColumn Header="ID" Visibility="Collapsed" Binding="{Binding ID}" Width="50" Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
 
-
-                        <DataGridTemplateColumn Header="Task Name" Width="200">
+                      
+                     
+                        <!--Task Name-->
+                        <DataGridTemplateColumn Header="Task Name" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TaskName}"
@@ -255,17 +269,17 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
+                        <!--Status-->
                         <DataGridTemplateColumn Header="Status" Width="80">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Status}" VerticalAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
-                                               
+
                                                 <Setter Property="Foreground" Value="Black"/>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Finished">
+                                                    <DataTrigger Binding="{Binding Status}" Value="Completed">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Status}" Value="In Progress">
@@ -274,7 +288,37 @@
                                                     <DataTrigger Binding="{Binding Status}" Value="Not Started">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                     </DataTrigger>
-                                                    
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                <!--chip Number-->
+                <DataGridTextColumn Header="PPT Model"  Binding="{Binding PPTModel}"  Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
+
+                        <!--Level-->
+                        <DataGridTemplateColumn Header="Level" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Level}" VerticalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+
+                                                <Setter Property="Foreground" Value="Black"/>
+                                                <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Level}" Value="Low">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                    </DataTrigger>
+                                            <DataTrigger Binding="{Binding Level}" Value="Medium">
+                                                        <Setter Property="Foreground" Value="Orange"/>
+                                                    </DataTrigger>
+                                            <DataTrigger Binding="{Binding Level}" Value="High">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                    </DataTrigger>
+
                                                 </Style.Triggers>
                                             </Style>
                                         </TextBlock.Style>
@@ -283,11 +327,16 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
+                        <!--Major Type-->
+                        <DataGridTextColumn Header="Major Device Type"  Binding="{Binding Major}"  Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
+
+                        <!--Minor Type-->
+                        <DataGridTextColumn Header="Minor Device Type"  Binding="{Binding Minor}"  Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
 
                         <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="130" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
-                        <DataGridTextColumn Header="Data Staus" Binding="{Binding DataStatus}" Width="80" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
-                        <DataGridTextColumn Header="Files Status" Binding="{Binding FilesStatus}" Width="80" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
-                        <DataGridTextColumn Header="Check Status" Binding="{Binding CheckStatus}" Width="90" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
+
+                        <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="130" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
+
                         
 
                         <DataGridTemplateColumn Header="Operation" Width="120">
@@ -307,10 +356,10 @@
                                             <Image Source="/resources/pic/finish.png" Stretch="Uniform"/>
                                         </Button>
                                         <Border Width="15"/>
-                                       
 
-                                        
-                                        <Button Command="{Binding PopupShowCommand}"
+
+
+                                <Button Command="{Binding DetailShowCommand}"
                                                   CommandParameter="{Binding}"      
                                                Width="24" Height="24" Background="Transparent" BorderThickness="0">
                                             <Image Source="/resources/pic/wenhao.png" Stretch="Uniform"/>
@@ -325,312 +374,6 @@
 
 
                 </DataGrid>
-
-            </TabItem>
-
-
-            <TabItem Header="Finsihed Tasks">
-                <DataGrid  x:Name="finished_dataGrid" ItemsSource="{Binding FinishedTasks }"
-                            MouseDoubleClick="doubleClick"
-                            AutoGenerateColumns="False"
-                            IsReadOnly="True"
-                            HeadersVisibility="Column"
-                            RowHeight="40"
-                            ColumnHeaderHeight="35"
-                            BorderThickness="0"
-                            CanUserSortColumns="False"
-                            GridLinesVisibility="None"
-                            CanUserAddRows="False">
-
-                    <DataGrid.Resources>
-
-                        <Style x:Key="CenteredTextBlockStyle" TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="BorderThickness" Value="0"/>
-                        </Style>
-                    </DataGrid.CellStyle>
-                    <DataGrid.RowStyle>
-                        <Style TargetType="DataGridRow">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="DataGridRow">
-                                        <Border x:Name="DgRowBorder"
-                  Background="{TemplateBinding Background}"
-                  BorderBrush="{TemplateBinding BorderBrush}"
-                  BorderThickness="{TemplateBinding BorderThickness}">
-                                            <SelectiveScrollingGrid>
-                                                <SelectiveScrollingGrid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </SelectiveScrollingGrid.ColumnDefinitions>
-                                                <SelectiveScrollingGrid.RowDefinitions>
-                                                    <RowDefinition Height="*"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                </SelectiveScrollingGrid.RowDefinitions>
-
-                                                <DataGridCellsPresenter Grid.Column="1"
-                                          ItemsPanel="{TemplateBinding ItemsPanel}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-
-                                                <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1"
-                                            Visibility="{TemplateBinding DetailsVisibility}"
-                                            SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=AreRowDetailsFrozen, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}}"/>
-
-                                                <DataGridRowHeader Grid.RowSpan="2"
-                                     SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
-                                     Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Row}}"/>
-                                            </SelectiveScrollingGrid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-
-                            <Style.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="LightGray"/>
-                                    <Setter Property="Foreground" Value="Black"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#d9d9d9"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.RowStyle>
-
-                    <DataGrid.Columns>
-
-
-                        <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="50" Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
-
-
-                        <DataGridTemplateColumn Header="Task Name" Width="200">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding TaskName}"
-                                     VerticalAlignment="Center"
-                                      Foreground="#1976D2"
-                                     TextDecorations="Underline"
-                                      Cursor="Hand"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Status" Width="80">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Status}" VerticalAlignment="Center">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-
-                                                <Setter Property="Foreground" Value="Black"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Finished">
-                                                        <Setter Property="Foreground" Value="Green"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="In Progress">
-                                                        <Setter Property="Foreground" Value="Orange"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Not Started">
-                                                        <Setter Property="Foreground" Value="Red"/>
-                                                    </DataTrigger>
-
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-
-                        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="130" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
-                        <DataGridTextColumn Header="Data Staus" Binding="{Binding DataStatus}" Width="80" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
-                        <DataGridTextColumn Header="Files Status" Binding="{Binding FilesStatus}" Width="80" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
-                        <DataGridTextColumn Header="Check Status" Binding="{Binding CheckStatus}" Width="90" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
-
-                        <DataGridTemplateColumn Header="Operation" Width="120">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <Button   
-                                         Width="24" Height="24" Background="Transparent" BorderThickness="0">
-                                            <Image Source="/resources/pic/download.png" Stretch="Uniform"/>
-                                        </Button>
-                                        
-
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-
-
-                    </DataGrid.Columns>
-
-
-                </DataGrid>
-
-            </TabItem>
-
-            <TabItem Header="New Tasks" >
-                <StackPanel>
-
-                    <Border Height="80"/>
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Content="ID:" Width="120"/>
-                        <TextBox x:Name="new_id" Text="{Binding NewTask.ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalContentAlignment="Center"/>
-                        <Label Content="*"  Foreground="Red"  Width="20" />
-                    </DockPanel>
-                    <Border Height="6"/>
-
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Content="Task Name:" Width="120"/>
-                        <TextBox x:Name="new_taskName" Text="{Binding NewTask.TaskName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="220" VerticalContentAlignment="Center"/>
-                        <Label Content="*"  Foreground="Red"  Width="20" />
-                    </DockPanel>
-
-                    <Border Height="6"/>
-
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Content="Start Date:" Width="120" VerticalContentAlignment="Center"/>
-                        <TextBox  Width="220" Text="{Binding NewTask.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Content="" Width="20" />
-                    </DockPanel>
-
-                    <Border Height="6"/>
-
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Content="Counsume:" Width="120"/>
-                        <TextBox Text="{Binding NewTask.Timeing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="220" VerticalContentAlignment="Center"/>
-                        <Label Content="H" Width="20" />
-                    </DockPanel>
-
-                    <Border Height="6"/>
-
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Content="Data Status:" Width="120"/>
-                        <TextBox  Text="{Binding NewTask.DataStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalContentAlignment="Center"/>
-                        <Label Content="" Width="20" />
-                    </DockPanel>
-
-                    <Border Height="6"/>
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Content="Files Status:" Width="120"/>
-                        <TextBox  Text="{Binding NewTask.FilesStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalContentAlignment="Center"/>
-                        <Label Content="" Width="20" />
-                    </DockPanel>
-
-
-                    <Border Height="6"/>
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label Content="Check Status:" Width="120"/>
-                        <TextBox Text="{Binding NewTask.CheckStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="220" VerticalContentAlignment="Center"/>
-                        <Label Content="" Width="20" />
-                    </DockPanel>
-
-                    <Border Height="6"/>
-                    <Button Content="Add New Task"  Click="Add_btn_Clicked" Width="340" Height="25"/>
-
-                </StackPanel>
-                
-            </TabItem>
-
-
-        </TabControl>
-
-        
-        <!--Right Side-->
-        <Expander   Grid.Column="2" ExpandDirection="Right">
-            <Border BorderThickness="1" BorderBrush="#d9d9d9">
-                <ScrollViewer 
-                    VerticalScrollBarVisibility="Auto"
-                    HorizontalScrollBarVisibility="Disabled"
-                    Margin="5">
-                    <StackPanel>
-                        <Expander Header="Query Contion"  IsExpanded="True"  >
-                            <StackPanel >
-                                <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                    <Label Content="Start DateTime:" Width="120" FontSize="14"/>
-                                    <xctk:DateTimePicker 
-                             Width="200" 
-                             Format="Custom" 
-                             FormatString="yyyy/MM/dd/ HH:mm:ss"
-                             Value="{Binding StartTime}" />
-                                    <Label Content=" " />
-                                </DockPanel>
-
-
-                                <!-- End DateTime -->
-                                <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                    <Label Content="End DateTime:" Width="120" FontSize="14"/>
-                                    <xctk:DateTimePicker 
-                             Width="200" 
-                             Format="Custom" 
-                             FormatString="yyyy/MM/dd/ HH:mm:ss"
-                             Value="{Binding EndTime}" />
-                                    <Label Content=" " />
-                                </DockPanel>
-
-
-                                
-                                <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                    <Label Content="Task ID:" Width="120" FontSize="14"/>
-                                    <TextBox Width="200" Text="{Binding TaskId}"  VerticalContentAlignment="Center"  FontSize="14"/>
-                                    <Label Content=" " />
-                                </DockPanel>
-
-                                <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                    <Label Content="Task Name:" Width="120" FontSize="14"/>
-                                    <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
-                                    <Label Content=" " />
-                                </DockPanel>
-
-                                <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                    <Label Content="Level:" Width="120" FontSize="14"/>
-                                    <ComboBox Width="200" VerticalContentAlignment="Center" ItemsSource="{Binding LevelList}" SelectedItem="{Binding Level}" />
-                                    <Label Content=" "/>
-                                </DockPanel>
-
-
-
-
-
-                                <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                    <Button Content="Query" Width="320" Height="30"/>
-                                </DockPanel>
-
-                                
-
-                            </StackPanel>
-
-                        </Expander>
-
-                        <Border Height="7"/>
-
-                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                            <Button Content="Add New Task" Width="320" Height="30"/>
-                        </DockPanel>
-
-                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                            <Button Content="Test" Width="320"  Click="Btn_Test_Click" Height="30"/>
-                        </DockPanel>
-                    </StackPanel>
-
-
-                </ScrollViewer>
-            </Border>
-
-        </Expander>
-        
 
         <Popup  Name="myPopup" IsOpen="{Binding PopupIsOpen}"
         

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ChipManualGenerationSogt"
         mc:Ignorable="d"  
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="Chip Manual Soft" Height="800" Width="1200">
+        Title="Chip Manual Soft" Height="900" Width="1400">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <HierarchicalDataTemplate x:Key="NewspaperTVItem" ItemsSource="{Binding Children}">
@@ -38,13 +38,15 @@
             <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="180"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <local:LeftSider x:Name="leftSider">
             
             </local:LeftSider>
 
+                
+                
+                
              <!-- middle left sider-->
             <TreeView  Visibility="Collapsed" x:Name="treeView"  Grid.Column="1" ItemsSource="{Binding Records}"
               SelectedItemChanged="TreeView_SelectedItemChanged"
@@ -52,7 +54,6 @@
            
              />
         
-            <Separator x:Name="separator" Grid.Column="2" VerticalAlignment="Top"/>
         
             <!-- content-->
             <Grid  x:Name="contentGrid" Grid.Column="2" Visibility="Collapsed">
@@ -146,7 +147,7 @@
             </Grid>
 
             <!-- welcome page -->
-            <StackPanel Visibility="Visible" x:Name="welComeStackPanel" Grid.Column="2" Orientation="Vertical" Margin="10 0 0 0">
+            <StackPanel Visibility="Collapsed" x:Name="welComeStackPanel" Grid.Column="2" Orientation="Vertical" Margin="10 0 0 0">
                      <DockPanel HorizontalAlignment="Center" Margin="0 100 0 7">
                         
                          <Label Content="1. Please Select A Task."  FontSize="40"  Width="700" />
@@ -161,7 +162,7 @@
 
 
             </StackPanel>
-                <!-- popup -->
+              <!-- popup -->
              <Popup  Name="myPopup" IsOpen="{Binding PopupVisible}"
         
              Placement="MousePoint"
@@ -191,7 +192,7 @@
             </Popup>
 
              <!-- home page -->
-            <Border  x:Name="home"  Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Gray">
+            <Border  x:Name="home" Visibility="Collapsed"  Grid.Column="1"  BorderThickness="1" BorderBrush="Gray">
                 <Grid >
 
                     <local:TaskMangeControls x:Name="taskMangeControls" >
@@ -201,6 +202,11 @@
                 </Grid>
             </Border>
 
+             <!-- new task page -->
+            <Border x:Name="newTaskPage" Grid.Column="1" >
+                <local:NewTaskWin x:Name="newTaskWin" />
+
+            </Border>
              <!-- log page -->
             <Border  x:Name="log"  Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" BorderThickness="1" BorderBrush="Gray">
                 <Grid>

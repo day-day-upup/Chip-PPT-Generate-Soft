@@ -414,6 +414,7 @@ namespace ChipManualGenerationSogt
             }
 
             #endregion
+            
             Application.Current.Dispatcher.Invoke(() =>
             {
                 

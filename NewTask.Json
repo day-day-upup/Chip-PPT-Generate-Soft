@@ -1,0 +1,60 @@
+{
+    "InitialData": {
+      "Sources": {
+        "StatusSource": [
+          "New",
+          "Running",
+          "Completed",
+          "Failed",
+          "Paused"
+        ],
+        "LevelSource": [
+          "High",
+          "Medium",
+          "Low"
+        ],
+        "MajorSource": [
+          "Amplifier",
+          "Transmitter",
+          "Receiver"
+        ],
+        "MinorSource": [
+          "Channel 1",
+          "Channel 2",
+          "Channel 3"
+        ],
+        "PPTModelSource": [
+          "Model-A",
+          "Model-B",
+          "Model-C"
+        ],
+        "ParametersSource": [
+          "Power",
+          "Gain",
+          "NoiseFloor",
+          "Bandwidth"
+        ],
+        "BandsSource": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "DefaultValues": {
+        "TaskName": "New_Analysis_Task",
+        "FolderPath": "",
+        "SelectedStatus": "New",
+        "SelectedLevel": "Medium",
+        "SelectedMajor": "Amplifier",
+        "SelectedMinor": "Channel 1",
+        "SelectedPPTModel": "Model-A",
+        "SelectedEntry": "Power",
+        "MinFrequency": 0.0,
+        "MaxFrequency": 10.0,
+        "Band1": "0.1 - 1.0",
+        "Band2": "1.0 - 5.0",
+        "Band3": ""
+      }
+    }
+  }

@@ -437,6 +437,232 @@ namespace ChipManualGenerationSogt
     }
 
 
+    public class TaskSqlServerRepository
+    {
+        private readonly string _connectionString = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
+        private const string TableName = "yp_test_task"; // 替换为你的实际表名
+
+        private IDbConnection CreateConnection()
+        {
+            return new SqlConnection(_connectionString);
+        }
+        // ==========================================================
+        // C - Create (异步增加)
+        // ==========================================================
+        public async Task<int> AddTaskAsync(TaskSqlServerModel task)
+        {
+            var sql = $@"
+            INSERT INTO {TableName} 
+            (ID,PPTModel, TaskName, Status, Level, Major, Minor, StartDate, EndDate, DataStatus, FilesStatus, Conditions)
+            VALUES 
+            (@ID,@PPTModel, @TaskName, @Status, @Level, @Major, @Minor, @StartDate, @EndDate, @DataStatus, @FilesStatus, @Conditions);
+            SELECT CAST(SCOPE_IDENTITY() as int)";
+
+            using (var connection = CreateConnection())
+            {
+                // 使用 ExecuteScalarAsync<int> 异步执行插入并返回新 ID
+                return await connection.ExecuteScalarAsync<int>(sql, task);
+            }
+        }
+
+        // ==========================================================
+        // R - Read (异步查询)
+        // ==========================================================
+
+        // 1. 异步查询所有记录
+        public async Task<IEnumerable<TaskSqlServerModel>> GetAllTasksAsync()
+        {
+            var sql = $"SELECT * FROM {TableName}";
+            using (var connection = CreateConnection())
+            {
+                // 使用 QueryAsync<T> 异步返回所有记录的列表
+                return await connection.QueryAsync<TaskSqlServerModel>(sql);
+            }
+        }
+
+        // 2. 根据 ID 异步查询单条记录
+        public async Task<TaskSqlServerModel> GetTaskByIdAsync(int id)
+        {
+            var sql = $"SELECT * FROM {TableName} WHERE ID = @Id";
+            using (var connection = CreateConnection())
+            {
+                // 使用 QueryFirstOrDefaultAsync<T> 异步返回第一个匹配项
+                return await connection.QueryFirstOrDefaultAsync<TaskSqlServerModel>(sql, new { ID = id });
+            }
+        }
+
+        // ==========================================================
+        // U - Update (异步更新)
+        // ==========================================================
+        public async Task<bool> UpdateTaskAsync(TaskSqlServerModel task)
+        {
+            var sql = $@"
+            UPDATE {TableName} SET
+                PPTModel = @PPTModel,
+                TaskName = @TaskName,
+                Status = @Status,
+                Level = @Level,
+                Major = @Major,
+                Minor = @Minor,
+                StartDate = @StartDate,
+                EndDate = @EndDate,
+                DataStatus = @DataStatus,
+                FilesStatus = @FilesStatus,
+                Contions = @Contions
+            WHERE ID = @ID";
+
+            using (var connection = CreateConnection())
+            {
+                // 使用 ExecuteAsync 异步执行更新，并返回受影响的行数
+                return await connection.ExecuteAsync(sql, task) > 0;
+            }
+        }
+
+        // ==========================================================
+        // D - Delete (异步删除)
+        // ==========================================================
+        public async Task<bool> DeleteTaskAsync(int id)
+        {
+            var sql = $"DELETE FROM {TableName} WHERE ID = @Id";
+
+            using (var connection = CreateConnection())
+            {
+                // 使用 ExecuteAsync 异步执行删除
+                return await connection.ExecuteAsync(sql, new { ID = id }) > 0;
+            }
+        }
+    }
+
+
+    public class LogRepository
+    {
+        private static readonly string _connectionString = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
+        private const string TableName = "yp_test_logs"; // 替换为你的实际表名
+
+        static public async Task<bool> InsertLogAsync(LogModel log)
+        {
+            // 自动映射 LogModel 的属性到 SQL 参数
+            const string sql = @"
+            INSERT INTO  yp_test_logs(
+                TimeStamp, UserName, TaskId, TaskName, 
+                Level, Message, PN, SN, ChipNumber
+            )
+            VALUES (
+                @TimeStamp, @UserName, @TaskId, @TaskName, 
+                @Level, @Message, @PN, @SN, @ChipNumber
+            )";
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                // ExecuteAsync 执行非查询操作，返回受影响的行数
+                var rowsAffected = await connection.ExecuteAsync(sql, log);
+                return rowsAffected > 0;
+            }
+        }
+
+
+        /// <summary>
+        /// 异步获取数据库中的所有日志记录。
+        /// </summary>
+        /// <returns>日志模型列表。</returns>
+        static public async Task<List<LogModel>> GetAllLogsAsync()
+        {
+            const string sql = @"
+            SELECT *
+
+            FROM  yp_test_logs
+            ORDER BY TimeStamp DESC"; // 按时间戳降序排序
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                // QueryAsync 执行查询操作，并自动映射到 LogModel 列表
+                var logs = await connection.QueryAsync<LogModel>(sql);
+                return logs.AsList();
+            }
+        }
+
+  
+       static public async Task<List<LogModel>> QueryLogsAsync(
+    string userName = null,
+    string taskId = null,
+    string level = null,
+    string pn = null,
+    string sn = null,
+    string chipNumber = null,
+    DateTime? startTime = null,
+    DateTime? endTime = null)
+        {
+            var sql = new StringBuilder(@"
+        SELECT *
+        FROM yp_test_logs
+        WHERE 1=1
+    ");
+
+            var parameters = new DynamicParameters();
+
+            if (!string.IsNullOrWhiteSpace(userName))
+            {
+                sql.Append(" AND UserName = @UserName");
+                parameters.Add("UserName", userName);
+            }
+
+            if (!string.IsNullOrWhiteSpace(taskId))
+            {
+                sql.Append(" AND TaskId = @TaskId");
+                parameters.Add("TaskId", taskId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(level))
+            {
+                sql.Append(" AND Level = @Level");
+                parameters.Add("Level", level);
+            }
+
+            // 模糊查询部分
+            if (!string.IsNullOrWhiteSpace(pn))
+            {
+                sql.Append(" AND PN LIKE @PN");
+                parameters.Add("PN", $"%{pn}%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(sn))
+            {
+                sql.Append(" AND SN LIKE @SN");
+                parameters.Add("SN", $"%{sn}%");
+            }
+
+            if (!string.IsNullOrWhiteSpace(chipNumber))
+            {
+                sql.Append(" AND ChipNumber LIKE @ChipNumber");
+                parameters.Add("ChipNumber", $"%{chipNumber}%");
+            }
+
+            if (startTime.HasValue)
+            {
+                sql.Append(" AND TimeStamp >= @StartTime");
+                parameters.Add("StartTime", startTime.Value);
+            }
+
+            if (endTime.HasValue)
+            {
+                sql.Append(" AND TimeStamp <= @EndTime");
+                parameters.Add("EndTime", endTime.Value);
+            }
+
+            sql.Append(" ORDER BY TimeStamp DESC");
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var logs = await connection.QueryAsync<LogModel>(sql.ToString(), parameters);
+                return logs.AsList();
+            }
+        }
+
+
+
+
+    }
+
 
     //通用数据访问层 + 业务逻辑分离 适合表很多的时候
     //public class DapperRepository

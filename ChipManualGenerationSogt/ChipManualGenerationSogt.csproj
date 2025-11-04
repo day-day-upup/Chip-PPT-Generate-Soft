@@ -256,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="views\NewTaskWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\LogWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -306,9 +310,13 @@
     </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="FileFinder.cs" />
+    <Compile Include="FtpClient.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="JsonPaser.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="views\NewTaskWin.xaml.cs">
+      <DependentUpon>NewTaskWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\LogWin.xaml.cs">
       <DependentUpon>LogWin.xaml</DependentUpon>
     </Compile>
@@ -387,6 +395,7 @@
     <Content Include="resources\files\T_MML806_V3.pptx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\pic\back.png" />
     <Resource Include="resources\pic\search.png" />
     <Resource Include="resources\pic\download.png" />
     <Resource Include="resources\pic\Add.png" />
@@ -414,6 +423,9 @@
     <Resource Include="resources\pic\basic.png" />
     <Resource Include="resources\pic\basic_demo.png" />
     <Content Include="resources\files\MML806_V3.pptx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\files\NewTask.Json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="views\App.config" />

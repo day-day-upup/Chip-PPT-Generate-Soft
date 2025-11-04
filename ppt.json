@@ -1,0 +1,178 @@
+{
+    "ProductName": "GaAs MMIC Low Noise Amplifier",
+    "ModelNumber": "MML806",
+    "Tables": {
+      "BasicParameters": [
+        {
+          "Key": "{Top PN}",
+          "Value": "MML806"
+        },
+        {
+          "Key": "{Version}",
+          "Value": "V1.0.0"
+        },
+        {
+          "Key": "{Product Name}",
+          "Value": "GaAs MMIC Low Noise Amplifier"
+        },
+        {
+          "Key": "{Frequency Range}",
+          "Value": "0-10GHz"
+        },
+        {
+          "Key": "{right bar info}",
+          "Value": "GaAs Low Noise Amplifier MMIC 45 – 90GHz"
+        }
+      ],
+      "FeatureParameters": [
+        {
+          "Key": "Frequency",
+          "Value": "45-90GHz"
+        },
+        {
+          "Key": "Small Signal Gain",
+          "Value": "15dB Typical"
+        },
+        {
+          "Key": "Gain Flatness",
+          "Value": "±2.5dB Typical"
+        },
+        {
+          "Key": "Noise Figure",
+          "Value": "4.5dB Typical"
+        },
+        {
+          "Key": "P1dB",
+          "Value": "12dBm Typical"
+        },
+        {
+          "Key": "Power Supply",
+          "Value": "VD=+4V@119mA ,VG=-0.4V"
+        },
+        {
+          "Key": "Input/Output",
+          "Value": "50Ω"
+        },
+        {
+          "Key": "Chip Size",
+          "Value": "1.766 x 2.0 x 0.05mm"
+        }
+      ],
+      "AbsoluteMaximumRatings": [
+        {
+          "Key": "Drain Bias Voltage (VD)",
+          "Value": "+4.5V"
+        },
+        {
+          "Key": "Gate Bias Voltage (VG)",
+          "Value": "-2V to 0V"
+        },
+        {
+          "Key": "RF Input Power (RFIN)",
+          "Value": "+15dBm"
+        },
+        {
+          "Key": "Continuous Pdiss (T = 85 °C)\n (derate 6.1mW/°C above 85 °C) ",
+          "Value": "175°C"
+        },
+        {
+          "Key": "Thermal Resistance\n (channel to die bottom)",
+          "Value": "0.55W"
+        },
+        {
+          "Key": "Operating Temperature",
+          "Value": "-55°C to +85 °C"
+        },
+        {
+          "Key": "Storage Temperature",
+          "Value": "-65°C to +150 °C"
+        }
+      ],
+      "SupplyCurrentVdVg": [
+        {
+          "VD": "+3.5",
+          "VG": "-0.38",
+          "Current (mA)": "118"
+        },
+        {
+          "VD": "4.0",
+          "VG": "-0.40",
+          "Current (mA)": "119"
+        },
+        {
+          "VD": "4.0",
+          "VG": "-0.50",
+          "Current (mA)": "71"
+        }
+      ],
+      "Notes": [
+        "1. Die thickness: 50μm",
+        "2. VD bond pad is 75*75μm?",
+        "3. VG bond pad is 75*75μm?",
+        "4. RF IN/OUT bond pad is 50*86μm?",
+        "5. Bond pad metalization: Gold",
+        "6. Backside metalization: Gold"
+      ],
+      "Description1": [
+        {
+          "Component": "C1",
+          "Description": "100pF Example: Skyworks Part: SC10002430"
+        },
+        {
+          "Component": "C2",
+          "Description": "0.01μF Example: TDK Part:C1005X7R1H103K050BB (0402)"
+        },
+        {
+          "Component": "C3",
+          "Description": "0.1μF Example: TDK Part:C1005X7R1H104K050BB (0402)"
+        },
+        {
+          "Component": "R1",
+          "Description": "100Ω Example: Yageo Part:SR0402FR-7T10RL"
+        }
+      ],
+      "Description2": [
+        {
+          "Pin": "1",
+          "Function": "RF IN",
+          "Detail": "RF signal input terminal; no blocking capacitor required."
+        },
+        {
+          "Pin": "2",
+          "Function": "RF OUT",
+          "Detail": "RF signal output terminal; no blocking capacitor required."
+        },
+        {
+          "Pin": "3",
+          "Function": "VD",
+          "Detail": "Drain Biases for the Amplifier ; An external biasing circuit is required."
+        },
+        {
+          "Pin": "4",
+          "Function": "VG",
+          "Detail": "Gate Biases for the Amplifier ; An external biasing circuit is required."
+        },
+        {
+          "Pin": "5",
+          "Function": "Die Bottom",
+          "Detail": "Die bottom must be connected to RF and dc ground."
+        }
+      ],
+      "TurnOnProcedure": [
+        "Turn ON procedure:",
+        "1.    Connect GND to RF and dc ground.",
+        "2.    Set the gate bias voltages,VG to -2V.",
+        "3.    Set the drain bias voltages VD to +4V.",
+        "4.    Increase the gate bias voltages to achieve a quiescent supply current of 82 mA.",
+        "5.    Apply RF signal."
+      ],
+      "TurnOffProcedure": [
+        "Turn OFF procedure:",
+        "1.    Turn off the RF signal.",
+        "2.    Decrease the gate bias voltages, VG to -2V to achieve a IDQ = 0 mA (approximately).",
+        "3.    Decrease the drain bias voltages to 0 V.",
+        "4.    Increase the gate bias voltages to achieve a quiescent supply current of 82 mA.",
+        "5.    Increase the all gate bias voltages to 0 V."
+      ]
+    }
+  }

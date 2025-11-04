@@ -197,6 +197,37 @@ namespace ChipManualGenerationSogt
 
     }
 
+
+
+   
+
+// 假设数据库中的表名为 'Tasks'
+public class TaskSqlServerModel
+    {
+        // 标识符：自增主键
+        public int ID { get; set; }
+
+        // 任务信息
+        public string PPTModel { get; set; }
+        public string TaskName { get; set; }
+        public string Status { get; set; }
+        public string Level { get; set; }
+        public string Major { get; set; }
+
+        // 注意：根据你的描述，Minor 可能是字符串，代表子设备名
+        public string Minor { get; set; }
+
+        // 时间信息
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
+        // 状态布尔值
+        public bool DataStatus { get; set; }
+        public bool FilesStatus { get; set; }
+
+        // 条件/配置
+        public string Conditions { get; set; } // 注意拼写，如果数据库是 'Conditions'，此处也应修改
+    }
 }
 
 

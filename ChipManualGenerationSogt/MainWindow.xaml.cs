@@ -70,6 +70,8 @@ namespace ChipManualGenerationSogt
             leftSider.OnOperationBtnClick += HandleOperationBtnClick;
             leftSider.OnAddBtnClick += HandleAddBtnClick;
 
+
+
             plots = new List<PlotModel>();
             //vm.LogText = "这是一个日志测试:A Log in\n 这是一个日志测试:A Select Amplifier MM809\n  这是一个日志测试:A Enter SN:L004x,ON:L004x\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,Idd:67mA\n 这是一个日志测试： A Select Filter:M";
             taskMangeControls.TaskExcute += HandleTaskExcute;
@@ -102,6 +104,20 @@ namespace ChipManualGenerationSogt
                 }
 
             };
+            taskMangeControls.AddEvent += (sender, e) =>
+            {
+                HiddenAll();
+                newTaskPage.Visibility = Visibility.Visible;
+            };
+
+            newTaskWin.BackEvent += (sender, e) =>
+            {
+                //newTaskPage.Visibility = Visibility.Hidden;
+                HiddenAll();
+                home.Visibility = Visibility.Visible;
+            };
+            
+
             _task = new TaskModel();
 
             //var win = new LoginW();
@@ -3067,7 +3083,7 @@ namespace ChipManualGenerationSogt
                 if (Global.OperationModel.DataReady)
                 {
                     treeView.Visibility = Visibility.Visible;
-                    separator.Visibility = Visibility.Visible;
+                    //separator.Visibility = Visibility.Visible;
                     contentGrid.Visibility = Visibility.Visible;
                     return;
                 }
@@ -3075,7 +3091,7 @@ namespace ChipManualGenerationSogt
             if (Global.TaskModel != null && vm.ContentTitle != null)
             {
                 treeView.Visibility = Visibility.Visible;
-                separator.Visibility = Visibility.Visible;
+                //separator.Visibility = Visibility.Visible;
                 contentGrid.Visibility = Visibility.Visible;
             }
             else if (Global.TaskModel != null && vm.ContentTitle == null)
@@ -3171,12 +3187,13 @@ namespace ChipManualGenerationSogt
         private void HiddenAll()
         {
             treeView.Visibility = Visibility.Collapsed;
-            separator.Visibility = Visibility.Collapsed;
+            //separator.Visibility = Visibility.Collapsed;
             welComeStackPanel.Visibility = Visibility.Collapsed;
             home.Visibility = Visibility.Collapsed;
             contentGrid.Visibility = Visibility.Collapsed;
             log.Visibility = Visibility.Collapsed;
             addPage.Visibility = Visibility.Collapsed;
+            newTaskPage.Visibility = Visibility.Collapsed;
         }
 
         private void Menu_Preview_Clicked(object sender, RoutedEventArgs e)
