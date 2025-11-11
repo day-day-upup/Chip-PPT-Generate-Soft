@@ -24,6 +24,43 @@
                 </Menu>
             </DockPanel>
         </HierarchicalDataTemplate>
+
+        <Style x:Key="CleanImageButtonStyle" TargetType="{x:Type Button}">
+
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" 
+                            SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="LightGray"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
     <Window.DataContext>
         <local:MainWindowModel/>
@@ -83,27 +120,21 @@
                         <!--Curves tab-->
                             <TabItem x:Name="curveTab" Header="Curves" Visibility="Hidden">
                             <Grid>
-                                <local:Curves x:Name="curves">
-
-                                </local:Curves>
+                               
                             </Grid>
                         </TabItem>
 
                         <!--Tables tab-->
                             <TabItem x:Name="tableTab" Header="Tables" Visibility="Hidden">
                             <Grid>
-                                <local:Tables x:Name="table">
-
-                                </local:Tables>
+                               
                             </Grid>
                         </TabItem>
 
 
                             <TabItem x:Name="imgTab" Header="Images" Visibility="Hidden">
                                 <Grid>
-                                    <local:ImageAdder x:Name="images">
-
-                                    </local:ImageAdder>
+                                    
                                 </Grid>
                             </TabItem>
                         </TabControl>
@@ -192,7 +223,7 @@
             </Popup>
 
              <!-- home page -->
-            <Border  x:Name="home" Visibility="Collapsed"  Grid.Column="1"  BorderThickness="1" BorderBrush="Gray">
+            <Border  x:Name="home" Visibility="Visible"  Grid.Column="1"  BorderThickness="1" BorderBrush="Gray">
                 <Grid >
 
                     <local:TaskMangeControls x:Name="taskMangeControls" >
@@ -203,11 +234,85 @@
             </Border>
 
              <!-- new task page -->
-            <Border x:Name="newTaskPage" Grid.Column="1" >
+            <Border x:Name="newTaskPage" Visibility="Collapsed"  Grid.Column="1" >
                 <local:NewTaskWin x:Name="newTaskWin" />
 
             </Border>
-             <!-- log page -->
+
+            <!-- OperationPage -->
+            <Border x:Name="_OperationPage" Grid.Column="1"  Visibility="Collapsed">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="340" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Background="#FAFAFA">
+                        <DockPanel>
+
+                            <Button Click="Btn_OPBack_Click"  Width="40" Style="{StaticResource CleanImageButtonStyle}">
+                                <Image Source="/resources/pic/back.png" Height="16"  />
+                            </Button>
+                            <Border Width="10"/>
+                            <Label Content="Operation Window" FontSize="14"/>
+
+                        </DockPanel>
+
+                        <Border Height="50"/>
+                       
+
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Button Content="View Curves" Click="Btn_ViewCurves_Click" Width="320" Height="30"/>
+                        </DockPanel>
+
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Button Content="View Images" Click="Btn_ViewImage_Click" Width="320" Height="30"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Button  Content="Upload PPT Manual" Click="Btn_Upload_Click" Width="320" Height="30"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Button x:Name="_btnVewWord" Content="View Table" Click="Btn_ViewWorld_Click" Width="320" Height="30"/>
+                        </DockPanel>
+
+                       
+
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Button x:Name="_btnSave" Content="Save Config" Click="Btn_Save_click"  Width="320" Height="30"/>
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Button x:Name="_btnGenPPT" Content="Generate PPT" Click="Btn_Ok_Click" Width="320" Height="30"/>
+                        </DockPanel>
+                        
+
+                    </StackPanel>
+
+                    <Border  Grid.Column="1" BorderBrush="#d9d9d9" BorderThickness="0 1 0 0">
+                        <Grid>
+                            <local:Curves x:Name="curves"  Visibility="Collapsed">
+
+                            </local:Curves>
+
+                            <local:Tables x:Name="table"  Visibility="Collapsed">
+
+                            </local:Tables>
+
+                            <local:ImageAdder x:Name="images" Visibility="Collapsed">
+
+                            </local:ImageAdder>
+                        </Grid>
+                        
+    
+                    </Border>
+
+                    
+                </Grid>
+
+                
+
+            </Border>
+
+            <!-- log page -->
             <Border  x:Name="log"  Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" BorderThickness="1" BorderBrush="Gray">
                 <Grid>
                     <local:LogWin x:Name="logWin"/>

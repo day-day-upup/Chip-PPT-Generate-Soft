@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/pic/forms.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/t_mml806_v3.pptx")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/mml806_v3.pptx")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/newtask.json")]

@@ -42,7 +42,7 @@ namespace ChipManualGenerationSogt
 
         private async void Btn_LogIn_Clicked(object sender, RoutedEventArgs e)
         {
-            string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
+            string connStr = "Server=192.168.1.209;Database=mlChips;User ID=sa;Password=qotana;Encrypt=false;TrustServerCertificate=true;";
 
             var repo = new TestRecordRepository(connStr);
             var users = repo.GetUsers(connStr);

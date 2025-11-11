@@ -31,15 +31,16 @@
                 <Label x:Name="userLabel" Content="{Binding UserName}" HorizontalAlignment="Center" FontSize="16"/>
 
                 <Border Height="20">
-                    
-             </Border>
-                <Button Height="40" Width="40" Background="Transparent" Click="Btn_Home_Clicked">
+
+                </Border>
+                    <StackPanel Visibility="Collapsed">
+                    <Button Height="40" Width="40" Background="Transparent" Click="Btn_Home_Clicked">
                     <Image Source="../resources/pic/home.png"  Width="25" Height="25" Stretch="Uniform"/>
                 
             </Button>
                 <Button Height="40" Width="40" Background="Transparent" Click="Btn_Operation_Clicked">
                     <Image Source="../resources/pic/operation.png"  Width="25" Height="25"  Stretch="Uniform"/>
-            </Button>
+                 </Button>
                 <Button Height="40" Width="40" Background="Transparent" Click="Btn_Log_Clicked" >
                     <Image Source="../resources/pic/log.png"  Width="25" Height="25" Stretch="Uniform" />
                 </Button>
@@ -47,6 +48,7 @@
                     <Button Height="40" Width="40" Background="Transparent" Click="Btn_Add_Clicked" >
                         <Image Source="../resources/pic/Add.png"  Width="25" Height="25" Stretch="Uniform" />
                     </Button>
+                    </StackPanel>
                 </StackPanel>
             
             

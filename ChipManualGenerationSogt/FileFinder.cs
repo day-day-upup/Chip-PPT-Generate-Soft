@@ -154,7 +154,7 @@ public static class AmplifierFileProcessor
 
             foreach (string item in allFilePaths)
             {
-                string fullPath = @"CopiedReports\" + item;
+                string fullPath = System.IO.Path.Combine(Global.TempBasePath, item);
                 string fileName = Path.GetFileName(fullPath);
 
                 // 判断文件类型并处理

@@ -33,6 +33,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using System.Windows.Markup;
+using System.Text.Json;
+using Microsoft.Office.Interop.PowerPoint;
 namespace ChipManualGenerationSogt
 {
 
@@ -138,15 +140,15 @@ namespace ChipManualGenerationSogt
             {
                 if (i % 3 == 1)
                 {
-                    value[0, i] =  "Min";
+                    value[0, i] =  "Min.";
                 }
                 else if (i % 3 == 2)
                 {
-                    value[0, i] = "Type";
+                    value[0, i] = "Type.";
                 }
                 else
                 {
-                    value[0, i] = "Max";
+                    value[0, i] = "Max.";
                 }
             }
             for (int i = 1; i < vm.ParameterRows.Count+1; i++)
@@ -965,7 +967,7 @@ namespace ChipManualGenerationSogt
                     {
                         "Turn ON procedure:",
                         "1.    Connect GND to RF and dc ground.",
-                        "2.    Set the gate bias voltages,VG to -2V.",
+                        "2.    Set the gate bias voltages VG to -2V.",
                         "3.    Set the drain bias voltages VD to +4V.",
                         "4.    Increase the gate bias voltages to achieve a quiescent supply current of 82 mA.",
                         "5.    Apply RF signal.",
@@ -979,8 +981,7 @@ namespace ChipManualGenerationSogt
                         "1.    Turn off the RF signal.",
                         "2.    Decrease the gate bias voltages, VG to -2V to achieve a IDQ = 0 mA (approximately).",
                         "3.    Decrease the drain bias voltages to 0 V.",
-                        "4.    Increase the gate bias voltages to achieve a quiescent supply current of 82 mA.",
-                        "5.    Increase the all gate bias voltages to 0 V.",
+                        "4.    Increase the all gate bias voltages to 0 V.",
                     };
             InitializeTable(vm.TurnOffRows, t2Table);
 
@@ -1351,6 +1352,289 @@ namespace ChipManualGenerationSogt
             }
         }
 
+
+        /// <summary>
+        /// 将 FeatureParameterRow 集合转换为 JSON 模型所需的 ParameterItem 集合 (string, string) => (Key, Value)。
+        /// </summary>
+        private List<ParameterItem> MapFeatureRowsToParameterItems(
+            IEnumerable<FeatureParameterRow> rows)
+        {
+            // FeatureParameterRow 包含 Name 和 Info 属性，对应 JSON 模型的 Key 和 Value
+            return rows.Select(r => new ParameterItem
+            {
+                Key = r.Name,
+                Value = r.Info
+            }).ToList();
+        }
+
+
+        public ProductData CreateProductDataFromViewModel()
+        {
+            // 注意：您代码中 ModelNumber 和 ProductName 的值没有明确从 vm 属性中获取，
+            // 我们在此假设它们在 ViewModel 上有相应的属性，或者您需要手动提供它们。
+
+            var productData = new ProductData
+            {
+                // 假设 ViewModel 上有 ProductName 和 ModelNumber 属性
+                ProductName = "GaAs MMIC Low Noise Amplifier", // 替换为 vm.ProductName
+                ModelNumber = "MML806", // 替换为 vm.ModelNumber
+
+                Tables = new ParamTables
+                {
+                    // ------------------ 映射两列数据表 ------------------
+                    // BasicParameters, FeatureParameters, AbsoluteMaximumRatings, Description1 结构相同
+                    BasicParameters = MapFeatureRowsToParameterItems(vm.BasicParameterRows),
+                    FeatureParameters = MapFeatureRowsToParameterItems(vm.FeatureParameterRows),
+                    AbsoluteMaximumRatings = MapFeatureRowsToParameterItems(vm.AbsoluteRatingsRows),
+                    Description1 = vm.Description1Rows.Select(r => new DescriptionItem1
+                    {
+                        Component = r.Name,
+                        Description = r.Info // FeatureParameterRow 的 Info 属性对应 Description
+                    }).ToList(),
+
+                    // ------------------ 映射三列数据表 ------------------
+                    SupplyCurrentVdVg = vm.CurrentVdVgTable.Select(r => new SupplyCurrentItem
+                    {
+                        VD = r.FirstColumn,
+                        VG = r.SecondColumn,
+                        Current_mA = r.ThirdColumn // 记住，Current (mA) 映射到 Current_mA
+                    }).ToList(),
+
+                    Description2 = vm.Description2Rows.Select(r => new DescriptionItem2
+                    {
+                        Pin = r.FirstColumn,
+                        Function = r.SecondColumn,
+                        Detail = r.ThirdColumn
+                    }).ToList(),
+
+                    // ------------------ 映射单列数据表 ------------------
+                    Notes = vm.NotesTable.Select(r => r.FirstColumn).ToList(),
+                    TurnOnProcedure = vm.TurnOnRows.Select(r => r.FirstColumn).ToList(),
+                    TurnOffProcedure = vm.TurnOffRows.Select(r => r.FirstColumn).ToList(),
+
+
+                    // ------------------ 映射参数表 ------------------
+                    DetailedPerformance = vm.ParameterRows.Select(row => new ParameterDetail
+                    {
+                        Name = row.Name,
+                        Unit = row.Unit,
+                        Groups = row.Groups.Select(group => new PerformanceGroup
+                        {
+                            // 注意：这里使用 _rawValueMin/Max 来获取完整的、未被 UI 隐藏的值
+                            Min = group.Min, // 假设您能访问到原始值
+                            Typ = group.Type,
+                            Max = group.Max  // 假设您能访问到原始值
+                        }).ToList()
+                    }).ToList()
+
+
+
+                }
+            };
+
+            return productData;
+        }
+
+        /// <summary>
+        /// 从 JSON 字符串中加载数据到 ViewModel。
+        /// </summary>
+        /// <param name="jsonString">包含 ProductData 结构的完整 JSON 字符串。</param>
+        /// <param name="vm">要加载数据的目标 ViewModel 实例。</param>
+        public void LoadProductDataToViewModel(string jsonString)
+        {
+            if (string.IsNullOrWhiteSpace(jsonString))
+            {
+                // 处理空字符串的情况
+                return;
+            }
+
+            // 1. 反序列化 JSON 字符串为 C# 对象
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true // 允许属性名不区分大小写
+            };
+
+            ProductData productData;
+            try
+            {
+                productData = JsonSerializer.Deserialize<ProductData>(jsonString, options);
+            }
+            catch (JsonException ex)
+            {
+                // 捕获和处理 JSON 解析错误
+                Console.WriteLine($"JSON Deserialization Error: {ex.Message}");
+                return;
+            }
+
+            if (productData?.Tables == null)
+            {
+                // 数据无效
+                return;
+            }
+
+            // 2. 将反序列化后的数据映射回 ViewModel 集合
+            MapTablesToViewModel(productData.Tables);
+        }
+
+        private void MapTablesToViewModel(ParamTables tables)
+        {
+            // A. 清空 ViewModel 集合（确保数据不会重复或混淆）
+            vm.BasicParameterRows.Clear();
+            vm.FeatureParameterRows.Clear();
+            vm.ParameterRows.Clear();
+            vm.AbsoluteRatingsRows.Clear();
+            vm.CurrentVdVgTable.Clear();
+            vm.NotesTable.Clear();
+            vm.Description1Rows.Clear();
+            vm.Description2Rows.Clear();
+            vm.TurnOnRows.Clear(); // 注意：您的序列化方法中没有 TurnOnRows 的 Clear，但反序列化时应清空
+            vm.TurnOffRows.Clear();
+
+
+            // ------------------ 映射两列数据表 (Key/Value -> Name/Info) ------------------
+
+            // 假设 MapParameterItemsToFeatureRows(List<ParameterItem> items, ObservableCollection<FeatureParameterRow> target) 已经实现
+            MapParameterItemsToFeatureRows(tables.BasicParameters, vm.BasicParameterRows);
+            MapParameterItemsToFeatureRows(tables.FeatureParameters, vm.FeatureParameterRows);
+            MapParameterItemsToFeatureRows(tables.AbsoluteMaximumRatings, vm.AbsoluteRatingsRows);
+
+            // ------------------ 映射 Description1 (Component/Description -> Name/Info) ------------------
+            if (tables.Description1 != null)
+            {
+                foreach (var item in tables.Description1)
+                {
+                    // 假设 DescriptionItem1 的 Key 映射到 FeatureParameterRow 的 Name，Value 映射到 Info
+                    vm.Description1Rows.Add(new FeatureParameterRow
+                    {
+                        Name = item.Component, // JSON Component 映射到 ViewModel Name
+                        Info = item.Description // JSON Description 映射到 ViewModel Info
+                    });
+                }
+            }
+
+            // ------------------ 映射参数表 (DetailedPerformance) ------------------
+
+            if (tables.DetailedPerformance != null)
+            {
+                foreach (var detail in tables.DetailedPerformance)
+                {
+                    var parameterRow = new ParameterRow
+                    {
+                        Name = detail.Name,
+                        Unit = detail.Unit,
+                    };
+
+                    // 映射 Groups
+                    if (detail.Groups != null)
+                    {
+                        foreach (var group in detail.Groups)
+                        {
+                            var minMaxGroup = new MinMaxTypeGroup();
+
+                            // ? 关键：设置原始 Min/Max 值（假设 SetRawValues 存在）
+                            minMaxGroup.SetRawValues(group.Min, group.Max);
+
+                            // 设置 Type (Typ)
+                            minMaxGroup.Type = group.Typ;
+
+                            parameterRow.Groups.Add(minMaxGroup);
+                        }
+                    }
+                    vm.ParameterRows.Add(parameterRow);
+                }
+            }
+
+            // ------------------ 映射三列数据表 (SupplyCurrentVdVg) ------------------
+            if (tables.SupplyCurrentVdVg != null)
+            {
+                foreach (var item in tables.SupplyCurrentVdVg)
+                {
+                    // 假设 TreeColumnTableRow 用于三列数据
+                    vm.CurrentVdVgTable.Add(new TreeColumnTableRow
+                    {
+                        FirstColumn = item.VD,
+                        SecondColumn = item.VG,
+                        ThirdColumn = item.Current_mA // JSON 中 Current_mA 对应 ViewModel 第三列
+                    });
+                }
+            }
+
+            // ------------------ 映射三列数据表 (Description2) ------------------
+            if (tables.Description2 != null)
+            {
+                foreach (var item in tables.Description2)
+                {
+                    vm.Description2Rows.Add(new TreeColumnTableRow
+                    {
+                        FirstColumn = item.Pin,
+                        SecondColumn = item.Function,
+                        ThirdColumn = item.Detail
+                    });
+                }
+            }
+
+
+            // ------------------ 映射单列数据表 (Notes, TurnOnProcedure, TurnOffProcedure) ------------------
+
+            // Notes
+            if (tables.Notes != null)
+            {
+                foreach (var note in tables.Notes)
+                {
+                    // 假设 OneColumnTableRow 用于单列数据
+                    vm.NotesTable.Add(new OneColumnTableRow { FirstColumn = note });
+                }
+            }
+
+            // TurnOnProcedure
+            if (tables.TurnOnProcedure != null)
+            {
+                foreach (var item in tables.TurnOnProcedure)
+                {
+                    vm.TurnOnRows.Add(new OneColumnTableRow { FirstColumn = item });
+                }
+            }
+
+            // TurnOffProcedure
+            if (tables.TurnOffProcedure != null)
+            {
+                foreach (var item in tables.TurnOffProcedure)
+                {
+                    vm.TurnOffRows.Add(new OneColumnTableRow { FirstColumn = item });
+                }
+            }
+        }
+
+        /// <summary>
+        /// 将 ParameterItem 列表反向映射到 FeatureParameterRow 的 ObservableCollection 中。
+        /// </summary>
+        /// <param name="items">从 JSON 反序列化得到的 ParameterItem 列表。</param>
+        /// <param name="targetCollection">要加载数据的 ViewModel 目标集合。</param>
+        private void MapParameterItemsToFeatureRows(
+            List<ParameterItem> items,
+            ObservableCollection<FeatureParameterRow> targetCollection)
+        {
+            // 1. 清空目标集合，准备加载新数据（重要步骤）
+            targetCollection.Clear();
+
+            // 2. 检查源数据是否有效
+            if (items == null)
+            {
+                return;
+            }
+
+            // 3. 映射并添加到目标集合
+            var newRows = items.Select(item => new FeatureParameterRow
+            {
+                Name = item.Key,    // JSON Key 映射到 ViewModel Name
+                Info = item.Value   // JSON Value 映射到 ViewModel Info
+            });
+
+            foreach (var row in newRows)
+            {
+                targetCollection.Add(row);
+            }
+        }
     }
 
     public  class TablesModel : ObeservableObject

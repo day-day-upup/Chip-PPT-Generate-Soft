@@ -23,6 +23,7 @@ namespace ChipManualGenerationSogt
     public partial class LogWin : UserControl
     {
         LogWinModel vm;
+        public event EventHandler BackEvent;
         public LogWin()
         {
             InitializeComponent();
@@ -75,6 +76,11 @@ namespace ChipManualGenerationSogt
             }
             return resoult;
         
+        }
+
+        private void Btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+            BackEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 

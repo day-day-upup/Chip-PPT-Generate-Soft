@@ -9,7 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
 
 
@@ -27,7 +27,7 @@
                 <ListBoxItem  Content="Outline Drawing" />
                 <ListBoxItem  Content="Assembly Drawing"  />
                 <ListBoxItem  Content="Biasing and Operation" />
-                <ListBoxItem  Content="Mounting Bonding Techniques for MMICs" />
+                <ListBoxItem  Content="Mounting &amp; Bonding Techniques for MMICs" />
                 
             </ListBox>
             <Border Grid.Column="1" BorderThickness="1" BorderBrush="DarkGray"   Background="Transparent" >
@@ -37,7 +37,7 @@
                         <MenuItem Header="Resize Image" Click="ResizeImage_Click"/>
                     </ContextMenu>
                 </Border.ContextMenu>
-                <Image x:Name="TopImage" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image x:Name="TopImage" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 
             </Border>

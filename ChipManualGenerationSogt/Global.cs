@@ -20,6 +20,11 @@ namespace ChipManualGenerationSogt
 
         public static string  FileBasePath { get; set; }  = System.IO.Path.Combine(AppBaseUrl, "resources","files");
 
-        public static string  FtpRootPath { get; set; }  = "Manuals";
+        public static string TempBasePath { get; set; } = System.IO.Path.Combine(AppBaseUrl, "resources", "temp");
+
+        public static string FtpRootPath { get; set; }
+
+        
+
     }
 }

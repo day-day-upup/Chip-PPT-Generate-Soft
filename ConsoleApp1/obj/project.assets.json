@@ -2826,11 +2826,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\PROJECT\\ChipManualGeneration\\exe\\ChipManualGenerationSogt\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectUniqueName": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\ConsoleApp1.csproj",
       "projectName": "ConsoleApp1",
-      "projectPath": "F:\\PROJECT\\ChipManualGeneration\\exe\\ChipManualGenerationSogt\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectPath": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\ConsoleApp1.csproj",
       "packagesPath": "C:\\Users\\pengyang\\.nuget\\packages\\",
-      "outputPath": "F:\\PROJECT\\ChipManualGeneration\\exe\\ChipManualGenerationSogt\\ConsoleApp1\\obj\\",
+      "outputPath": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2899,5 +2899,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "获取包漏洞数据时出错: 无法加载源 https://api.nuget.org/v3/index.json 的服务索引。"
+    }
+  ]
 }

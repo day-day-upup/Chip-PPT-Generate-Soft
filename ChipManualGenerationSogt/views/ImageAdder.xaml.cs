@@ -35,28 +35,51 @@ namespace ChipManualGenerationSogt
         }
         private void InitializeImageMappings()
         {
+            string BasePath = "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files";
             _imageMappings = new Dictionary<string, (string, string)>
             {
-                ["Functional Block Diagram"] = (
-                    "F:\\PROJECT\\ChipManualGeneration\\exe\\1.png",
-                    "pack://application:,,,/resources/pic/fuction.png"
+                //["Functional Block Diagram"] = (
+                //    "F:\\PROJECT\\ChipManualGeneration\\exe\\1.png",
+                //    ""
                     
+                //),
+                //["Outline Drawing"] = (
+                //    "F:\\PROJECT\\ChipManualGeneration\\exe\\3.png",
+                //     ""
+                //),
+                //["Assembly Drawing"] = (
+                //    "F:\\PROJECT\\ChipManualGeneration\\exe\\4.png",
+                //     ""
+                //),
+                //["Biasing and Operation"] = (
+                //    "F:\\PROJECT\\ChipManualGeneration\\exe\\5.png",
+                //    ""
+                //),
+                //["Mounting Bonding Techniques for MMICs"] = (
+                //    "F:\\PROJECT\\ChipManualGeneration\\exe\\6.png",
+                //     ""
+                //)
+
+                 ["Functional Block Diagram"] = (
+                    System.IO.Path.Combine(BasePath, "功能图.png"),
+                    ""
+
                 ),
                 ["Outline Drawing"] = (
-                    "F:\\PROJECT\\ChipManualGeneration\\exe\\3.png",
-                     "pack://application:,,,/resources/pic/out drawing.png"
+                    System.IO.Path.Combine(BasePath, "外形图.png"),
+                     ""
                 ),
                 ["Assembly Drawing"] = (
-                    "F:\\PROJECT\\ChipManualGeneration\\exe\\4.png",
-                     "pack://application:,,,/resources/pic/a drawing.png"
+                    System.IO.Path.Combine(BasePath, "装配图.png"),
+                     ""
                 ),
                 ["Biasing and Operation"] = (
-                    "F:\\PROJECT\\ChipManualGeneration\\exe\\5.png",
-                    "pack://application:,,,/resources/pic/b drawing.png"
+                    System.IO.Path.Combine(BasePath, "框图.png"),
+                    ""
                 ),
-                ["Mounting Bonding Techniques for MMICs"] = (
-                    "F:\\PROJECT\\ChipManualGeneration\\exe\\6.png",
-                     "pack://application:,,,/resources/pic/m drawing.png"
+                ["Mounting & Bonding Techniques for MMICs"] = (
+                     System.IO.Path.Combine(BasePath, "芯片安装图.png"),
+                     ""
                 )
             };
 
@@ -254,7 +277,7 @@ namespace ChipManualGenerationSogt
             (string name, string filePath) img2 = ("Outline Drawing", _imageMappings["Outline Drawing"].Item1);
             (string name, string filePath) img3 = ("Assembly Drawing", _imageMappings["Assembly Drawing"].Item1);
             (string name, string filePath) img4 = ("Biasing and Operation", _imageMappings["Biasing and Operation"].Item1);
-            (string name, string filePath) img5 = ("Mounting Bonding Techniques for MMICs", _imageMappings["Mounting Bonding Techniques for MMICs"].Item1);
+            (string name, string filePath) img5 = ("Mounting & Bonding Techniques for MMICs", _imageMappings["Mounting & Bonding Techniques for MMICs"].Item1);
             resoult.Add(img1);
             resoult.Add(img2);
             resoult.Add(img3);

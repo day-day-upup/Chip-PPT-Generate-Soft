@@ -227,6 +227,9 @@ public class TaskSqlServerModel
 
         // 条件/配置
         public string Conditions { get; set; } // 注意拼写，如果数据库是 'Conditions'，此处也应修改
+        public string PptName { get; set; }
+
+        public bool TableUpdate { get; set; }
     }
 }
 

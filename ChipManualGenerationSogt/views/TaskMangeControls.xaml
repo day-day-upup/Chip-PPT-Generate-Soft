@@ -56,7 +56,7 @@
                     <StackPanel>
                        
 
-                    <Expander Header="Query Tasks"  IsExpanded="True">
+                    <Expander Header="Filter Tasks"  IsExpanded="True">
                         <StackPanel >
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
                                 <Label Content="Start DateTime:" Width="120" FontSize="14"/>
@@ -96,7 +96,7 @@
                                 <Label Content="Status:" Width="120" FontSize="14"/>
                                 <xctk:CheckComboBox   Loaded="CheckComboBox_Loaded"
                                         Width="200"
-                                        ItemsSource="{Binding Levels}"
+                                        ItemsSource="{Binding StatusSources}"
                                         SelectedItemsOverride="{Binding SelectedLevels}"
                                             />
                                 <Label Content=" "/>
@@ -142,7 +142,7 @@
 
 
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                <Button Content="Query"  Width="320" Height="30"/>
+                                <Button Content="Filter"  Width="320" Height="30"/>
                             </DockPanel>
 
 
@@ -158,23 +158,32 @@
                     </DockPanel>
 
 
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                    <DockPanel HorizontalAlignment="Center" Visibility="Visible" Margin="0 0 0 7">
                         <Button Content="Test" Click="Btn_Test_Click" Width="320" Height="30"/>
                     </DockPanel>
 
 
                     <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Button Content="Query Log" Click="Btn_Add_Click" Width="320" Height="30"/>
+                        <Button Content="View Log" Click="Btn_QueryLog_Click" Width="320" Height="30"/>
                     </DockPanel>
+
+                   
+
+                   
+
+
 
                 </StackPanel>
                 </ScrollViewer>
 
             </Grid>
 
-
-         <DataGrid  x:Name="dataGrid" ItemsSource="{Binding TableItemSources}"  SelectedItem="{Binding SelectTableItem, Mode=TwoWay}"
-                           Grid.Column="1" Margin="1 0 0 0"
+        <xctk:BusyIndicator x:Name="busyIndicator"  Grid.Column="1"
+               IsBusy="{Binding IsBusy}"
+               BusyContent="{Binding BusyMessage}"
+               DisplayAfter="0">
+            <DataGrid  x:Name="dataGrid" ItemsSource="{Binding TableItemSources}"  SelectedItem="{Binding SelectTableItem, Mode=TwoWay}"
+                            Margin="1 0 0 0"
                            MouseDoubleClick="doubleClick"
                            AutoGenerateColumns="False"
                            IsReadOnly="True"
@@ -186,8 +195,7 @@
                            CanUserSortColumns="False"
                            GridLinesVisibility="None"
                            CanUserAddRows="False">
-
-                    <DataGrid.Resources>
+                <DataGrid.Resources>
 
                         <Style x:Key="CenteredTextBlockStyle" TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -208,10 +216,10 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="DataGridRow">
                                         <Border x:Name="DgRowBorder"
-                     Background="{TemplateBinding Background}"
-                     BorderBrush="{TemplateBinding BorderBrush}"
-                     BorderThickness="{TemplateBinding BorderThickness}">
-                                            <SelectiveScrollingGrid>
+                                         Background="{TemplateBinding Background}"
+                                         BorderBrush="{TemplateBinding BorderBrush}"
+                                         BorderThickness="{TemplateBinding BorderThickness}">
+                                         <SelectiveScrollingGrid>
                                                 <SelectiveScrollingGrid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
                                                     <ColumnDefinition Width="*"/>
@@ -238,7 +246,19 @@
                                 </Setter.Value>
                             </Setter>
 
-                            <Style.Triggers>
+                        <Setter Property="ContextMenu">
+                            <Setter.Value>
+                                <ContextMenu>
+                                    <MenuItem Header="Commit To Generate PPT"  IsEnabled="{Binding MenuItemCommitIsEnabled, Mode=TwoWay}"
+                                                Command="{Binding CommitCommand}"
+                                                CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Back To Modify Data Sources"  IsEnabled="{Binding MenuItemBackToModifyIsEnabled, Mode=TwoWay}"
+                                                Command="{Binding ModifyCommand}"
+                                                CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter Property="Background" Value="LightGray"/>
                                     <Setter Property="Foreground" Value="Black"/>
@@ -247,6 +267,8 @@
                                     <Setter Property="Background" Value="#d9d9d9"/>
                                 </Trigger>
                             </Style.Triggers>
+                            
+                            
                         </Style>
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
@@ -270,7 +292,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <!--Status-->
-                        <DataGridTemplateColumn Header="Status" Width="80">
+                        <DataGridTemplateColumn Header="Status" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Status}" VerticalAlignment="Center">
@@ -282,10 +304,10 @@
                                                     <DataTrigger Binding="{Binding Status}" Value="Completed">
                                                         <Setter Property="Foreground" Value="Green"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="In Progress">
-                                                        <Setter Property="Foreground" Value="Orange"/>
+                                                <DataTrigger Binding="{Binding Status}" Value="PPT Ready For Generate">
+                                                    <Setter Property="Foreground" Value="DodgerBlue"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Not Started">
+                                                    <DataTrigger Binding="{Binding Status}" Value="Not Commited">
                                                         <Setter Property="Foreground" Value="Red"/>
                                                     </DataTrigger>
 
@@ -313,7 +335,7 @@
                                                         <Setter Property="Foreground" Value="Green"/>
                                                     </DataTrigger>
                                             <DataTrigger Binding="{Binding Level}" Value="Medium">
-                                                        <Setter Property="Foreground" Value="Orange"/>
+                                                    <Setter Property="Foreground" Value="DodgerBlue"/>
                                                     </DataTrigger>
                                             <DataTrigger Binding="{Binding Level}" Value="High">
                                                         <Setter Property="Foreground" Value="Red"/>
@@ -344,16 +366,16 @@
                                 <DataTemplate>
                                     
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <Button   Command="{Binding OkCommand}" 
+                                    <Button   Command="{Binding PreviewCommand}"
                                                   CommandParameter="{Binding}" 
                                          Width="24" Height="24" Background="Transparent" BorderThickness="0">
                                             <Image Source="/resources/pic/start.png" Stretch="Uniform"/>
                                         </Button>
                                         <Border Width="15"/>
-                                        <Button   Command="{Binding FinishCommand}" 
+                                    <Button   Command="{Binding DownLoadCommand}" 
                                                   CommandParameter="{Binding}"  
                                                   Width="24" Height="24" Background="Transparent" BorderThickness="0"  >
-                                            <Image Source="/resources/pic/finish.png" Stretch="Uniform"/>
+                                            <Image Source="/resources/pic/download.png" Stretch="Uniform"/>
                                         </Button>
                                         <Border Width="15"/>
 
@@ -362,10 +384,10 @@
                                 <Button Command="{Binding DetailShowCommand}"
                                                   CommandParameter="{Binding}"      
                                                Width="24" Height="24" Background="Transparent" BorderThickness="0">
-                                            <Image Source="/resources/pic/wenhao.png" Stretch="Uniform"/>
+                                            <Image Source="/resources/pic/modify.png" Stretch="Uniform"/>
                                         </Button>
 
-                                    </StackPanel>
+                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -374,7 +396,7 @@
 
 
                 </DataGrid>
-
+          </xctk:BusyIndicator>
         <Popup  Name="myPopup" IsOpen="{Binding PopupIsOpen}"
         
        

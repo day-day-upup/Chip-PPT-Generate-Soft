@@ -313,13 +313,6 @@ namespace ChipManualGenerationSogt
                 ),
                 new A.PresetGeometry(new A.AdjustValueList()) { Preset = A.ShapeTypeValues.Rectangle }
             );
-            //var spPr = new P.ShapeProperties(
-            //    new A.Transform2D(
-            //        new A.Offset { X = offsetX, Y = offsetY },
-            //        new A.Extents { Cx = 4000000, Cy = 800000 }
-            //    ),
-            //    new A.PresetGeometry(new A.AdjustValueList()) { Preset = A.ShapeTypeValues.Rectangle }
-            //);
 
             // 创建 P.TextBody
             var textBody = new P.TextBody(
@@ -331,7 +324,7 @@ namespace ChipManualGenerationSogt
             //var lines = text.Split('\n');
             for (int i = 0; i < lines.Length; i++)
             {
-                bool isTitle = false;
+               
 
                 // 创建段落属性
                 var paragraphProperties = new A.ParagraphProperties
@@ -349,20 +342,6 @@ namespace ChipManualGenerationSogt
 
                 var paragraph = new A.Paragraph(paragraphProperties);
 
-                // 对于第二行及以后的行，先添加项目符号
-                //if (i >= 1)
-                //{
-                //    // 创建项目符号的 Run
-                //    var bulletRunProps = new A.RunProperties
-                //    {
-                //        FontSize = 1100,
-                //    };
-                //    bulletRunProps.Append(new A.LatinFont { Typeface = "Calibri" });
-                //    // 使用Unicode圆点字符，并确保编码正确
-                //    var bulletRun = new A.Run(bulletRunProps, new A.Text("\u2022 ")); // Unicode圆点字符后跟一个空格
-
-                //    paragraph.Append(bulletRun);
-                //}
 
                 // 添加文本内容的 Run
                 var textRunProps = new A.RunProperties
@@ -371,6 +350,89 @@ namespace ChipManualGenerationSogt
                     FontSize = 1200,
                     Bold = true,
                     Underline = (i==0? A.TextUnderlineValues.Single:A.TextUnderlineValues.None),
+                };
+                textRunProps.Append(new A.LatinFont { Typeface = "Calibri" });
+                var textRun = new A.Run(textRunProps, new A.Text(lines[i]));
+                paragraph.Append(textRun);
+
+                textBody.Append(paragraph);
+            }
+
+            // 创建 Shape 并添加
+            var shape = new P.Shape(nvSpPr, spPr, textBody);
+            shapeTree.Append(shape);
+            return textBoxHeight;
+        }
+
+
+        public static long AddTextBox3(P.Slide slide, string text, long offsetX, long offsetY)
+        {
+            var shapeTree = slide.CommonSlideData.ShapeTree;
+
+            // 生成唯一 ID
+            uint shapeId = 1;
+            var existingIds = shapeTree.Descendants<P.NonVisualDrawingProperties>()
+                .Where(nv => nv.Id != null)
+                .Select(nv => nv.Id.Value);
+            if (existingIds.Any())
+                shapeId = (uint)(existingIds.Max() + 1);
+
+            // 非视觉属性
+            var nvSpPr = new P.NonVisualShapeProperties(
+                new P.NonVisualDrawingProperties { Id = shapeId, Name = $"TextBox {shapeId}" },
+                new P.NonVisualShapeDrawingProperties(new A.ShapeLocks { NoGrouping = true }),
+                new P.ApplicationNonVisualDrawingProperties()
+            );
+
+            // 视觉属性（位置、大小）
+            var lines = text.Split('\n');
+            long textBoxHeight = CalculateTextBoxHeight(lines);
+
+            // 视觉属性（位置、大小）
+            var spPr = new P.ShapeProperties(
+                new A.Transform2D(
+                    new A.Offset { X = offsetX, Y = offsetY },
+                    new A.Extents { Cx = 6000000, Cy = textBoxHeight }
+                ),
+                new A.PresetGeometry(new A.AdjustValueList()) { Preset = A.ShapeTypeValues.Rectangle }
+            );
+
+            // 创建 P.TextBody
+            var textBody = new P.TextBody(
+                new A.BodyProperties(),
+                new A.ListStyle()
+            );
+
+            // 添加段落
+            //var lines = text.Split('\n');
+            for (int i = 0; i < lines.Length; i++)
+            {
+
+
+                // 创建段落属性
+                var paragraphProperties = new A.ParagraphProperties
+                {
+                    Alignment = A.TextAlignmentTypeValues.Left
+                };
+
+                // 为第二行及以后的行设置缩进和项目符号
+                if (i >= 1)
+                {
+                    // 设置缩进
+                    //paragraphProperties.LeftMargin = 360000;  // 整个段落的左缩进
+                    paragraphProperties.Indent = -180000;     // 首行缩进（负值表示悬挂缩进，使项目符号突出）
+                }
+
+                var paragraph = new A.Paragraph(paragraphProperties);
+
+
+                // 添加文本内容的 Run
+                var textRunProps = new A.RunProperties
+                {
+                    //FontSize = isTitle ? 1400 : 1100,
+                    FontSize = 1200,
+                    Bold = true,
+                    //Underline = (i == 0 ? A.TextUnderlineValues.Single : A.TextUnderlineValues.None),
                 };
                 textRunProps.Append(new A.LatinFont { Typeface = "Calibri" });
                 var textRun = new A.Run(textRunProps, new A.Text(lines[i]));
@@ -489,107 +551,6 @@ namespace ChipManualGenerationSogt
         }
 
 
-        public static long AddTextBox3(P.Slide slide, string text, long offsetX, long offsetY)
-        {
-            var shapeTree = slide.CommonSlideData.ShapeTree;
-
-            // 生成唯一 ID
-            uint shapeId = 1;
-            var existingIds = shapeTree.Descendants<P.NonVisualDrawingProperties>()
-                .Where(nv => nv.Id != null)
-                .Select(nv => nv.Id.Value);
-            if (existingIds.Any())
-                shapeId = (uint)(existingIds.Max() + 1);
-
-            // 非视觉属性
-            var nvSpPr = new P.NonVisualShapeProperties(
-                new P.NonVisualDrawingProperties { Id = shapeId, Name = $"TextBox {shapeId}" },
-                new P.NonVisualShapeDrawingProperties(new A.ShapeLocks { NoGrouping = true }),
-                new P.ApplicationNonVisualDrawingProperties()
-            );
-
-            // 视觉属性（位置、大小）
-            var lines = text.Split('\n');
-            long textBoxHeight = CalculateTextBoxHeight(lines);
-
-            // 视觉属性（位置、大小）
-            var spPr = new P.ShapeProperties(
-                new A.Transform2D(
-                    new A.Offset { X = offsetX, Y = offsetY },
-                    new A.Extents { Cx = 6000000, Cy = textBoxHeight }
-                ),
-                new A.PresetGeometry(new A.AdjustValueList()) { Preset = A.ShapeTypeValues.Rectangle }
-            );
-            //var spPr = new P.ShapeProperties(
-            //    new A.Transform2D(
-            //        new A.Offset { X = offsetX, Y = offsetY },
-            //        new A.Extents { Cx = 4000000, Cy = 800000 }
-            //    ),
-            //    new A.PresetGeometry(new A.AdjustValueList()) { Preset = A.ShapeTypeValues.Rectangle }
-            //);
-
-            // 创建 P.TextBody
-            var textBody = new P.TextBody(
-                new A.BodyProperties(),
-                new A.ListStyle()
-            );
-
-            // 添加段落
-            //var lines = text.Split('\n');
-            for (int i = 0; i < lines.Length; i++)
-            {
-                bool isTitle = true;
-
-                // 创建段落属性
-                var paragraphProperties = new A.ParagraphProperties
-                {
-                    Alignment = A.TextAlignmentTypeValues.Left
-                };
-
-                // 为第二行及以后的行设置缩进和项目符号
-                if (i >= 1)
-                {
-                    // 设置缩进
-                    //paragraphProperties.LeftMargin = 360000;  // 整个段落的左缩进
-                    paragraphProperties.Indent = -180000;     // 首行缩进（负值表示悬挂缩进，使项目符号突出）
-                }
-
-                var paragraph = new A.Paragraph(paragraphProperties);
-
-                // 对于第二行及以后的行，先添加项目符号
-                //if (i >= 1)
-                //{
-                //    // 创建项目符号的 Run
-                //    var bulletRunProps = new A.RunProperties
-                //    {
-                //        FontSize = 1100,
-                //    };
-                //    bulletRunProps.Append(new A.LatinFont { Typeface = "Calibri" });
-                //    // 使用Unicode圆点字符，并确保编码正确
-                //    var bulletRun = new A.Run(bulletRunProps, new A.Text("\u2022 ")); // Unicode圆点字符后跟一个空格
-
-                //    paragraph.Append(bulletRun);
-                //}
-
-                // 添加文本内容的 Run
-                var textRunProps = new A.RunProperties
-                {
-                    //FontSize = isTitle ? 1400 : 1100,
-                    FontSize = 1200,
-                    Bold = isTitle,
-                };
-                textRunProps.Append(new A.LatinFont { Typeface = "Calibri" });
-                var textRun = new A.Run(textRunProps, new A.Text(lines[i]));
-                paragraph.Append(textRun);
-
-                textBody.Append(paragraph);
-            }
-
-            // 创建 Shape 并添加
-            var shape = new P.Shape(nvSpPr, spPr, textBody);
-            shapeTree.Append(shape);
-            return textBoxHeight;
-        }
 
         public static long AddTextBox4(P.Slide slide, string text, long offsetX, long offsetY)
         {
@@ -780,7 +741,7 @@ namespace ChipManualGenerationSogt
                 {
                     //FontSize = isTitle ? 1400 : 1100,
                     FontSize = 1100,
-                    Bold = (i==0 ||  i==6 || i== 8 || i==11),
+                    Bold = (i==0 ||  i==6 || i== 9  ||i==8|| i==11),
                     
                 };
                 textRunProps.Append(new A.LatinFont { Typeface = "Calibri" });
@@ -797,43 +758,6 @@ namespace ChipManualGenerationSogt
         }
 
 
-        private static A.RunProperties CreateRunPropertiesFromFontConfig(FontConfig font, bool isTitle = false)
-        {
-            if (font == null)
-                font = new FontConfig(); // 使用默认值
-
-            var props = new A.RunProperties();
-
-            // 字体大小：Open XML 使用 100 * 磅（例如 11pt = 1100）
-            int fontSize = font.Size > 0 ? font.Size : (isTitle ? 14 : 11);
-            props.FontSize = fontSize * 100;
-
-            // 粗体 / 斜体
-            props.Bold = font.IsBold;
-            props.Italic = font.IsItalic;
-
-            // 颜色（假设是十六进制如 "#FF0000" 或 "FF0000"）
-            if (!string.IsNullOrEmpty(font.Color))
-            {
-                string colorHex = font.Color.TrimStart('#');
-                if (colorHex.Length == 6)
-                {
-                    //props.SolidFill = new A.SolidFill(new A.RgbColorModelHex(colorHex));
-                }
-            }
-
-            // 字体族
-            string typeface = !string.IsNullOrEmpty(font.Typeface) ? font.Typeface : "Calibri";
-            props.Append(new A.LatinFont { Typeface = typeface });
-
-            // 下划线
-            if (font.Underline.HasValue)
-            {
-                props.Underline = font.Underline.Value;
-            }
-
-            return props;
-        }
         public static long AddTextBoxCenter(P.Slide slide, string text, long offsetX, long offsetY)
         {
             var shapeTree = slide.CommonSlideData.ShapeTree;
@@ -932,7 +856,9 @@ namespace ChipManualGenerationSogt
         /// <param name="offsetY"></param>
         /// <param name="fontszie"></param>
         /// <returns></returns>
-        public static long AddTextBoxCenter(P.Slide slide, string text, long offsetX, long offsetY, int fontszie)
+
+
+        public static long AddTextBoxCenter(P.Slide slide, string text, long offsetX, long offsetY, int fontszie, int width)
         {
             var shapeTree = slide.CommonSlideData.ShapeTree;
 
@@ -959,7 +885,7 @@ namespace ChipManualGenerationSogt
             var spPr = new P.ShapeProperties(
                 new A.Transform2D(
                     new A.Offset { X = offsetX, Y = offsetY },
-                    new A.Extents { Cx = 6000000, Cy = textBoxHeight }
+                    new A.Extents { Cx = width, Cy = textBoxHeight }
                 ),
                 new A.PresetGeometry(new A.AdjustValueList()) { Preset = A.ShapeTypeValues.Rectangle }
             );
@@ -1294,18 +1220,6 @@ namespace ChipManualGenerationSogt
             return textBoxHeight;
         } // ? 辅助方法：必须和 AddTextBoxCenter 在同一个类中！
 
-        private static void AddRun(A.Paragraph paragraph, string text, int fontSize, bool bold, int baseline)
-        {
-            var runProps = new A.RunProperties
-            {
-                FontSize = fontSize,
-                Bold = bold,
-                Baseline = baseline
-            };
-            runProps.Append(new A.LatinFont { Typeface = "Calibri" });
-            var textElement = new A.Text(text) { };
-            paragraph.Append(new A.Run(runProps, textElement));
-        }
 
         // 根据行数计算文本框高度
         private static long CalculateTextBoxHeight(string[] lines)
@@ -1346,119 +1260,6 @@ namespace ChipManualGenerationSogt
         }
 
 
-        private static void AddStyledTable(P.Slide slide, string[,] data, long offsetX, long offsetY)
-        {
-            var shapeTree = slide.CommonSlideData.ShapeTree;
-
-            // 生成唯一 ID
-            uint shapeId = 1;
-            var existingIds = shapeTree.Descendants<P.NonVisualDrawingProperties>()
-                .Where(nv => nv.Id != null)
-                .Select(nv => nv.Id.Value);
-            if (existingIds.Any())
-                shapeId = (uint)(existingIds.Max() + 1);
-
-            int rows = data.GetLength(0);
-            int cols = data.GetLength(1);
-
-            long tableWidth = 6000000;
-            long tableHeight = 2000000;
-
-            // 非视觉属性
-            var nvSpPr = new P.NonVisualShapeProperties(
-                new P.NonVisualDrawingProperties { Id = shapeId, Name = $"Table {shapeId}" },
-                new P.NonVisualShapeDrawingProperties(new A.ShapeLocks { NoGrouping = true }),
-                new P.ApplicationNonVisualDrawingProperties()
-            );
-
-            var table = new S.Table();
-            table.Append(new DocumentFormat.OpenXml.Drawing.TableProperties());
-
-            // 表格网格
-            var tableGrid = new DocumentFormat.OpenXml.Drawing.TableGrid();
-            for (int col = 0; col < cols; col++)
-            {
-                tableGrid.Append(new A.GridColumn { Width = tableWidth / cols });
-            }
-            table.Append(tableGrid);
-
-            // 添加行和单元格
-            for (int row = 0; row < rows; row++)
-            {
-                var tableRow = new DocumentFormat.OpenXml.Drawing.TableRow { Height = tableHeight / rows };
-
-                for (int col = 0; col < cols; col++)
-                {
-                    var tableCell = new DocumentFormat.OpenXml.Drawing.TableCell();
-
-                    // 设置单元格样式
-                    var cellProperties = new DocumentFormat.OpenXml.Drawing.TableCellProperties();
-
-                    // 表头行背景色
-                    if (row == 0)
-                    {
-                        cellProperties.Append(new A.SolidFill(new A.RgbColorModelHex { Val = "D3D3D3" })); // 浅灰色
-                    }
-
-                    // 边框
-                    cellProperties.Append(new A.TableCellBorders(
-                        //new A.LeftBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" }) { Width = 1 }),
-                        //new A.RightBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" }) { Width = 1 }),
-                        //new A.TopBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" }) { Width = 1 }),
-                        //new A.BottomBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" }) { Width = 1 })
-                        new A.LeftBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" })),
-                        new A.RightBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" })),
-                        new A.TopBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" })),
-                        new A.BottomBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "000000" }))
-                    ));
-
-                    tableCell.Append(cellProperties);
-
-                    // 文本内容
-                    var textBody = new P.TextBody(
-                        new A.BodyProperties(),
-                        new A.ListStyle(),
-                        new A.Paragraph(
-                            new A.ParagraphProperties
-                            {
-                                Alignment = A.TextAlignmentTypeValues.Center
-                            },
-                            new A.Run(
-                                new A.RunProperties
-                                {
-                                    FontSize = 1100,
-                                    Bold = (row == 0),
-                                    //LatinFont = new A.LatinFont { Typeface = "Calibri" }
-                                },
-                                new A.Text(data[row, col] ?? "")
-                            )
-                        )
-                    );
-
-                    tableCell.Append(textBody);
-                    tableRow.Append(tableCell);
-                }
-
-                table.Append(tableRow);
-            }
-
-            // 创建图形框架
-            var graphicFrame = new P.GraphicFrame(
-                nvSpPr,
-                new P.Transform(
-                    new A.Offset { X = offsetX, Y = offsetY },
-                    new A.Extents { Cx = tableWidth, Cy = tableHeight }
-                ),
-                new Graphic(
-                    new A.GraphicData(
-                        table
-                    //"http://schemas.openxmlformats.org/drawingml/2006/table"
-                    )
-                )
-            );
-
-            shapeTree.Append(graphicFrame);
-        }
 
 
         public static void AddTable(P.Slide slide, string[,] data, long offsetX, long offsetY, long width, long height)
@@ -1591,7 +1392,7 @@ namespace ChipManualGenerationSogt
             shapeTree.Append(graphicFrame);
         }
 
-
+        //*********z这里
         public static void AddTable6(P.Slide slide, string[,] data, long offsetX, long offsetY, long width, long height)
         {
             var shapeTree = slide.CommonSlideData.ShapeTree;
@@ -1614,7 +1415,7 @@ namespace ChipManualGenerationSogt
 
             var table = new A.Table();
 
-            long firstColWidth = width / 5 * 2; // 第一列宽一半
+            long firstColWidth = width / 6 * 2; // 第一列宽一半
             long remainingWidth = width - firstColWidth;
             long otherColWidth = remainingWidth / (cols - 1);
 
@@ -1641,14 +1442,40 @@ namespace ChipManualGenerationSogt
                     var tableCell = new A.TableCell();
 
                     // ==== 表格单元格属性 ====
+                    //int borderWidthEmu = 5700;
+                    //var borderColor = new A.RgbColorModelHex { Val = "00ff00" };
                     var tableCellProperties = new A.TableCellProperties();
-                    tableCellProperties.Append(new A.TableCellBorders(
-                        new A.LeftBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "D0D0D0" })),
-                        new A.RightBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "D0D0D0" })),
-                        new A.TopBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "D0D0D0" })),
-                        new A.BottomBorder(new A.SolidFill(new A.RgbColorModelHex { Val = "D0D0D0" }))
-                    ));
+                    //tableCellProperties.Append(new A.TableCellBorders(
+                    //                            //new A.RightBorder(new A.Outline { Width = borderWidthEmu }, new A.SolidFill(new A.RgbColorModelHex { Val = "D0D0D0" })),
+                    //    new A.LeftBorder(new A.Outline { Width = borderWidthEmu }, new A.SolidFill(borderColor)),
+                    //    new A.RightBorder(new A.Outline { Width = borderWidthEmu }, new A.SolidFill(borderColor)),
+                    //    new A.TopBorder(new A.Outline { Width = borderWidthEmu }, new A.SolidFill(borderColor)),
+                    //    new A.BottomBorder(new A.Outline { Width = borderWidthEmu }, new A.SolidFill(borderColor))
+                    //));
+                    // --- 创建 Outline 模板 ---
+                    int borderWidthEmu = 6350; // 0.5 磅边框
+                    var borderColor = new A.RgbColorModelHex { Val = "D9D9D9" }; // 浅灰色
 
+                    var borderOutline = new A.Outline
+                    {
+                        Width = borderWidthEmu,
+                        CapType = A.LineCapValues.Flat,
+                        CompoundLineType = A.CompoundLineValues.Single,
+                        Alignment = A.PenAlignmentValues.Center
+                    };
+
+                    // 颜色填充
+                    borderOutline.Append(new A.SolidFill(borderColor));
+                    // 线型设为实线
+                    borderOutline.Append(new A.PresetDash { Val = A.PresetLineDashValues.Solid });
+
+                    // ? 为每个边独立复制一份 Outline
+                    tableCellProperties.Append(new A.TableCellBorders(
+                        new A.LeftBorder((A.Outline)borderOutline.Clone()),
+                        new A.RightBorder((A.Outline)borderOutline.Clone()),
+                        new A.TopBorder((A.Outline)borderOutline.Clone()),
+                        new A.BottomBorder((A.Outline)borderOutline.Clone())
+                    ));
                     // 表头背景色
                     if (row == 0)
                         tableCellProperties.Append(new A.SolidFill(new A.RgbColorModelHex { Val = "757171" }));
@@ -1718,9 +1545,9 @@ namespace ChipManualGenerationSogt
             shapeTree.Append(graphicFrame);
         }
 
-     
 
-        /// <summary>
+
+
         /// 每个单元格的宽度均分， 也就是一样的
         /// </summary>
         /// <param name="slide"></param>
@@ -1857,113 +1684,6 @@ namespace ChipManualGenerationSogt
             shapeTree.Append(graphicFrame);
         }
 
-        public static void AddTable(P.Slide slide, List<(string name, List<string> value, string unit)> data, long offsetX, long offsetY, long width, long height)
-        {
-            if (data == null || data.Count == 0)
-                return;
-
-            var shapeTree = slide.CommonSlideData.ShapeTree;
-
-            // 1. 计算总列数 (cols) 和中间值列数 (middleCols)
-            // 假设数据至少有 name 和 unit 两列
-            int middleCols = data.Max(d => d.value?.Count ?? 0);
-            int cols = 1 + middleCols + 1; // 1: name, middleCols: value, 1: unit
-            int rows = data.Count;
-
-            // 2. 确定下一个可用的 ShapeId
-            uint shapeId = 1;
-            var existingIds = shapeTree.Descendants<P.NonVisualDrawingProperties>()
-                .Where(nv => nv.Id != null)
-                .Select(nv => nv.Id.Value);
-            if (existingIds.Any())
-                shapeId = (uint)(existingIds.Max() + 1);
-
-            // 3. 创建 GraphicFrame 的非视觉属性
-            var nvGraphicFramePr = new P.NonVisualGraphicFrameProperties(
-                new P.NonVisualDrawingProperties { Id = shapeId, Name = $"Table {shapeId}" },
-                new P.NonVisualGraphicFrameDrawingProperties(),
-                new P.ApplicationNonVisualDrawingProperties()
-            );
-
-            var table = new A.Table();
-
-            // 4. 计算列宽
-            // 假设第一列 (Name) 占 20%，最后一列 (Unit) 占 20%，中间列均分 60%
-            long nameColWidth = width / 5; // 20%
-            long unitColWidth = width / 5; // 20%
-            long remainingWidth = width - nameColWidth - unitColWidth;
-            long middleColWidth = (middleCols > 0) ? remainingWidth / middleCols : 0;
-
-            // 5. 创建 TableGrid (定义列宽)
-            var tableGrid = new A.TableGrid();
-            for (int col = 0; col < cols; col++)
-            {
-                long colWidth;
-                if (col == 0) // Name 列
-                {
-                    colWidth = nameColWidth;
-                }
-                else if (col == cols - 1) // Unit 列 (最后一列)
-                {
-                    colWidth = unitColWidth;
-                }
-                else // Value 列
-                {
-                    colWidth = middleColWidth;
-                }
-                tableGrid.Append(new A.GridColumn { Width = colWidth });
-            }
-            table.Append(tableGrid);
-
-            // 6. 遍历行数据并创建 TableRow
-            for (int row = 0; row < rows; row++)
-            {
-                // 高度平均分配
-                var tableRow = new A.TableRow { Height = height / rows };
-                var rowData = data[row];
-
-                // 确保第一行作为表头（如果需要）
-                bool isHeaderRow = (row == 0);
-
-                // 列索引 0：Name
-                tableRow.Append(CreateTableCell(rowData.name, isHeaderRow, isFirstCol: true));
-
-                // 列索引 1 到 middleCols：Value
-                for (int col = 0; col < middleCols; col++)
-                {
-                    string cellText = (rowData.value != null && col < rowData.value.Count)
-                                      ? rowData.value[col]
-                                      : "";
-                    tableRow.Append(CreateTableCell(cellText, isHeaderRow));
-                }
-
-                // 最后一列：Unit
-                tableRow.Append(CreateTableCell(rowData.unit, isHeaderRow, isLastCol: true));
-
-                table.Append(tableRow);
-            }
-
-            // 7. 组装 GraphicFrame
-            var graphicData = new A.GraphicData
-            {
-                Uri = "http://schemas.openxmlformats.org/drawingml/2006/table"
-            };
-            graphicData.Append(table);
-
-            var graphic = new A.Graphic();
-            graphic.Append(graphicData);
-
-            var graphicFrame = new P.GraphicFrame();
-            graphicFrame.Append(nvGraphicFramePr);
-            graphicFrame.Append(new P.Transform(
-                new A.Offset { X = offsetX, Y = offsetY },
-                new A.Extents { Cx = width, Cy = height }
-            ));
-            graphicFrame.Append(new P.ShapeProperties());
-            graphicFrame.Append(graphic);
-
-            shapeTree.Append(graphicFrame);
-        }
         /// <summary>
         /// 辅助方法：创建并返回一个带默认样式的 A.TableCell
         /// </summary>
@@ -2345,6 +2065,9 @@ namespace ChipManualGenerationSogt
                 for (int col = 0; col < cols; col++)
                 {
                     string cellText = string.IsNullOrEmpty(data[row, col]) ? " " : data[row, col];
+                    string searchPattern = "Part";
+                    string newReplacement= "\n" + searchPattern;
+                    cellText = cellText.Replace(searchPattern, newReplacement);
                     var tableCell = new A.TableCell();
 
                     // ==== 表格单元格属性 ====

@@ -11,14 +11,17 @@
         <local:CurvesModel/>
     </UserControl.DataContext>
     <Grid>
-        <ScrollViewer Grid.Row="1"  
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Disabled"
+     
+
+
+        <ScrollViewer Grid.Column="1"  
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto"
             Background="White">
             <ItemsControl ItemsSource="{Binding Plots}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Rows="2" />
+                        <UniformGrid Columns="2" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
@@ -27,8 +30,8 @@
                     <DataTemplate>
                         <Border BorderBrush="#d9d9d9" 
                             BorderThickness="1" 
-                            Margin="0,0,1,1">
-
+                            Margin="0,0,1,1" >
+                            
                             <ContentPresenter Content="{Binding}"  HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch" />
                         </Border>

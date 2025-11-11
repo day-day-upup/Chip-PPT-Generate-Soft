@@ -4,8 +4,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Dapper;
+using System.IO;
 
 
 
@@ -37,7 +40,8 @@ namespace ChipManualGenerationSogt
     public class TaskRepository
     {
 
-        private readonly string _connectionString =  "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
+        // private readonly string _connectionString =  "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
+        private readonly string _connectionString = "Server=192.168.1.209;Database=mlChips;User ID=sa;Password=qotana;Encrypt=false;TrustServerCertificate=true;";
 
 
         public TaskRepository(string connectionString)
@@ -211,7 +215,7 @@ namespace ChipManualGenerationSogt
         {
             // 自动映射 LogModel 的属性到 SQL 参数
             const string sql = @"
-            INSERT INTO  yp_test_logs(
+            INSERT INTO  logs(
                 TimeStamp, UserName, TaskId, TaskName, 
                 Level, Message, PN, SN, ChipNumber
             )
@@ -238,7 +242,7 @@ namespace ChipManualGenerationSogt
             const string sql = @"
             SELECT *
 
-            FROM  yp_test_logs
+            FROM  logs
             ORDER BY TimeStamp DESC"; // 按时间戳降序排序
 
             using (var connection = new SqlConnection(_connectionString))
@@ -255,7 +259,7 @@ namespace ChipManualGenerationSogt
             const string sql = @"
             SELECT *
    
-            FROM yp_test_logs
+            FROM logs
             WHERE 
                 UserName = @UserName
             ORDER BY TimeStamp DESC";
@@ -282,7 +286,7 @@ namespace ChipManualGenerationSogt
         {
             var sql = new StringBuilder(@"
         SELECT *
-        FROM yp_test_logs
+        FROM logs
         WHERE 1=1
     ");
 
@@ -439,8 +443,8 @@ namespace ChipManualGenerationSogt
 
     public class TaskSqlServerRepository
     {
-        private readonly string _connectionString = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-        private const string TableName = "yp_test_task"; // 替换为你的实际表名
+        private readonly string _connectionString = "Server=192.168.1.209;Database=mlChips;User ID=sa;Password=qotana;Encrypt=false;TrustServerCertificate=true;";
+        private const string TableName = "tasks"; // 替换为你的实际表名
 
         private IDbConnection CreateConnection()
         {
@@ -453,9 +457,9 @@ namespace ChipManualGenerationSogt
         {
             var sql = $@"
             INSERT INTO {TableName} 
-            (ID,PPTModel, TaskName, Status, Level, Major, Minor, StartDate, EndDate, DataStatus, FilesStatus, Conditions)
+            (ID,PPTModel, TaskName,PptName, Status, Level, Major, Minor, StartDate, EndDate, DataStatus, FilesStatus, Conditions, TableUpdate)
             VALUES 
-            (@ID,@PPTModel, @TaskName, @Status, @Level, @Major, @Minor, @StartDate, @EndDate, @DataStatus, @FilesStatus, @Conditions);
+            (@ID,@PPTModel, @TaskName,@PptName, @Status, @Level, @Major, @Minor, @StartDate, @EndDate, @DataStatus, @FilesStatus, @Conditions,@TableUpdate);
             SELECT CAST(SCOPE_IDENTITY() as int)";
 
             using (var connection = CreateConnection())
@@ -508,7 +512,9 @@ namespace ChipManualGenerationSogt
                 EndDate = @EndDate,
                 DataStatus = @DataStatus,
                 FilesStatus = @FilesStatus,
-                Contions = @Contions
+                Conditions = @Conditions,
+                PptName = @PptName,
+                TableUpdate = @TableUpdate
             WHERE ID = @ID";
 
             using (var connection = CreateConnection())
@@ -536,14 +542,14 @@ namespace ChipManualGenerationSogt
 
     public class LogRepository
     {
-        private static readonly string _connectionString = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-        private const string TableName = "yp_test_logs"; // 替换为你的实际表名
+        public static string _connectionString = "Server=192.168.1.209;Database=mlChips;User ID=sa;Password=qotana;Encrypt=false;TrustServerCertificate=true;";
+        private const string TableName = "logs"; // 替换为你的实际表名
 
         static public async Task<bool> InsertLogAsync(LogModel log)
         {
             // 自动映射 LogModel 的属性到 SQL 参数
             const string sql = @"
-            INSERT INTO  yp_test_logs(
+            INSERT INTO  logs(
                 TimeStamp, UserName, TaskId, TaskName, 
                 Level, Message, PN, SN, ChipNumber
             )
@@ -570,7 +576,7 @@ namespace ChipManualGenerationSogt
             const string sql = @"
             SELECT *
 
-            FROM  yp_test_logs
+            FROM  logs
             ORDER BY TimeStamp DESC"; // 按时间戳降序排序
 
             using (var connection = new SqlConnection(_connectionString))
@@ -594,7 +600,7 @@ namespace ChipManualGenerationSogt
         {
             var sql = new StringBuilder(@"
         SELECT *
-        FROM yp_test_logs
+        FROM logs
         WHERE 1=1
     ");
 
@@ -663,8 +669,15 @@ namespace ChipManualGenerationSogt
 
     }
 
+    /// <summary>
+    /// 对应 JSON 结构中的 "DatabaseConnection" 对象。
+    /// </summary>
 
-    //通用数据访问层 + 业务逻辑分离 适合表很多的时候
+
+
+
+
+   //通用数据访问层 + 业务逻辑分离 适合表很多的时候
     //public class DapperRepository
     //{
     //    private readonly string _connectionString;

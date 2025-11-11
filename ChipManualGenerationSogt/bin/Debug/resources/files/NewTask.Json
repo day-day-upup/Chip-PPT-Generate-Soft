@@ -2,7 +2,8 @@
     "InitialData": {
       "Sources": {
         "StatusSource": [
-          "In Progress",
+          "Not Commited",
+          "PPT Ready For Generate",
           "Completed"
         ],
         "LevelSource": [
@@ -17,7 +18,7 @@
           "Low Noise Amplifier"
         ],
         "PPTModelSource": [
-          "MML806"
+             "MML"
         ],
         "ParametersSource": [
           "Power",

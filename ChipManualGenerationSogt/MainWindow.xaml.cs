@@ -43,6 +43,9 @@ using DocumentFormat.OpenXml.Drawing.Diagrams;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Office2013.Excel;
 using DocumentFormat.OpenXml.Bibliography;
+using System.Text.Json;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 namespace ChipManualGenerationSogt
 {
     /// <summary>
@@ -52,10 +55,12 @@ namespace ChipManualGenerationSogt
     {
         MainWindowModel vm;
         PptDataModel pptDataModel;
-        TaskModel _task;
+       
         List<PlotModel> plots;
         User _user;
+        FileterConditionModel _filterCondition;
         List<string> _plotNames = new List<string>();
+        string _fileFolerPath = "";
         public MainWindow(User user)
         {
             InitializeComponent();
@@ -109,16 +114,43 @@ namespace ChipManualGenerationSogt
                 HiddenAll();
                 newTaskPage.Visibility = Visibility.Visible;
             };
+            taskMangeControls.QueryLogEvent += (sender, e) =>
+            {
+                HandleLogBtnClick(null, null);
+            };
+            taskMangeControls.DetailShowEvent += (sender, e) =>
+            {
+                var taskItem = e as TaskTableItem;
+                if (taskItem != null)
+                { 
 
+                
+                }
+                HiddenAll();
+                newTaskPage.Visibility = Visibility.Visible;
+                newTaskWin.ShowCurrentTaskConfigure(taskItem);
+
+            };
             newTaskWin.BackEvent += (sender, e) =>
             {
                 //newTaskPage.Visibility = Visibility.Hidden;
                 HiddenAll();
+                taskMangeControls.RefreshTask();
                 home.Visibility = Visibility.Visible;
             };
-            
 
-            _task = new TaskModel();
+        
+         
+
+            logWin.BackEvent += (sender, e) =>
+            {
+
+                HiddenAll();
+                //taskMangeControls.RefreshTask();
+                home.Visibility = Visibility.Visible;
+            };
+
+            
 
             //var win = new LoginW();
             //win.Show();
@@ -189,7 +221,7 @@ namespace ChipManualGenerationSogt
 
             }
             #region 第一页
-            string features = "Featrues\n";
+            string features = "Features\n";
             foreach (var item in table.GetFeatureTableData())
             {
                 features += "\u2022" +"    " +item.name + " : " + item.info + "\n";
@@ -198,7 +230,7 @@ namespace ChipManualGenerationSogt
 
             //这个的匹配赋值方式可能还需要更改
 
-            string elecCondition = "TA = +25\u2103, " + filter.GetFileterCondition().VD_VG_Conditon.ElementAt(0).Replace('&', ',');
+            string elecCondition = "TA = +25\u2103, " + _filterCondition.VD_VG_Conditon.ElementAt(0).Replace('&', ',') + " Typical";
 
             pptDataModel.FirstPage = new FirstPageModel
             {
@@ -272,12 +304,13 @@ namespace ChipManualGenerationSogt
             pptDataModel.EndToFront5Page.AbsoluteMaximumRatingsTableTitle = "Absolute Maximum Ratings";
             pptDataModel.EndToFront5Page.AbsoluteMaximumRatingsTable = DataConverter.ConvertListToTwoDArray(table.GetAbsoluteRatingsData());
             pptDataModel.EndToFront5Page.TypicalSupplyCurrentVgTableTitle = "Typical Supply Current";
-            
+
+            string BasePath = "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files";
 
             pptDataModel.EndToFront5Page.TypicalSupplyCurrentVgTable = DataConverter.ConvertThreeElementListToTwoDArray(table.GetCurrentVdVgData());
             pptDataModel.EndToFront5Page.WarningImage = new ImageModel
             {
-                ImagePath = @"F:\PROJECT\ChipManualGeneration\exe\2.png",
+                ImagePath = System.IO.Path.Combine(BasePath, "防静电标志.jpg"),
                 Height = 50_0000,
                 Width = 50_0000,
             };
@@ -433,42 +466,9 @@ namespace ChipManualGenerationSogt
         {
             logWin.SetComboxSourse(users);
         }
-        private async void test3()
-        {
-            try
-            {
-                string pptFile = @"F:\PROJECT\ChipManualGeneration\exe\T_MML806_V3_Demo.pptx";
-                string pdfFile = @"F:\PROJECT\ChipManualGeneration\exe\T_MML806_V3_Demo.pdf";
+     
 
-                // 在后台线程执行（避免 UI 冻结）
-                await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
-
-                MessageBox.Show("PDF 已生成！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"转换失败：{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-        }
-
-
-        private void GeneratePlotModels()
-        {
-
-            var finder = new TextFileFinder(
-              rootDirectory: @"CopiedReports",
-               extensions: new[] { ".txt", "s2p" }
-              );
-            //var finder = new TextFileFinder(); // 或你的文件查找器
-            var allFiles = finder.FindAllTextFiles(); // 返回相对路径列表
-
-            // 将里面的文件处理并分组
-            AmpfilierFilesbyGroup filesByGroup = AmplifierFileProcessor.ProcessFiles(allFiles);
-
-
-
-        }
+      
         private void test2()
         {
             curves.Clear();
@@ -604,7 +604,7 @@ namespace ChipManualGenerationSogt
             var tem1 = "Measurement Plots: S-parameters\n" + "TA = +25\u2103";
             var tem2 = "Measurement Plots: P1dB\n" + "TA = +25\u2103";
             var tem3 = "Measurement Plots: OIP3\n" + "TA = +25\u2103";
-            var tem4 = "Measurement Plots: Psat\n" + "TA = +25\u2103";
+            var tem4 = "Measurement Plots: PSAT\n" + "TA = +25\u2103";
             var tem5 = "Measurement Plots: Noise Figure\n" + "TA = +25\u2103";
             _plotNames.Add(tem1);
             _plotNames.Add(tem2);
@@ -614,10 +614,7 @@ namespace ChipManualGenerationSogt
 
             List<Temperature25FilePathModel> filesModelVgs = new List<Temperature25FilePathModel>();
 
-            //foreach (var item in filesByGroup.)
-            //{ 
-
-            //}
+     
 
             foreach (var subCon in condition.VD_VG_Conditon)
             {
@@ -791,12 +788,12 @@ namespace ChipManualGenerationSogt
             string normalizedPath = filePath.Replace('\\', '/');
             string[] pathSegments = normalizedPath.Split('/');
 
-            string vdIdSegment = pathSegments.FirstOrDefault(s => s.StartsWith("-VD="));
+            string vdIdSegment = pathSegments.FirstOrDefault(s => s.StartsWith("-VD=") || s.StartsWith("VD="));
 
             if (vdIdSegment != null)
             {
                 // 使用正则提取 VD 的值，例如从 "-VD=5V&ID=90mA" 中提取 "5V"
-                var match = Regex.Match(vdIdSegment, @"-VD=(\d+V)");
+                var match = Regex.Match(vdIdSegment, @"-?VD=(\d+V)");
                 //if (match.Success)
                 //{
                 //    return match.Groups[1].Value; // 提取 "5V", "4V" 等
@@ -823,279 +820,6 @@ namespace ChipManualGenerationSogt
             elecParam = parts.FirstOrDefault(p => p.Contains("VD="))
                             ?? "UnknownParam";
         }
-        private void GeneratePlots(AmpfilierFilesbyGroup ampParams)
-        {
-            string filePath = "";
-
-            #region 读取标准S参数
-
-            // 获得标准S参数
-            if (ampParams.DataSparaFilePaths.Count > 4)
-            {
-                filePath = ampParams.DataSparaFilePaths[3];
-            }
-            else
-            {
-
-                filePath = ampParams.DataSparaFilePaths[0];
-            }
-
-            var analyzer = new S2PParser();
-            analyzer.Parse(filePath);
-            var point = curves.SPGenerateXYPointData(analyzer.S11, 0);
-            string yLable = "INPUT RETURN LOSS(dB)";
-            string xLable = "FREQUENCY(GHz)";
-            string title = "";
-            string temperature = "";
-            string elecParam = "";
-            CureveGenerateLengdText(filePath, out temperature, out elecParam);
-            string legend = elecParam;
-            curves.AddPlot(curves.GeneratePlotParameters(point, xLable, yLable, title, legend));
-
-            point = curves.SPGenerateXYPointData(analyzer.S12, 0);
-            yLable = "ISOLATION(dB)";
-            curves.AddPlot(curves.GeneratePlotParameters(point, xLable, yLable, title, legend));
-
-            point = curves.SPGenerateXYPointData(analyzer.S21, 0);
-            yLable = "Gain(dB)";
-            curves.AddPlot(curves.GeneratePlotParameters(point, xLable, yLable, title, legend));
-
-            point = curves.SPGenerateXYPointData(analyzer.S22, 0);
-            yLable = "OUTPUT RETURN LOSS(dB)";
-            curves.AddPlot(curves.GeneratePlotParameters(point, xLable, yLable, title, legend));
-            #endregion
-
-
-            #region 25°所有s参数
-            var points = new Collection<XYPoint>();
-            var legends = new Collection<string>();
-            if (ampParams.DataSparabyTemp.TryGetValue("25.0deg", out var s2pAt25))
-            {
-                foreach (var item in s2pAt25)
-                {
-                    analyzer.Parse(item);
-                    var pointTmp = curves.SPGenerateXYPointData(analyzer.S11, 0);
-                    CureveGenerateLengdText(item, out temperature, out elecParam);
-                    points.Add(pointTmp);
-                    legends.Add(elecParam);
-                }
-                //s2pAt25.ForEach(Console.WriteLine);
-
-            }
-            filter.AddLevels(legends.ToList());
-            yLable = "INPUT RETURN LOSS(dB)";
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-
-            points.Clear();
-            legends.Clear();
-            yLable = "ISOLATION(dB)";
-            foreach (var item in s2pAt25)
-            {
-                analyzer.Parse(item);
-                var pointTmp = curves.SPGenerateXYPointData(analyzer.S12, 0);
-                CureveGenerateLengdText(item, out temperature, out elecParam);
-                points.Add(pointTmp);
-                legends.Add(elecParam);
-            }
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-
-
-            points.Clear();
-            legends.Clear();
-            yLable = "Gain(dB)";
-            foreach (var item in s2pAt25)
-            {
-                analyzer.Parse(item);
-                var pointTmp = curves.SPGenerateXYPointData(analyzer.S21, 0);
-                CureveGenerateLengdText(item, out temperature, out elecParam);
-                points.Add(pointTmp);
-                legends.Add(elecParam);
-            }
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-
-
-            points.Clear();
-            legends.Clear();
-            yLable = "Gain(dB)";
-            foreach (var item in s2pAt25)
-            {
-                analyzer.Parse(item);
-                var pointTmp = curves.SPGenerateXYPointData(analyzer.S22, 0);
-                CureveGenerateLengdText(item, out temperature, out elecParam);
-                points.Add(pointTmp);
-                legends.Add(elecParam);
-            }
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-            #endregion
-
-            #region 25°nf psat pxdb， oip3
-
-            points.Clear();
-            legends.Clear();
-            yLable = "P1dB(dBm)";
-            var txtParser = new TextFileParser();
-            //textParser.ParsePsatFile(ampParams.NFFiles.ElementAt(0));
-            if (ampParams.PxdBbyTemp.TryGetValue("25.0deg", out var p1dbAt25))
-            {
-                foreach (var item in p1dbAt25)
-                {
-                    txtParser.Parse(item);
-                    var pointTmp = curves.SPGenerateXYPointData(txtParser.Points);
-                    CureveGenerateLengdText(item, out temperature, out elecParam);
-                    points.Add(pointTmp);
-                    legends.Add(elecParam);
-                }
-                //s2pAt25.ForEach(Console.WriteLine);
-            }
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-
-
-
-            points.Clear();
-            legends.Clear();
-            yLable = "OUTPUT IP3(dBm)";
-
-            //textParser.ParsePsatFile(ampParams.NFFiles.ElementAt(0));
-            if (ampParams.OIP3byTemp.TryGetValue("25.0deg", out var ip3At25))
-            {
-                foreach (var item in ip3At25)
-                {
-                    txtParser.Parse(item);
-                    var pointTmp = curves.SPGenerateXYPointData(txtParser.Points);
-                    CureveGenerateLengdText(item, out temperature, out elecParam);
-                    points.Add(pointTmp);
-                    legends.Add(elecParam);
-                }
-                //s2pAt25.ForEach(Console.WriteLine);
-            }
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-
-
-            points.Clear();
-            legends.Clear();
-            yLable = "Psat(dBm)";
-
-            //textParser.ParsePsatFile(ampParams.NFFiles.ElementAt(0));
-            if (ampParams.PsatbyTemp.TryGetValue("25.0deg", out var psatAt25))
-            {
-                foreach (var item in psatAt25)
-                {
-                    txtParser.Parse(item);
-                    var pointTmp = curves.SPGenerateXYPointData(txtParser.Points);
-                    CureveGenerateLengdText(item, out temperature, out elecParam);
-                    points.Add(pointTmp);
-                    legends.Add(elecParam);
-                }
-                //s2pAt25.ForEach(Console.WriteLine);
-            }
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-
-            points.Clear();
-            legends.Clear();
-            yLable = "NOISE FIGURE(dBm)";
-
-            //textParser.ParsePsatFile(ampParams.NFFiles.ElementAt(0));
-            if (ampParams.NFbyTemp.TryGetValue("25.0deg", out var nfAt25))
-            {
-                foreach (var item in nfAt25)
-                {
-                    txtParser.Parse(item);
-                    var pointTmp = curves.SPGenerateXYPointData(txtParser.Points);
-                    CureveGenerateLengdText(item, out temperature, out elecParam);
-                    points.Add(pointTmp);
-                    legends.Add(elecParam);
-                }
-                //s2pAt25.ForEach(Console.WriteLine);
-            }
-            curves.AddPlot(curves.GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-            #endregion
-
-
-
-            //var analyzer2 = new S2PParser();
-            //analyzer2.Parse(@"F:\PROJECT\ChipManualGeneration\原始数据\MML004X_V2-三温\MML004X_V2-25\-VD=3V&ID=43mA\L004X、L024X、L026X_MML004X_V2-25_-VD=3V&ID=43mA_2025-09-01 14.49.13_25.0deg_SPara.s2p");
-
-            //var analyzer3 = new S2PParser();
-            //analyzer3.Parse(@"F:\PROJECT\ChipManualGeneration\原始数据\MML004X_V2-三温\MML004X_V2-25\-VD=5V&ID=90mA\L004X、L024X、L026X_MML004X_V2-25_-VD=5V&ID=90mA_2025-09-01 15.05.38_25.0deg_SPara.s2p");
-
-
-            //var points = new Collection<XYPoint>();
-            //var point1 = SPGenerateXYPointData(analyzer.S11, 0);
-            //var point2 = SPGenerateXYPointData(analyzer2.S11, 0);
-            //var point3 = SPGenerateXYPointData(analyzer3.S11, 0);
-
-            //points.Add(point1);
-            //points.Add(point2);
-            //points.Add(point3);
-            //yLable = "INPUT RETURN LOSS(dB)";
-            //var legends = new Collection<string>();
-            //legends.Add("-VD=4V&ID=67mA");
-            //legends.Add("-VD=3V&ID=43mA");
-            //legends.Add("-VD=5V&ID=90mA");
-            //AddPlot(GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-            //points.Clear();
-            //point1 = SPGenerateXYPointData(analyzer.S12, 0);
-            //point2 = SPGenerateXYPointData(analyzer2.S12, 0);
-            //point3 = SPGenerateXYPointData(analyzer3.S12, 0);
-            //points.Add(point1);
-            //points.Add(point2);
-            //points.Add(point3);
-            //yLable = "ISOLATION(dB)";
-            //AddPlot(GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-            //points.Clear();
-            //point1 = SPGenerateXYPointData(analyzer.S21, 0);
-            //point2 = SPGenerateXYPointData(analyzer2.S21, 0);
-            //point3 = SPGenerateXYPointData(analyzer3.S21, 0);
-            //points.Add(point1);
-            //points.Add(point2);
-            //points.Add(point3);
-            //yLable = "GAIN(dB)";
-            //AddPlot(GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-            //points.Clear();
-            //point1 = SPGenerateXYPointData(analyzer.S22, 0);
-            //point2 = SPGenerateXYPointData(analyzer2.S22, 0);
-            //point3 = SPGenerateXYPointData(analyzer3.S22, 0);
-            //points.Add(point1);
-            //points.Add(point2);
-            //points.Add(point3);
-            //yLable = "OUTPUT RETURN LOSS(dB)";
-            //AddPlot(GeneratePlotParameters(points, xLable, yLable, title, legends));
-
-            //int index = 0;
-            // 存储图片的
-            //foreach (var item in vm.Plots)
-            //{
-            //    //item.Refresh();
-            //    //Console.WriteLine(vm.Plots.Count);
-            //    //string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-            //    //string fileName = $"myplot_{index}.png";
-            //    //item.Plot.SavePng(fileName, 600, 500);
-            //    //item.Refresh();
-
-            //    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
-            //    string folder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pic");
-            //    Directory.CreateDirectory(folder);
-            //    string fileName = System.IO.Path.Combine(folder, $"{index}.png");
-
-            //    Application.Current.Dispatcher.Invoke(() =>
-            //    {
-            //        item.Plot.SavePng(fileName, 600, 500);
-            //    });
-            //    index++;
-            //}
-
-
-        }
         //private void btn_Generate_Click(object sender, RoutedEventArgs e)
         private void GeneratePlots(AmpfilierFilesbyGroup ampParams, FileterConditionModel condition)
         {
@@ -1114,40 +838,7 @@ namespace ChipManualGenerationSogt
 
                 filePath = ampParams.DataSparaFilePaths[0];
             }
-            //curves.Clear();
-            //当前阶段直接处理第一条
-            //List<string> filesArry = new List<string>();
-            //if( ampParams.DataSparabyTemp.TryGetValue("25.0deg",out var  files))
-            //{
 
-            //    foreach (var item in files)
-            //    {
-            //        foreach (var subCon in condition.VD_VG_Conditon)
-            //        {
-            //            if (subCon.Contains("&"))
-            //            {
-            //                string[] tmpArry = subCon.Split('&');
-            //                if (item.Contains(tmpArry[0]))
-            //                    filesArry.Add(item);
-            //            }
-            //            else
-            //            {
-            //                string[] tmpArry = subCon.Split(',');
-            //                if (item.Contains(tmpArry[0]))
-            //                    filesArry.Add(item);
-
-            //            }
-
-
-            //            //string[] tmpArry = subCon.Split("");
-
-            //        }
-            //    }
-
-            //}
-            //List<string> files2 = new List<string>();
-            //files2.Add(filesArry.ElementAt(0));
-            //GenerateSParaPlots(files2, condition.Min, condition.Max, LegendTextType.Elec);
 
             if (!ampParams.DataSparabyTemp.TryGetValue("25.0deg", out var files))
             {
@@ -1186,11 +877,82 @@ namespace ChipManualGenerationSogt
 
         }
 
+
+        private void GeneratePlots(AmpfilierFilesbyGroup ampParams, FileterConditionModel condition,string key)
+        {
+
+            string filePath = "";
+
+            //#region 读取标准S参数
+
+            // 获得标准S参数
+            if (ampParams.DataSparaFilePaths.Count > 4)
+            {
+                filePath = ampParams.DataSparaFilePaths[3];
+            }
+            else
+            {
+
+                filePath = ampParams.DataSparaFilePaths[0];
+            }
+
+
+            if (!ampParams.DataSparabyTemp.TryGetValue("25.0deg", out var files))
+            {
+                // 如果 files 为空或未找到键，则返回或抛出异常
+                return; // 或者 throw new KeyNotFoundException("未找到 '25.0deg' 的数据。");
+            }
+
+          
+
+           // string finalMatchPart = null;
+
+            //if (!string.IsNullOrEmpty(key))
+            //{
+            //    // 2. 应用原有的复杂规则来提取匹配部分 (matchPart)
+
+            //    // 确定分隔符：检查是否包含 '&'，否则使用 ','
+            //    char splitChar = key.Contains('&') ? '&' : ',';
+
+            //    // 分割字符串，并获取第一个部分作为最终的匹配条件
+            //    finalMatchPart = key.Split(splitChar).FirstOrDefault();
+            //}
+
+            // 1. 使用 LINQ 查找第一个匹配的文件路径
+            string firstMatchingFile = files.FirstOrDefault(item =>
+            {
+                string secondMatchPart = null;
+                if (key.Contains('&'))
+                {
+                    secondMatchPart = key.Replace('&', ',');
+                }
+                else
+                {
+                    secondMatchPart = key.Replace(',', '&');
+                }
+
+                    return !string.IsNullOrEmpty(key) && (item.Contains(key) || item.Contains(secondMatchPart));
+            });
+
+
+            // 2. 检查是否找到文件，并进行绘图
+            if (firstMatchingFile != null)
+            {
+                // 将单个文件放入 List<string> (files2)
+                List<string> files2 = new List<string> { firstMatchingFile };
+
+                // 执行绘图操作
+                GenerateSParaPlots(files2, condition.Min, condition.Max, LegendTextType.Elec);
+            }
+
+        }
+
+
         private void GenerateSParaPlots(List<string> files, double xMin, double xMax, LegendTextType type)
         {
 
             var plotS21 = new PlotModel();
-            plotS21.YLabel = "GAIN(DB)";
+            plotS21.YLabel = "GAIN(dB)";
             plotS21.XLabel = "FREQUENCY(GHz)";
 
 
@@ -1286,19 +1048,25 @@ namespace ChipManualGenerationSogt
                 plotS22.xAxisInterval = xInterval;
             }
             double newYMin, newYMax;
-            int yInterval;
+            double yInterval;
             const int TargetDivisions = 10; // 目标 10 个刻度
 
-            PlotModel.CalculateNiceRange((double)plotS11.yMin, (double)plotS11.yMax, TargetDivisions,
+            //PlotModel.CalculateNiceRange((double)plotS11.yMin, (double)plotS11.yMax, TargetDivisions,
+            //                                      out newYMin, out newYMax, out yInterval);
+            PlotModel.S11CalculateNiceRange((double)plotS11.yMin, 0, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
             plotS11.yMin = newYMin;
             plotS11.yMax = newYMax;
             plotS11.yAxisInterval = yInterval;
-            plotS11.Alignment = ScottPlot.Alignment.UpperRight;
+            plotS11.Alignment = ScottPlot.Alignment.LowerRight;
             //plotS11.Alignment = ScottPlot.Alignment.UpperRight;
 
 
-            PlotModel.CalculateNiceRange((double)plotS12.yMin, (double)plotS12.yMax, TargetDivisions,
+            //PlotModel.CalculateNiceRange((double)plotS12.yMin, (double)plotS12.yMax, TargetDivisions,
+            //                                      out newYMin, out newYMax, out yInterval);
+
+
+            PlotModel.S11CalculateNiceRange((double)plotS12.yMin, (double)plotS12.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
             plotS12.yMin = newYMin;
             plotS12.yMax = newYMax;
@@ -1306,7 +1074,10 @@ namespace ChipManualGenerationSogt
             //plotS12.Alignment = ScottPlot.Alignment.UpperRight;
 
 
-            PlotModel.CalculateNiceRange((double)plotS21.yMin, (double)plotS21.yMax, TargetDivisions,
+            //PlotModel.CalculateNiceRange((double)plotS21.yMin, (double)plotS21.yMax, TargetDivisions,
+            //                                      out newYMin, out newYMax, out yInterval);
+
+            PlotModel.S21CalculateNiceRange((double)plotS21.yMin, (double)plotS21.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
             plotS21.yMin = newYMin;
             plotS21.yMax = newYMax;
@@ -1314,12 +1085,14 @@ namespace ChipManualGenerationSogt
             plotS21.Alignment = ScottPlot.Alignment.LowerRight;
             //plotS11.Alignment = ScottPlot.Alignment.LowerRight;
 
-            PlotModel.CalculateNiceRange((double)plotS22.yMin, (double)plotS22.yMax, TargetDivisions,
+            //PlotModel.CalculateNiceRange((double)plotS22.yMin, (double)plotS22.yMax, TargetDivisions,
+            //                                     out newYMin, out newYMax, out yInterval);
+            PlotModel.S11CalculateNiceRange((double)plotS22.yMin, (double)plotS22.yMax, TargetDivisions,
                                                  out newYMin, out newYMax, out yInterval);
             plotS22.yMin = newYMin;
             plotS22.yMax = newYMax;
             plotS22.yAxisInterval = yInterval;
-            plotS22.Alignment = ScottPlot.Alignment.UpperRight;
+            plotS22.Alignment = ScottPlot.Alignment.LowerRight;
 
 
             curves.AddPlot(plotS21);
@@ -1339,7 +1112,7 @@ namespace ChipManualGenerationSogt
 
         {
 
-            
+            //PlotModel.Init();
             #region S参数处理
             ////////////s11
             var plotS11 = new PlotModel();
@@ -1353,7 +1126,7 @@ namespace ChipManualGenerationSogt
 
             ////////////s21
             var plotS21 = new PlotModel();
-            plotS21.YLabel = "GAIN(DB)";
+            plotS21.YLabel = "GAIN(dB)";
             plotS21.XLabel = "FREQUENCY(GHz)";
 
             ////////////s22
@@ -1361,6 +1134,9 @@ namespace ChipManualGenerationSogt
             plotS22.YLabel = "OUTPUT RETURN LOSS(dB)";
             plotS22.XLabel = "FREQUENCY(GHz)";
             var analyzer = new S2PParser();
+
+            string oldChar = "deg";
+            string newChar = "\u00B0C"; 
 
             foreach (var file in filesModel25.SList)
             {
@@ -1392,10 +1168,10 @@ namespace ChipManualGenerationSogt
                 switch (type)
                 {
                     case LegendTextType.Temp:// legend 用温度当不同
-                        curveS11.Legend = temperature;
-                        curveS12.Legend = temperature;
-                        curveS21.Legend = temperature;
-                        curveS22.Legend = temperature;
+                        curveS11.Legend = temperature.Replace(oldChar, newChar);
+                        curveS12.Legend = temperature.Replace(oldChar, newChar);
+                        curveS21.Legend = temperature.Replace(oldChar, newChar);
+                        curveS22.Legend = temperature.Replace(oldChar, newChar);
                         break;
 
                     case LegendTextType.Elec:// 以电气参数当不同
@@ -1440,18 +1216,18 @@ namespace ChipManualGenerationSogt
                 plotS22.xAxisInterval = xInterval;
             }
             double newYMin, newYMax;
-            int yInterval;
+            double yInterval;
             const int TargetDivisions = 10; // 目标 10 个刻度
 
-            PlotModel.CalculateNiceRange((double)plotS11.yMin, (double)plotS11.yMax, TargetDivisions,
+            PlotModel.S11CalculateNiceRange((double)plotS11.yMin, (double)plotS11.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
             plotS11.yMin = newYMin;
             plotS11.yMax = newYMax;
             plotS11.yAxisInterval = yInterval;
-            plotS11.Alignment = ScottPlot.Alignment.UpperRight;
+            plotS11.Alignment = ScottPlot.Alignment.LowerRight;
 
 
-            PlotModel.CalculateNiceRange((double)plotS12.yMin, (double)plotS12.yMax, TargetDivisions,
+            PlotModel.S11CalculateNiceRange((double)plotS12.yMin, (double)plotS12.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
             plotS12.yMin = newYMin;
             plotS12.yMax = newYMax;
@@ -1459,7 +1235,7 @@ namespace ChipManualGenerationSogt
             //plotS12.Alignment = ScottPlot.Alignment.UpperRight;
 
 
-            PlotModel.CalculateNiceRange((double)plotS21.yMin, (double)plotS21.yMax, TargetDivisions,
+            PlotModel.S21CalculateNiceRange((double)plotS21.yMin, (double)plotS21.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
             plotS21.yMin = newYMin;
             plotS21.yMax = newYMax;
@@ -1467,12 +1243,12 @@ namespace ChipManualGenerationSogt
             plotS21.Alignment = ScottPlot.Alignment.LowerRight;
 
 
-            PlotModel.CalculateNiceRange((double)plotS22.yMin, (double)plotS22.yMax, TargetDivisions,
+            PlotModel.S11CalculateNiceRange((double)plotS22.yMin, (double)plotS22.yMax, TargetDivisions,
                                                  out newYMin, out newYMax, out yInterval);
             plotS22.yMin = newYMin;
             plotS22.yMax = newYMax;
             plotS22.yAxisInterval = yInterval;
-            plotS22.Alignment = ScottPlot.Alignment.UpperCenter;
+            plotS22.Alignment = ScottPlot.Alignment.LowerRight;
 
 
             curves.AddPlot(plotS21);
@@ -1505,7 +1281,7 @@ namespace ChipManualGenerationSogt
                 switch (type)
                 {
                     case LegendTextType.Temp:
-                        curve.Legend = temperature;
+                        curve.Legend = temperature.Replace(oldChar, newChar);
                         break;
                     case LegendTextType.Elec:
                         curve.Legend = elecParam.Replace("&", ",");
@@ -1517,9 +1293,11 @@ namespace ChipManualGenerationSogt
             plotP1db.xMin = xMin;
             plotP1db.xMax = xMax;
             plotP1db.xAxisInterval = xInterval;
+            
 
-
-            PlotModel.CalculateNiceRange((double)plotP1db.yMin, (double)plotP1db.yMax, TargetDivisions,
+            //PlotModel.CalculateNiceRange((double)plotP1db.yMin, (double)plotP1db.yMax, TargetDivisions,
+            //                                      out newYMin, out newYMax, out yInterval);
+            PlotModel.PxdbCalculateNiceRange((double)plotP1db.yMin, (double)plotP1db.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
             plotP1db.yMin = newYMin;
             plotP1db.yMax = newYMax;
@@ -1546,7 +1324,7 @@ namespace ChipManualGenerationSogt
                 switch (type)
                 {
                     case LegendTextType.Temp:
-                        curve.Legend = temperature;
+                        curve.Legend = temperature.Replace(oldChar, newChar);
                         break;
                     case LegendTextType.Elec:
                         curve.Legend = elecParam.Replace("&", ",");
@@ -1560,8 +1338,9 @@ namespace ChipManualGenerationSogt
             plotOIP3.xAxisInterval = xInterval;
 
 
-            PlotModel.CalculateNiceRange((double)plotOIP3.yMin, (double)plotOIP3.yMax, TargetDivisions,
+            PlotModel.S21CalculateNiceRange((double)plotOIP3.yMin, (double)plotOIP3.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
+            
             plotOIP3.yMin = newYMin;
             plotOIP3.yMax = newYMax;
             plotOIP3.yAxisInterval = yInterval;
@@ -1569,7 +1348,7 @@ namespace ChipManualGenerationSogt
 
             ////////////psat
             var plotPsat = new PlotModel();
-            plotPsat.YLabel = "Psat(dBm)";
+            plotPsat.YLabel = "PSAT(dBm)";
             plotPsat.XLabel = "FREQUENCY(GHz)";
             foreach (var file in filesModel25.PsatList)
             {
@@ -1585,7 +1364,7 @@ namespace ChipManualGenerationSogt
                 switch (type)
                 {
                     case LegendTextType.Temp:
-                        curve.Legend = temperature;
+                        curve.Legend = temperature.Replace(oldChar, newChar);
                         break;
                     case LegendTextType.Elec:
                         curve.Legend = elecParam.Replace("&", ",");
@@ -1599,16 +1378,15 @@ namespace ChipManualGenerationSogt
             plotPsat.xAxisInterval = xInterval;
 
 
-            PlotModel.CalculateNiceRange((double)plotPsat.yMin, (double)plotPsat.yMax, TargetDivisions,
+            PlotModel.PsatCalculateNiceRange((double)plotPsat.yMin, (double)plotPsat.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
+            
             plotPsat.yMin = newYMin;
             plotPsat.yMax = newYMax;
             plotPsat.yAxisInterval = yInterval;
 
-
-            ////////////NF
             var plotNF = new PlotModel();
-            plotNF.YLabel = "NOISE FIGURE(dBm)";
+            plotNF.YLabel = "NOISE FIGURE(dB)";
             plotNF.XLabel = "FREQUENCY(GHz)";
             foreach (var file in filesModel25.NFList)
             {
@@ -1624,7 +1402,7 @@ namespace ChipManualGenerationSogt
                 switch (type)
                 {
                     case LegendTextType.Temp:
-                        curve.Legend = temperature;
+                        curve.Legend = temperature.Replace(oldChar, newChar);
                         break;
                     case LegendTextType.Elec:
                         curve.Legend = elecParam.Replace("&", ",");
@@ -1638,12 +1416,16 @@ namespace ChipManualGenerationSogt
             plotNF.xAxisInterval = xInterval;
 
 
-            PlotModel.CalculateNiceRange((double)plotNF.yMin, (double)plotNF.yMax, TargetDivisions,
+            PlotModel.NFCalculateNiceRange((double)plotNF.yMin, (double)plotNF.yMax, TargetDivisions,
                                                   out newYMin, out newYMax, out yInterval);
+
             plotNF.yMin = newYMin;
             plotNF.yMax = newYMax;
             plotNF.yAxisInterval = yInterval;
-            plotNF.Alignment = ScottPlot.Alignment.UpperCenter;
+            plotNF.Alignment = ScottPlot.Alignment.UpperRight;
+
+
+
 
             curves.AddPlot(plotP1db);
             curves.AddPlot(plotOIP3);
@@ -1651,6 +1433,8 @@ namespace ChipManualGenerationSogt
             curves.AddPlot(plotNF);
             #endregion
         }
+
+        
 
         private void CalcuteParameter(List<string> files, List<string> freqBands)
         {
@@ -1983,204 +1767,6 @@ namespace ChipManualGenerationSogt
 
         }
 
-        private async void Btn_Ok_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //var saveFileDialog = new SaveFileDialog
-                //{
-                //    Filter = "PPT Files (*.pptx)|*.pptx|All Files (*.*)|*.*",
-                //    DefaultExt = ".pptx",
-                //    FileName = "demo.pptx", // 默认文件名
-                //    Title = "Save PPT File"
-                //};
-                //// 显示对话框（必须在 UI 线程调用！）
-                //bool? result = saveFileDialog.ShowDialog();
-
-                //if (result == true)
-                //{
-                //    string selectedPdfPath = saveFileDialog.FileName;
-
-                //    // 现在你可以用 selectedPdfPath 来保存 PDF
-                //    // 例如：File.WriteAllBytes(selectedPdfPath, pdfBytes);
-                //    // 或调用你的 PDF 生成逻辑
-
-                //    // 注意：不要使用原来的 Path.Combine(...) 硬编码路径了
-                //    // pdfFile = selectedPdfPath;
-                //    await Task.Run(() => PPTChange(@"resources\files\T_MML806_V3.pptx", selectedPdfPath));
-
-                //    string appDir = AppDomain.CurrentDomain.BaseDirectory;
-                //    string pptFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pptx");
-                //    // 创建保存文件对话框
-
-
-                //    string pdfFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pdf");
-
-                //    // 在后台线程执行（避免 UI 冻结）
-                //    await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
-
-                //    var pdfShown = new PdfShowWin();
-                //    pdfShown.ShowPdf(pdfFile);
-                //    pdfShown.Show();
-                //}
-                ////var pptPath = @"F:\PROJECT\ChipManualGeneration\exe\T_MML806_V3.pptx";
-                string Data_Status_Str = "Are you sure you have finished preparing the data?";
-                string File_Status_Str = $"Do you want to generate a PPT file for {Global.TaskModel.TaskName}?";
-                string Check_Status_Str = $"Are you sure you have finished checking the {Global.TaskModel.TaskName}? ";
-                const string tips = "Warning";
-                switch ((UserPriority)Global.User.priority)
-                { 
-                    case UserPriority.Admin:
-                        { 
-                            
-                        }
-                        break;
-
-                    case UserPriority.DataProvider:
-                        {
-                            var resoult = MessageBox.Show(Data_Status_Str, tips, MessageBoxButton.OK, MessageBoxImage.Warning);
-                            if (resoult == MessageBoxResult.OK)
-                            {
-                                
-                                var condition = filter.GetFileterCondition();
-
-                                var sqlServer = new TaskRepository();
-                                string cond = "";
-                                foreach (var item in condition.FreqBands)
-                                { 
-                                    cond += item + ";";
-                                }
-                                 cond +=  "," + condition.Min + ',' + condition.Max + ',';
-                                foreach (var item in condition.FreqBands)
-                                {
-                                    cond += item + ",";
-                                }
-                                var existingModel = await sqlServer.GetOperationByIdAsync(Convert.ToInt32(Global.TaskModel.ID));
-                                if (existingModel == null)
-                                {
-                                    // 记录不存在，可能需要进行插入操作，或者抛出异常
-                                    // throw new Exception($"TaskID {taskId} not found for update.");
-                                    return;
-                                }
-                                //var opModel = new OperationModel
-                                //{
-                                //    TaskID = Convert.ToInt32(Global.TaskModel.ID),
-                                //    TaskName = Global.TaskModel.TaskName,
-                                //    TimeStamp = DateTime.Now,
-                                //    StartDateTime = condition.StartDateTime,
-                                //    EndDateTime = condition.StopDateTime,
-                                //    PN = condition.PN,
-                                //    SN = condition.ON,
-                                //    DataReady = true,
-                                //    Condition = cond,
-                                //};
-                                existingModel.TimeStamp = DateTime.Now; // 更新时间戳
-                                existingModel.StartDateTime = condition.StartDateTime;
-                                existingModel.EndDateTime = condition.StopDateTime;
-                                existingModel.PN = condition.PN;
-                                existingModel.SN = condition.ON;
-                                existingModel.DataReady = true;
-                                existingModel.Condition = cond;
-                                await sqlServer.UpdateOperationAsync(existingModel);
-
-                                MessageBox.Show("Finished preparing the data,.\n Click the Finish button ", tips, MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                            }
-                        }
-                        break;
-
-                    case UserPriority.PptMaker:
-                        {
-                            try
-                            {
-                                var resoult = MessageBox.Show(File_Status_Str, tips, MessageBoxButton.OK, MessageBoxImage.Warning);
-                                if (resoult == MessageBoxResult.OK)
-                                {
-                                    string[] tmp = vm.ContentTitle.Split('-');
-                                    string fileName = tmp.Last() + ".pptx";
-                                    //string fileName =  "MML806.pptx";
-                                    var saveFileDialog = new SaveFileDialog
-                                    {
-                                        Filter = "PPT Files (*.pptx)|*.pptx|All Files (*.*)|*.*",
-                                        DefaultExt = ".pptx",
-                                        FileName = fileName, // 默认文件名
-                                        Title = "Save PPT File"
-                                    };
-                                    // 显示对话框（必须在 UI 线程调用！）
-                                    bool? result1 = saveFileDialog.ShowDialog();
-
-                                    if (result1 == true)
-                                    {
-                                        string finalSavePath = saveFileDialog.FileName;
-                                        var sqlServer = new TaskRepository();
-                                        var opModel = new OperationModel
-                                        {
-                                            TaskID = Convert.ToInt32(Global.TaskModel.ID),
-                                            TaskName = Global.TaskModel.TaskName,
-                                            FileReady = true,
-                                            PptPath = finalSavePath,
-
-                                        };
-                                        await sqlServer.UpdateOperationAsync(opModel);
-                                        try
-                                        {
-                                            string appDir = AppDomain.CurrentDomain.BaseDirectory;
-                                            string picsPath = System.IO.Path.Combine(appDir, "resources", "pic");
-                                            System.IO.Directory.Delete(picsPath, true);
-                                            System.IO.Directory.CreateDirectory(picsPath);
-                                            curves.SaveAllPlot(picsPath);
-                                            PptDataModeFactory();
-
-
-                                            string pptFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pptx");
-                                            string pdfFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pdf");
-                                            await Task.Run(() => GeneratePPT(pptFile));
-                                            await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
-                                            var pdfShown = new PdfShowWin();
-                                            //pdfShown.Status = true;
-                                            //PdfShowWin.PPTPath = pptFile;
-                                            //PdfShowWin.PdfPath = pdfFile;
-                                            pdfShown.ShowPdf(pdfFile);
-                                            pdfShown.Show();
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
-                                        }
-
-                                        MessageBox.Show($"Generate a PPT file for {Global.TaskModel.TaskName}.\n Click the Finish button ", tips, MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                                    }
-                                }
-
-
-                            }
-                            catch (Exception ex) {
-                                MessageBox.Show(ex.Message, "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                        }
-                        break;
-                    case UserPriority.Reviewer:
-                        {
-                            var resoult = MessageBox.Show(Check_Status_Str, tips, MessageBoxButton.OK, MessageBoxImage.Warning);
-                            if (resoult == MessageBoxResult.OK)
-                            {
-                                MessageBox.Show($"finished checking the { Global.TaskModel.TaskName}.\n Click the Finish button ", tips, MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                            }
-                        }
-                        break;
-
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-        }
 
         private bool PPTChange(string filePath = @"resources\files\T_MML806_V3.pptx", string tagetFilePath = @"resources\files\demo.pptx")
         {
@@ -2443,8 +2029,8 @@ namespace ChipManualGenerationSogt
 
         public void GeneratePPT(string tagetFilePath)
         {
-
-            tagetFilePath = @"F:\PROJECT\ChipManualGeneration\exe\ChipManualGenerationSogt\ChipManualGenerationSogt\bin\Debug\resources\files\demo.pptx";
+            //string pptFile = System.IO.Path.Combine(Global.FileBasePath, "demo.pptx");
+            //tagetFilePath = @"F:\PROJECT\ChipManualGeneration\exe\ChipManualGenerationSogt\ChipManualGenerationSogt\bin\Debug\resources\files\demo.pptx";
             string filePath = @"resources\files\T_MML806_V3.pptx";
             bool success = false;
             try
@@ -2488,7 +2074,7 @@ namespace ChipManualGenerationSogt
                     var slide = slidePart.Slide;
 
                     var currentY = 1214000L; // 初始 Y 位置
-                    const long verticalSpacing = 500000; // 间距 100,000 EMU
+                    const long verticalSpacing = 300000; // 间距 100,000 EMU
 
                     //string features = "Features\nFrequency: 45-90GHz\nSmall Signal Gain: 15dB Typical\nGain Flatness: ±2.5dB Typical\nNoise Figure:4.5dB Typical\n P1dB: 12dBm Typical\n Power Supply:VD=+4V@119mA ,VG=-0.4V\n Input /Output: 50Ω\nChip Size: 1.766 x 2.0 x 0.05mm";
                     //string x = "Feautures\n" + table.GetFeatureTableInfo();
@@ -2509,7 +2095,7 @@ namespace ChipManualGenerationSogt
                     long height4 = PptModifier.AddTextBox(slide, pptDataModel.FirstPage.ElectricalSpecsCondition, 914400, currentY);
                     currentY += height4 + 10000;
                     //PptModifier.AddTable(slide, table.GetParameterTableInfo(), 914400, currentY, 6000000, 3800000);
-                    PptModifier.AddTable6(slide, pptDataModel.FirstPage.ParameterTableData, 914400, currentY, 6000000, 380_0000);
+                    PptModifier.AddTable6(slide, pptDataModel.FirstPage.ParameterTableData, 914400, currentY, 6100000, 350_0000);
                     currentY += 2000000 + verticalSpacing; // 表格高度 + 间距
 
                     PptModifier.AddTextBox(slide, pptDataModel.FirstPage.FunctionalBlockDiagramImage.ImageName.TrimEnd(), 914400 + 3_250_000,1314000 + 150_000);
@@ -2814,7 +2400,7 @@ namespace ChipManualGenerationSogt
                                             titleText,
                                             textBoxPositions.ElementAt(j).x,
                                             textBoxPositions.ElementAt(j).y,
-                                            1200
+                                            1200,500_0000
                                         );
                                     }
                                     else
@@ -2825,7 +2411,7 @@ namespace ChipManualGenerationSogt
                                             titleText,
                                             textBoxPositions.ElementAt(j).x,
                                             textBoxPositions.ElementAt(j).y,
-                                            290_0000, 350_0000
+                                            240_0000, 350_0000
                                         );
                                     }
                                     titleIndex++; // 只有在添加了标题后才增加标题索引
@@ -2866,7 +2452,7 @@ namespace ChipManualGenerationSogt
                     //pic1 = @"F:\PROJECT\ChipManualGeneration\exe\2.png";
                     PptModifier.AddImage(newSlidePart, pptDataModel.EndToFront5Page.WarningImage.ImagePath, 914400 + 2700000 + 600000, currentY + 220_0000, 50_0000, 50_0000);
                     //info = "ELECTROSTATIC SENSITIVE DEVICE\n OBSERVE HANDLING PRECAUTIONS";
-                    PptModifier.AddTextBox2(newSlide, pptDataModel.EndToFront5Page.WarningText, 91_4400 + 3000000 + 600000 + 200_000, currentY + 220_0000);
+                    PptModifier.AddTextBox3(newSlide, pptDataModel.EndToFront5Page.WarningText, 91_4400 + 3000000 + 600000 + 200_000, currentY + 220_0000);
 
                     #endregion
 
@@ -2903,7 +2489,7 @@ namespace ChipManualGenerationSogt
                     //pic1 = @"F:\PROJECT\ChipManualGeneration\exe\4.png";
                     PptModifier.AddImage(newSlidePart, pptDataModel.EndToFront3Page.StructImage.ImagePath, 1014400, currentY + height + 100, 550_0000, 350_0000);
 
-                    PptModifier.AddTable4(newSlide, pptDataModel.EndToFront3Page.Description, 914400, currentY + height + 100 + 350_0000 + 50_000, 350_0000, 200_0000);
+                    PptModifier.AddTable4(newSlide, pptDataModel.EndToFront3Page.Description, 914400, currentY + height + 100 + 350_0000 + 50_000, 320_0000, 200_0000);
 
                     PptModifier.AddTable4(newSlide, pptDataModel.EndToFront3Page.Description2, 914400, currentY + height + 100 + 350_0000 + 1000 + 200_0000 + 150_000, 600_0000, 200_0000);
 
@@ -2961,45 +2547,8 @@ namespace ChipManualGenerationSogt
         }
 
 
-        private async void Btn_Refresh_Clicked(object sender, RoutedEventArgs e)
-        {
-            test2();
-        }
+     
 
-        private async void Btn_Preview_Clicked(object sender, RoutedEventArgs e)
-        {
-
-            try
-            {
-               
-                //var pptPath = @"F:\PROJECT\ChipManualGeneration\exe\T_MML806_V3.pptx";
-                await Task.Run(() => PPTChange());
-                string appDir = AppDomain.CurrentDomain.BaseDirectory;
-                string pptFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pptx");
-                string pdfFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pdf");
-
-                //string pptFile = @"resources\files\demo.pptx"; 用这个方式执行转换会转换失败
-                //string pdfFile = @"resources\files\demo.pdf";
-                // 在后台线程执行（避免 UI 冻结）
-                await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
-
-                var pdfShown = new PdfShowWin();
-                pdfShown.Status = true;
-                PdfShowWin.PPTPath = pptFile;
-                PdfShowWin.PdfPath = pdfFile;
-                pdfShown.ShowPdf(pdfFile);
-                pdfShown.Show();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-
-
-
-        }
 
         private void HandleQueryFinished(object sender, EventArgs e)
         {
@@ -3024,55 +2573,12 @@ namespace ChipManualGenerationSogt
             });
         }
 
-        private  async void Btn_Preview_PPT_Model_Clicked(object sender, RoutedEventArgs e)
-        {
-            //string pdfFile = "";
-            //if (vm.ContentTitle == "Amplifier--MM809")
-            //    pdfFile = @"F:\PROJECT\ChipManualGeneration\放大器\MML806_V3.pdf";
-            //else if (vm.ContentTitle == "Amplifier--MM808")
-            //    pdfFile = "F:\\PROJECT\\ChipManualGeneration\\放大器\\MML814_V3.0.1.pdf";
-            //try
-            //{
-            //    var pdfShown = new PdfShowWin();
-            //    pdfShown.ShowPdf(pdfFile);
-            //    pdfShown.Show();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            try
-            {
-                string appDir = AppDomain.CurrentDomain.BaseDirectory;
-                string picsPath = System.IO.Path.Combine(appDir, "resources", "pic");
-                System.IO.Directory.Delete(picsPath, true);
-                System.IO.Directory.CreateDirectory(picsPath);
-                curves.SaveAllPlot(picsPath);
-                PptDataModeFactory();
-                
-                
-                string pptFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pptx");
-                string pdfFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pdf");
-                await Task.Run(() => GeneratePPT(pptFile));
-                await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
-                var pdfShown = new PdfShowWin();
-                //pdfShown.Status = true;
-                //PdfShowWin.PPTPath = pptFile;
-                //PdfShowWin.PdfPath = pdfFile;
-                pdfShown.ShowPdf(pdfFile);
-                pdfShown.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
-        }
 
 
         private void HandleHomeBtnClick(object sender, EventArgs e)
         {
             HiddenAll();
+            taskMangeControls.RefreshTask();
             home.Visibility = Visibility.Visible;
         }
         private void HandleOperationBtnClick(object sender, EventArgs e)
@@ -3111,68 +2617,74 @@ namespace ChipManualGenerationSogt
         private void HandleLogBtnClick(object sender, EventArgs e)
         {
             HiddenAll();
+
             log.Visibility = Visibility.Visible;
 
         }
 
-        private async void HandleTaskExcute(object sender, TaskModel task)
+        private async void HandleTaskExcute(object sender, TaskTableItem task)
         {
-            var sqlServer = new TaskRepository();
-            var existingModel = await sqlServer.GetOperationByIdAsync(Convert.ToInt32(task.ID));
-            Global.OperationModel = existingModel;
-            if (existingModel != null)
-            {
-                if (existingModel.DataReady)
-                {
-                     
-                    var filterCond = new FileterConditionModel();
-                    filterCond.PN = existingModel.PN;
-                    filterCond.ON = existingModel.SN;
-                    filterCond.StartDateTime = existingModel.StartDateTime;
-                    filterCond.StopDateTime = existingModel.EndDateTime;
+            //var sqlServer = new TaskRepository();
+            //var existingModel = await sqlServer.GetOperationByIdAsync(Convert.ToInt32(task.ID));
+            //Global.OperationModel = existingModel;
+            //if (existingModel != null)
+            //{
+            //    if (existingModel.DataReady)
+            //    {
 
-                    string[] conditions = existingModel.Condition.Trim(',').Split(',');
-                    string[] vd_vgs = conditions.ElementAt(0).Split(';');
+            //        var filterCond = new FileterConditionModel();
+            //        filterCond.PN = existingModel.PN;
+            //        filterCond.ON = existingModel.SN;
+            //        filterCond.StartDateTime = existingModel.StartDateTime;
+            //        filterCond.StopDateTime = existingModel.EndDateTime;
 
-                    foreach (var item in vd_vgs)
-                    {
-                        filterCond.VD_VG_Conditon.Add(item.Trim(';'));
-                    }
-                    filterCond.Min = Convert.ToDouble(conditions.ElementAt(1));
-                    filterCond.Max = Convert.ToDouble(conditions.ElementAt(2));
-                    int count = conditions.Count();
-                    for (int i = 3; i < count; i++)
-                    {
-                        filterCond.FreqBands.Add(conditions.ElementAt(i));
+            //        string[] conditions = existingModel.Condition.Trim(',').Split(',');
+            //        string[] vd_vgs = conditions.ElementAt(0).Split(';');
 
-                    }
+            //        foreach (var item in vd_vgs)
+            //        {
+            //            filterCond.VD_VG_Conditon.Add(item.Trim(';'));
+            //        }
+            //        filterCond.Min = Convert.ToDouble(conditions.ElementAt(1));
+            //        filterCond.Max = Convert.ToDouble(conditions.ElementAt(2));
+            //        int count = conditions.Count();
+            //        for (int i = 3; i < count; i++)
+            //        {
+            //            filterCond.FreqBands.Add(conditions.ElementAt(i));
 
-                    //await Task.Run(() =>
-                    //{
-                    //    filter.SetFileterCondition(filterCond);
-                    //});
+            //        }
 
-                    filter.SetFileterCondition(filterCond);
-                    await Task.Run(() =>
-                    {
-                        filter.Btn_Next_Clicked(null, null);
-                    });
-                    //filter.Btn_Next_Clicked(null, null);
+            //        //await Task.Run(() =>
+            //        //{
+            //        //    filter.SetFileterCondition(filterCond);
+            //        //});
 
-                    //filter.Btn_Calcute_Click(null, null);
-                    await Task.Run(() =>
-                    {
-                        filter.Btn_Calcute_Click(null, null);
-                    });
-                    vm.ContentTitle = Global.TaskModel.TaskName +"-" + "Amplifier" +"-" + "MML806";
+            //        filter.SetFileterCondition(filterCond);
+            //        await Task.Run(() =>
+            //        {
+            //            filter.Btn_Next_Clicked(null, null);
+            //        });
+            //        //filter.Btn_Next_Clicked(null, null);
 
-
-                }
+            //        //filter.Btn_Calcute_Click(null, null);
+            //        await Task.Run(() =>
+            //        {
+            //            filter.Btn_Calcute_Click(null, null);
+            //        });
+            //        vm.ContentTitle = Global.TaskModel.TaskName +"-" + "Amplifier" +"-" + "MML806";
 
 
-            }
-            _task = task;
-            HandleOperationBtnClick(null, null);
+            //    }
+
+
+            //}
+            //_task = task;
+            //HandleOperationBtnClick(null, null);
+
+            SetBtnVisibility(false);
+            HiddenAll();
+            curves.Clear();
+            _OperationPage.Visibility = Visibility.Visible;
 
         }
 
@@ -3194,6 +2706,7 @@ namespace ChipManualGenerationSogt
             log.Visibility = Visibility.Collapsed;
             addPage.Visibility = Visibility.Collapsed;
             newTaskPage.Visibility = Visibility.Collapsed;
+            _OperationPage.Visibility = Visibility.Collapsed;
         }
 
         private void Menu_Preview_Clicked(object sender, RoutedEventArgs e)
@@ -3212,7 +2725,702 @@ namespace ChipManualGenerationSogt
             }
         }
 
-        
+        private void Btn_ViewLog_Click(object sender, RoutedEventArgs e)
+        {
+            OperationWindowHiddenAll();
+        }
+
+        private async void Btn_ViewCurves_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                SetBtnVisibility(true);
+                OperationWindowHiddenAll();
+                curves.Visibility = Visibility.Visible;
+                curves.Clear();
+                _plotNames.Clear();
+                vm.IsBusy = true;
+                vm.BusyMessage = "Loading curves...";
+                //var sqlServer = new TaskSqlServerRepository();
+                //var taskItems = await sqlServer.GetAllTasksAsync();
+                var taskItem = Global.TaskModel;
+                //Global.TaskModel
+                #region 在将之前的操作条件 反序列化，得到结果
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+                //var conditons = JsonSerializer.Deserialize<TaskFrequencyConfig>(Global.TaskModel.Conditions, options);
+
+                var conditons = JsonSerializer.Deserialize<TaskFrequencyConfig>(taskItem.Conditions, options);
+
+                #endregion
+
+
+                //从FTP服务器下载数据
+                //string ftpRemotePath = Global.TaskModel.Major +"\\" + Global.TaskModel.Minor + "\\" + Global.TaskModel.TaskName;
+                string ftpRemotePath = taskItem.Major + "\\" + taskItem.Minor + "\\" + taskItem.TaskName;
+
+                if (await FtpClient.DownloadFolderAsync(ftpRemotePath, Global.TempBasePath))
+                {
+                    #region 将文件夹的数据进行分裂
+                    var finder = new TextFileFinder(
+                                   rootDirectory: Global.TempBasePath,
+                                    extensions: new[] { ".txt", "s2p" }
+                                   );
+                    //var finder = new TextFileFinder(); // 或你的文件查找器
+                    var allFiles = finder.FindAllTextFiles(); // 返回相对路径列表
+
+                    // 将里面的文件处理并分组
+                    var filesByGroup = AmplifierFileProcessor.ProcessFiles(allFiles);
+                    #endregion
+
+                    var fileterCondi = new FileterConditionModel
+                    {
+                        Min = Convert.ToDouble(conditons.MinFrequency),
+                        Max = Convert.ToDouble(conditons.MaxFrequency),
+
+                        VD_VG_Conditon = conditons.ParameterItems,
+                    };
+                    if (conditons.Band1 != null && conditons.Band1 != "0 - 0")// 这个"0 - 0" 是因为有些band没有用到时初始化成这个特殊字符
+                        fileterCondi.FreqBands.Add(conditons.Band1);
+                    if (conditons.Band2 != null&&conditons.Band2 != "0 - 0")
+                        fileterCondi.FreqBands.Add(conditons.Band2);
+                    if (conditons.Band3 != null && conditons.Band3 != "0 - 0")
+                        fileterCondi.FreqBands.Add(conditons.Band3);
+
+
+
+                    _filterCondition = fileterCondi;
+                    //if (fileterCondi.VD_VG_Conditon.Count > 1)
+                    //{
+
+                    //    GeneratePlots(filesByGroup, fileterCondi);
+                    //    var temp = "Measurement Plots: S-parameters\n" + fileterCondi.VD_VG_Conditon.ElementAt(0).Replace('&', ',');
+                    //    _plotNames.Add(temp);
+                    //}
+                    if (fileterCondi.VD_VG_Conditon.Count > 1)
+                    {
+
+                        GeneratePlots(filesByGroup, fileterCondi, conditons.SelectedEntry);
+                        var temp = "Measurement Plots: S-parameters\n" + fileterCondi.VD_VG_Conditon.ElementAt(0).Replace('&', ',');
+                        _plotNames.Add(temp);
+                    }
+
+                    Temperature25FilePathModel filesModel25 = new Temperature25FilePathModel();
+                    const string tempKey = "25.0deg";
+                    var conditions = fileterCondi.VD_VG_Conditon;
+
+                    // 1. 定义所有要处理的属性及其对应的目标列表
+                    // 使用元组数组来映射来源字典和目标列表
+                    var fileMappings = new List<(
+                        Dictionary<string, List<string>> sourceDict,
+                        List<string> targetList)>
+                    {
+                        (filesByGroup.DataSparabyTemp, filesModel25.SList),
+                        (filesByGroup.PxdBbyTemp, filesModel25.PxdbList),
+                        (filesByGroup.OIP3byTemp, filesModel25.OIP3List),
+                        (filesByGroup.PsatbyTemp, filesModel25.PsatList),
+                        (filesByGroup.NFbyTemp, filesModel25.NFList)
+                    };
+                    // 2. 遍历所有映射并统一处理
+                    foreach (var mapping in fileMappings)
+                    {
+                        // 尝试从当前来源字典中获取文件列表
+                        if (mapping.sourceDict.TryGetValue(tempKey, out var files))
+                        {
+                            // 使用通用的筛选函数获取匹配的文件
+                            var matchingFiles = GetMatchingFiles(files, conditions);
+
+                            // 将结果一次性添加到目标列表中
+                            mapping.targetList.AddRange(matchingFiles);
+                        }
+                    }
+
+
+                    GeneratePlotsByTemperaturen(filesModel25, fileterCondi.Min, fileterCondi.Max, LegendTextType.Elec);
+
+                    #region 三温图
+
+                    var tem1 = "Measurement Plots: S-parameters\n" + "TA = +25\u2103";
+                    var tem2 = "Measurement Plots: P1dB\n" + "TA = +25\u2103";
+                    var tem3 = "Measurement Plots: OIP3\n" + "TA = +25\u2103";
+                    var tem4 = "Measurement Plots: Psat\n" + "TA = +25\u2103";
+                    var tem5 = "Measurement Plots: Noise Figure\n" + "TA = +25\u2103";
+                    _plotNames.Add(tem1);
+                    _plotNames.Add(tem2);
+                    _plotNames.Add(tem3);
+                    _plotNames.Add(tem4);
+                    _plotNames.Add(tem5);
+
+                    List<Temperature25FilePathModel> filesModelVgs = new List<Temperature25FilePathModel>();
+
+
+
+                    foreach (var subCon in fileterCondi.VD_VG_Conditon)
+                    {
+                        string vd = "";
+                        if (subCon.Contains("&"))
+                        {
+                            string[] tmpArry = subCon.Split('&');
+                            vd = tmpArry[0];
+                        }
+                        else
+                        {
+                            string[] tmpArry = subCon.Split(',');
+                            vd = tmpArry[0];
+
+                        }
+                        var filesModelvg = new Temperature25FilePathModel();
+                        if (filesByGroup.DataSparabyVD.TryGetValue(vd, out var sVg))
+                        {
+                            foreach (var item in sVg)
+                            {
+                                filesModelvg.SList.Add(item);
+                            }
+                        }
+                        if (filesByGroup.PxdBbyVD.TryGetValue(vd, out var pxdbVg))
+                        {
+                            foreach (var item in pxdbVg)
+                            {
+                                filesModelvg.PxdbList.Add(item);
+                            }
+                        }
+                        if (filesByGroup.OIP3byVD.TryGetValue(vd, out var oip3Vg))
+                        {
+                            foreach (var item in oip3Vg)
+                            {
+                                filesModelvg.OIP3List.Add(item);
+                            }
+                        }
+                        if (filesByGroup.PsatbyVD.TryGetValue(vd, out var psatVg))
+                        {
+                            foreach (var item in psatVg)
+                            {
+                                filesModelvg.PsatList.Add(item);
+                            }
+                        }
+                        if (filesByGroup.NFbyVD.TryGetValue(vd, out var nfVg))
+                        {
+                            foreach (var item in nfVg)
+                            {
+                                filesModelvg.NFList.Add(item);
+                            }
+                        }
+
+
+                        var actually = new Temperature25FilePathModel();
+                        actually.SList = SelectUnique5VFilePerTemperature(filesModelvg.SList, vd);
+                        actually.PxdbList = SelectUnique5VFilePerTemperature(filesModelvg.PxdbList, vd);
+                        actually.OIP3List = SelectUnique5VFilePerTemperature(filesModelvg.OIP3List, vd);
+                        actually.PsatList = SelectUnique5VFilePerTemperature(filesModelvg.PsatList, vd);
+                        actually.NFList = SelectUnique5VFilePerTemperature(filesModelvg.NFList, vd);
+                        filesModelVgs.Add(actually);
+                    }
+                    foreach (var item in filesModelVgs)// 不同的VD下， 不同的三温度图
+                    {
+                        if (item.SList.Count > 0)
+                        {
+                            List<string> culFiles = new List<string>();
+                            culFiles.Add(item.SList.ElementAt(0));
+                            culFiles.Add(item.PxdbList.ElementAt(0));
+                            culFiles.Add(item.OIP3List.ElementAt(0));
+                            culFiles.Add(item.PsatList.ElementAt(0));
+                            culFiles.Add(item.NFList.ElementAt(0));
+                            CalcuteParameter(culFiles, fileterCondi.FreqBands);
+
+                            break;
+                        }
+                    }
+
+
+                    for (int i = 0; i < filesModelVgs.Count; i++)// 不同的VD下， 不同的三温度图
+                    {
+                        if (filesModelVgs.ElementAt(i).SList.Count > 0)
+                        {
+                            GeneratePlotsByTemperaturen(filesModelVgs.ElementAt(i), fileterCondi.Min, fileterCondi.Max, LegendTextType.Temp);
+                            // 这个数组用于处理参数列表， 是用来计算的
+
+                            var tem11 = "Measurement Plots: S-parameters\n" + fileterCondi.VD_VG_Conditon.ElementAt(i).Replace('&', ',');
+                            var tem22 = "Measurement Plots: P1dB\n" + fileterCondi.VD_VG_Conditon.ElementAt(i).Replace('&', ',');
+                            var tem33 = "Measurement Plots: OIP3\n" + fileterCondi.VD_VG_Conditon.ElementAt(i).Replace('&', ',');
+                            var tem44 = "Measurement Plots: Psat\n" + fileterCondi.VD_VG_Conditon.ElementAt(i).Replace('&', ',');
+                            var tem55 = "Measurement Plots: Noise Figure\n" + fileterCondi.VD_VG_Conditon.ElementAt(i).Replace('&', ',');
+
+                            _plotNames.Add(tem11);
+                            _plotNames.Add(tem22);
+                            _plotNames.Add(tem33);
+                            _plotNames.Add(tem44);
+                            _plotNames.Add(tem55);
+                            //CalcuteParameter(List<string> files, List<string> freqBands)
+                        }
+
+
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Download failed!");
+                }
+                #endregion
+
+                #region 加载表格
+                string jsonPath = System.IO.Path.Combine(Global.TempBasePath, "table.json");
+                if (taskItem.TableUpdate == false)
+                {
+                    #region 先创建表格
+                    //if (File.Exists(jsonPath))
+                    //{
+                    //    Console.WriteLine($"{jsonPath} not exist");
+                    //    return;
+                    //}
+                    SaveConfigs();// 先创建一个基本的productdata 的json文件
+
+
+                    #endregion
+                    #region 再更新表格
+
+                    var productData = LoadTableInfo(jsonPath);
+                    if (productData?.Tables == null)
+                    {
+                        Console.WriteLine("数据加载失败或 Tables 字段为空。");
+                        return;
+                    }
+                    string newFrequencyValue = _filterCondition.Min.ToString() + "-" + _filterCondition.Max.ToString() + "GHz";
+
+                    var basicFreqItem = productData.Tables.BasicParameters
+                                         .FirstOrDefault(item => item.Key == "{Frequency Range}");
+
+                    if (basicFreqItem != null)
+                    {
+
+                        basicFreqItem.Value = newFrequencyValue;
+                        Console.WriteLine($"BasicParameters 中的频率已修改为: {basicFreqItem.Value}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("未找到 BasicParameters 中的 {Frequency Range} 项。");
+                    }
+                    var rightBarItem = productData.Tables.BasicParameters
+                                       .FirstOrDefault(item => item.Key == "{right bar info}");
+                   
+                    if (rightBarItem != null)
+                    {
+                        // 正则表达式模式解释：
+                        // \d+      : 匹配一个或多个数字 (如 45)
+                        // [\s–-]+  : 匹配一个或多个空格、长破折号 (–) 或短破折号 (-)
+                        // \d+GHz   : 匹配一个或多个数字后跟 GHz
+                        string pattern = @"\d+[\s–-]+\d+GHz";
+                        string updatedString = Regex.Replace(rightBarItem.Value, pattern, newFrequencyValue);
+                        rightBarItem.Value = updatedString;
+                    }
+                    else
+                    { 
+                        Console.WriteLine("未找到 BasicParameters 中的 {right bar info} 项。");
+                    }
+
+                    var chipItem = productData.Tables.BasicParameters
+                                      .FirstOrDefault(item => item.Key == "{Top PN}");
+                    if (chipItem != null)
+                    {
+                        chipItem.Value = taskItem.TaskName;
+                    }
+                    else 
+                    {
+                    
+                    }
+                
+
+                     var featureFreqItem = productData.Tables.FeatureParameters
+                                                .FirstOrDefault(item => item.Key == "Frequency");
+                    if (featureFreqItem != null)
+                    {
+
+                        featureFreqItem.Value = newFrequencyValue;
+                        Console.WriteLine($"FeatureParameters 中的频率已修改为: {featureFreqItem.Value}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("未找到 FeatureParameters 中的 Frequency 项。");
+                    }
+                    var serializeOptions = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        // 同样添加编码设置以避免不必要的转义
+                        // = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                    };
+                    string updatedJsonString = JsonSerializer.Serialize(productData, serializeOptions);
+                    File.WriteAllText(jsonPath, updatedJsonString);
+                    #endregion
+
+                }
+                else
+                {
+                    #region 从ftp服务器上下载最新json 文件
+                    string remotePath = System.IO.Path.Combine(Global.FtpRootPath, "table.json");
+                    string localPath = System.IO.Path.Combine(Global.TempBasePath, "table.json");
+                    await FtpClient.DownloadFileAsync(remotePath, localPath);
+                    #endregion
+
+                }
+                string filePath = System.IO.Path.Combine(Global.TempBasePath, "table.json");
+                string jsonString = File.ReadAllText(filePath);
+                table.LoadProductDataToViewModel(jsonString);
+                #endregion
+
+
+            }
+            catch (Exception ex) {
+
+                MessageBox.Show(ex.Message, "",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+
+            finally
+            {
+                vm.IsBusy = false;
+
+            }
+        }
+        private ProductData LoadTableInfo(string jsonPath)
+        {
+            ProductData resoult = null;
+            try
+            {
+                if (File.Exists(jsonPath))
+                {
+                    string jsonString = File.ReadAllText(jsonPath);
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                    };
+                    resoult = JsonSerializer.Deserialize<ProductData>(jsonString, options);
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                
+            }
+
+
+            return resoult;
+
+        }
+
+        bool WriteTableInfo(string jsonPath, ProductData productData)
+        {
+            bool resoult = false;
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+            
+            return resoult;
+        }
+        private void Btn_ViewWorld_Click(object sender, RoutedEventArgs e)
+        {
+            OperationWindowHiddenAll();
+            table.Visibility = Visibility.Visible;
+        }
+        private void Btn_ViewImage_Click(object sender, RoutedEventArgs e)
+        {
+            OperationWindowHiddenAll();
+            images.Visibility = Visibility.Visible;
+        }
+        private void Btn_OPBack_Click(object sender, RoutedEventArgs e)
+        {
+            HandleHomeBtnClick(null, null);
+
+        }
+
+        private async void Btn_Preview_Clicked(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+
+                //var pptPath = @"F:\PROJECT\ChipManualGeneration\exe\T_MML806_V3.pptx";
+                await Task.Run(() => PPTChange());
+                string appDir = AppDomain.CurrentDomain.BaseDirectory;
+                string pptFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pptx");
+                string pdfFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pdf");
+
+                //string pptFile = @"resources\files\demo.pptx"; 用这个方式执行转换会转换失败
+                //string pdfFile = @"resources\files\demo.pdf";
+                // 在后台线程执行（避免 UI 冻结）
+                await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
+
+                var pdfShown = new PdfShowWin();
+                pdfShown.Status = true;
+                PdfShowWin.PPTPath = pptFile;
+                PdfShowWin.PdfPath = pdfFile;
+                pdfShown.ShowPdf(pdfFile);
+                pdfShown.Show();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+
+
+        }
+
+        private async void Btn_Preview_PPT_Model_Clicked(object sender, RoutedEventArgs e)
+        {
+            //string pdfFile = "";
+            //if (vm.ContentTitle == "Amplifier--MM809")
+            //    pdfFile = @"F:\PROJECT\ChipManualGeneration\放大器\MML806_V3.pdf";
+            //else if (vm.ContentTitle == "Amplifier--MM808")
+            //    pdfFile = "F:\\PROJECT\\ChipManualGeneration\\放大器\\MML814_V3.0.1.pdf";
+            //try
+            //{
+            //    var pdfShown = new PdfShowWin();
+            //    pdfShown.ShowPdf(pdfFile);
+            //    pdfShown.Show();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            try
+            {
+                string appDir = AppDomain.CurrentDomain.BaseDirectory;
+                string picsPath = System.IO.Path.Combine(appDir, "resources", "pic");
+                System.IO.Directory.Delete(picsPath, true);
+                System.IO.Directory.CreateDirectory(picsPath);
+                curves.SaveAllPlot(picsPath);
+                PptDataModeFactory();
+
+
+                string pptFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pptx");
+                string pdfFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pdf");
+                await Task.Run(() => GeneratePPT(pptFile));
+                await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
+                var pdfShown = new PdfShowWin();
+                //pdfShown.Status = true;
+                //PdfShowWin.PPTPath = pptFile;
+                //PdfShowWin.PdfPath = pdfFile;
+                pdfShown.ShowPdf(pdfFile);
+                pdfShown.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private async void Btn_Ok_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //string filePath = System.IO.Path.Combine(Global.FileBasePath, "table.json");
+                //string jsonString = File.ReadAllText(filePath);
+                //table.LoadProductDataToViewModel(jsonString);
+
+                string fileName = "";
+                var basicTable = table.GetBasicTableData();
+                string[] arry = basicTable.ElementAt(1).info.Split('.');
+                //fileName = basicTable.ElementAt(0).info+"_" + basicTable.ElementAt(1).info.Substring(0, 2)  + ".pptx";
+                fileName = basicTable.ElementAt(0).info + "_" + arry[0] + ".pptx";
+                var newRepository = new TaskSqlServerRepository();
+                var newItem = await newRepository.GetTaskByIdAsync(Global.TaskModel.ID);
+                newItem.PptName = fileName;
+                await newRepository.UpdateTaskAsync(newItem); 
+
+
+
+                var dialog = new SaveFileDialog
+                    {
+                        Title = "Save As",
+                        Filter = "PPT File (*.pptx)|*.pptx",
+                        InitialDirectory = Global.AppBaseUrl,
+                        FileName = fileName,
+                    };
+                        if (dialog.ShowDialog() == true)
+                        {
+                            string pptFile = dialog.FileName;
+                             _fileFolerPath = pptFile.Replace(System.IO.Path.GetFileName(pptFile), "");
+                             SaveConfigs();
+                            vm.IsBusy = true;
+                            vm.BusyMessage = "Generating PPT...";
+                            string appDir = AppDomain.CurrentDomain.BaseDirectory;
+                            string picsPath = System.IO.Path.Combine(appDir, "resources", "pic");
+                            System.IO.Directory.Delete(picsPath, true);
+                            System.IO.Directory.CreateDirectory(picsPath);
+                            curves.SaveAllPlot(picsPath);
+                            PptDataModeFactory();
+                            //string pptFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pptx");
+                            string pdfFile = System.IO.Path.Combine(appDir, "resources", "files", "demo.pdf");
+                            await Task.Run(() => GeneratePPT(pptFile));
+                            await Task.Run(() => PptToPdfConverter.Convert(pptFile, pdfFile));
+                            MessageBox.Show("Generate PPT success!","", MessageBoxButton.OK,MessageBoxImage.Information);
+                        }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Tips", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            vm.IsBusy = false;
+
+        }
+
+        private async void Btn_Save_click(object sender, RoutedEventArgs e)
+        {
+            SaveConfigs();
+
+            
+            string remotePath = System.IO.Path.Combine(Global.FtpRootPath,"table.json" );
+            string localPath = System.IO.Path.Combine(Global.TempBasePath, "table.json");
+            if (await FtpClient.UploadFileAsync(localPath, remotePath))
+            {
+                var newRepository = new TaskSqlServerRepository();
+                var newItem = await newRepository.GetTaskByIdAsync(Global.TaskModel.ID);
+                newItem.TableUpdate = true;
+                
+                newItem.EndDate = DateTime.Now;
+                //newItem.FilesStatus = true;
+                await newRepository.UpdateTaskAsync(newItem);
+                MessageBox.Show("Upload success!");
+            }
+            else
+            {
+                MessageBox.Show("Upload failed!");
+            }
+
+
+        }
+        private async void Btn_Upload_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Title = "Select a file",
+                Filter = "PowerPoint File (*.pptx)|*.pptx",
+                InitialDirectory = _fileFolerPath
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                SaveConfigs();
+                string filePath = dialog.FileName;
+                string remotePath = System.IO.Path.Combine(Global.FtpRootPath, System.IO.Path.GetFileName(filePath));
+                if (await FtpClient.UploadFileAsync(filePath, remotePath))
+                {
+                    var newRepository = new TaskSqlServerRepository();
+                    var newItem = await newRepository.GetTaskByIdAsync(Global.TaskModel.ID);
+                    newItem.Status = "Completed";
+                    newItem.EndDate = DateTime.Now;
+                    newItem.FilesStatus=true;
+                    await newRepository.UpdateTaskAsync(newItem);
+                    MessageBox.Show("Upload success!");
+                }
+                else
+                {
+                    MessageBox.Show("Upload failed!");
+                }
+
+
+            }
+        }
+
+
+        public void SetBtnVisibility(bool enable)
+        {
+            _btnVewWord.IsEnabled = enable;
+            _btnSave.IsEnabled = enable;
+            _btnGenPPT.IsEnabled = enable;
+        }
+
+
+        private void OperationWindowHiddenAll()
+        {
+            table.Visibility = Visibility.Collapsed;
+            curves.Visibility = Visibility.Collapsed;
+            table.Visibility =Visibility.Collapsed;
+            images.Visibility = Visibility.Collapsed;
+        }
+        private void SaveConfigs() 
+        {
+            var tableData = table.CreateProductDataFromViewModel();
+            string filePath = System.IO.Path.Combine(Global.TempBasePath, "table.json");
+            WriteProductJsonFile(tableData, filePath);
+
+        }
+
+        public  void WriteProductJsonFile(ProductData data, string filePath)
+        {
+            try
+            {
+
+                //var options = new JsonSerializerOptions
+                //{
+                //    WriteIndented = true
+                //};
+
+
+                //string jsonString = JsonSerializer.Serialize(data, options);
+
+                //File.WriteAllText(filePath, jsonString);
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+
+                
+                string jsonString = JsonSerializer.Serialize(data, options);
+
+              
+                // File.CreateText(filePath) 创建一个 StreamWriter， StreamWriter 实现了 IDisposable
+                // 离开 using 块时，会自动调用 writer.Dispose()，从而关闭底层文件流。
+                using (StreamWriter writer = File.CreateText(filePath))
+                {
+                    writer.Write(jsonString);
+                    // 不需要手动调用 Flush()，因为 StreamWriter.Dispose() 会自动调用 Flush()。
+                } 
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"序列化错误: {ex.Message}");
+            }
+        }
+
+        public ProductData ReadJsonFile(string filePath)
+        {
+            try { 
+                //读取时 没有使用异步 无需使用using
+                string jsonString = File.ReadAllText(filePath);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                ProductData data = JsonSerializer.Deserialize<ProductData>(jsonString, options);
+                return data;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"反序列化错误: {ex.Message}");
+                return null;
+            }
+        }
+
     }
 
     internal class MainWindowModel : ObeservableObject

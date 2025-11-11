@@ -38,8 +38,8 @@ namespace ChipManualGenerationSogt
                 throw new FileNotFoundException($"File not found: {pdfPath}");
                 
             }
-            webView.Source = new Uri($"file:///{pdfPath.Replace("\\", "/")}");
-            //webView.Source = new Uri(@"file:///F:\PROJECT\ChipManualGeneration\exe\ChipManualGenerationSogt\ChipManualGenerationSogt\bin\Debug\resources\files\demo.pdf");
+            //webView.Source = new Uri($"file:///{pdfPath.Replace("\\", "/")}");
+            webView.Source = new Uri(@"file:///F:\PROJECT\ChipManualGeneration\exe\ChipManualGenerationSogt\ChipManualGenerationSogt\bin\Debug\resources\files\demo.pdf");
         }
 
 

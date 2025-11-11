@@ -7,17 +7,58 @@
              mc:Ignorable="d" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+       
+
+
+        <Style x:Key="CleanImageButtonStyle" TargetType="{x:Type Button}">
+
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}" 
+                        SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="LightGray"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <local:LogWinModel />
     </UserControl.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3"/>
             <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer 
+        <ScrollViewer  Grid.Column="2"
                 VerticalScrollBarVisibility="Auto"
                     HorizontalScrollBarVisibility="Auto"
                     Margin="5">     
@@ -25,9 +66,22 @@
         </ScrollViewer>
             <Separator   Grid.Column="1" />
 
-        <Border Grid.Column="2" BorderBrush="#d9d9d9" BorderThickness="1" >
+        <Border Grid.Column="0" BorderBrush="#d9d9d9" BorderThickness="1" >
 
             <StackPanel >
+
+                <DockPanel>
+
+                    <Button  Width="40" Click="Btn_Back_Click" Style="{StaticResource CleanImageButtonStyle}">
+                        <Image Source="/resources/pic/back.png" Height="16" />
+                    </Button>
+                    <Border Width="10"/>
+                    <Label Content="Log Query Page" FontSize="14"/>
+
+                </DockPanel>
+
+                <Border Height="20"/>
+
                 <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
                     <Label Content="Start DateTime:" Width="120" FontSize="14"/>
                     <xctk:DateTimePicker 

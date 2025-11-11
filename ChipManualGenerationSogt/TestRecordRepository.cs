@@ -214,7 +214,7 @@ namespace ChipManualGenerationSogt
                         command.CommandType = CommandType.Text;
                         command.CommandText = @"  
                                 SELECT  *
-                                FROM yp_test_user; 
+                                FROM [user]; 
 		                         ";
 
                         SqlDataReader reader = command.ExecuteReader();
@@ -226,7 +226,7 @@ namespace ChipManualGenerationSogt
                             user.ID = Convert.ToInt32( reader["ID"]  );
                             user.UserName = reader["UserName"] as string;
                             user.Password = reader["Password"] as string;
-                            user.priority = Convert.ToInt32(reader["priority"] );
+                            user.priority = Convert.ToInt32(reader["Priority"] );
                             users.Add(user);
                         }
                     }

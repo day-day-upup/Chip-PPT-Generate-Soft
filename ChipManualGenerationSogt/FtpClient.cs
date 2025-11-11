@@ -10,12 +10,12 @@ namespace ChipManualGenerationSogt
 {
     public class FtpClient
     {
-        static private readonly string _ftpServer = "ftp://192.168.1.77";// 后续用配置文件配置
+        static private readonly string _ftpServer = "ftp://192.168.1.209:12315";// 后续用配置文件配置
         //static private readonly NetworkCredential _credential = new NetworkCredential("yp", "123456");
 
         //private readonly string _ftpServer;
-        static private readonly string _user="yp";
-        static private readonly string _password="123456";
+        static private readonly string _user="sa";
+        static private readonly string _password= "qotana";
 
         //public FtpUploader(string ftpServer, string user, string password)
         //{
@@ -72,7 +72,7 @@ namespace ChipManualGenerationSogt
         /// <summary>
         /// 异步上传单个文件，返回是否成功
         /// </summary>
-        private static async Task<bool> UploadFileAsync(string localFile, string remoteFile)
+        public static async Task<bool> UploadFileAsync(string localFile, string remoteFile)
         {
             string uri = $"{_ftpServer}/{remoteFile}".Replace("\\", "/");
             Console.WriteLine($"?? 开始上传: {localFile}");
@@ -188,7 +188,7 @@ namespace ChipManualGenerationSogt
         /// <summary>
         /// 异步下载单个文件
         /// </summary>
-        static private async Task DownloadFileAsync(string remoteFile, string localFile)
+        static public async Task DownloadFileAsync(string remoteFile, string localFile)
         {
             string uri = BuildFtpUri(_ftpServer, remoteFile);
             //string uri = $"{_ftpServer}/{remoteFile}".Replace("\\", "/");
@@ -207,6 +207,53 @@ namespace ChipManualGenerationSogt
             await responseStream.CopyToAsync(fileStream);
 
             Console.WriteLine($"   ? 下载完成: {Path.GetFileName(localFile)}");
+        }
+
+        /// <summary>
+        /// 异步下载单个文件，返回是否成功ex 表示的是扩展
+        static public async Task<bool> DownloadFileAsyncEx(string remoteFile, string localFile)
+        {
+            try
+            {
+                string uri = BuildFtpUri(_ftpServer, remoteFile);
+                Console.WriteLine($"?? 正在下载文件: {uri}");
+
+                var request = (FtpWebRequest)WebRequest.Create(uri);
+                request.Method = WebRequestMethods.Ftp.DownloadFile;
+                request.Credentials = new NetworkCredential(_user, _password);
+                request.UseBinary = true;
+                request.UsePassive = true;
+
+                using (var response = (FtpWebResponse)await request.GetResponseAsync())
+                using (var responseStream = response.GetResponseStream())
+                using (var fileStream = File.Create(localFile))
+                {
+                    await responseStream.CopyToAsync(fileStream);
+                }
+
+                Console.WriteLine($"   ? 下载完成: {Path.GetFileName(localFile)}");
+                return true; // 下载成功
+            }
+            catch (WebException webEx)
+            {
+                // 捕获与网络或 FTP 相关的错误
+                Console.WriteLine($"!!! 文件下载失败 ({remoteFile}): {webEx.Message}");
+
+                // 尝试获取更具体的 FTP 状态码
+                if (webEx.Response is FtpWebResponse ftpResponse)
+                {
+                    Console.WriteLine($"!!! FTP 状态: {ftpResponse.StatusCode} - {ftpResponse.StatusDescription}");
+                }
+
+                // 如果文件创建失败（例如，路径无效），也会抛出异常，此时 localFile 可能不存在
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // 捕获其他非网络错误（如文件系统权限问题等）
+                Console.WriteLine($"!!! 文件下载发生意外错误 ({remoteFile}): {ex.Message}");
+                return false;
+            }
         }
         static private async Task<List<FtpEntry>> ListDirectoryDetailsAsync(string remoteFolder)
         {
