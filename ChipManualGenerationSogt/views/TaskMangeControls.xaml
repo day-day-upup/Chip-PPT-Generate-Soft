@@ -1,0 +1,442 @@
+<UserControl x:Class="ChipManualGenerationSogt.TaskMangeControls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChipManualGenerationSogt"
+             mc:Ignorable="d"              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:TaskMangeControlsViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <Style x:Key="CheckBoxTreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsSelectedInModel, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <ContentPresenter Content="{Binding}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="#FAFAFA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <Border BorderBrush="#d9d9d9" BorderThickness="1">
+                    <DockPanel>
+                        <Button>
+                            <Image Source="/resources/pic/search.png" Height="25" Width="25" DockPanel.Dock="Left"/>
+                        </Button>
+                        <TextBox x:Name="searchBox" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"   VerticalContentAlignment="Center"  FontSize="16"/>
+                    </DockPanel>
+                </Border>
+
+                <ScrollViewer  Grid.Row="1"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                       
+
+                    <Expander Header="Filter Tasks"  IsExpanded="True">
+                        <StackPanel >
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Start DateTime:" Width="120" FontSize="14"/>
+                                <xctk:DateTimePicker 
+                             Width="200" 
+                             Format="Custom" 
+                             FormatString="yyyy/MM/dd/ HH:mm:ss"
+                             Value="{Binding StartTime}" />
+                                <Label Content=" " />
+                            </DockPanel>
+
+
+                            <!-- End DateTime -->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="End DateTime:" Width="120" FontSize="14"/>
+                                <xctk:DateTimePicker 
+                             Width="200" 
+                             Format="Custom" 
+                             FormatString="yyyy/MM/dd/ HH:mm:ss"
+                             Value="{Binding EndTime}" />
+                                <Label Content=" " />
+                            </DockPanel>
+
+
+                            <!--task name-->
+
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Task Name:" Width="120" FontSize="14"/>
+                                <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
+                                <Label Content=" " />
+                            </DockPanel>
+
+
+                            <!--status-->
+
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Status:" Width="120" FontSize="14"/>
+                                <xctk:CheckComboBox   Loaded="CheckComboBox_Loaded"
+                                        Width="200"
+                                        ItemsSource="{Binding StatusSources}"
+                                        SelectedItemsOverride="{Binding SelectedLevels}"
+                                            />
+                                <Label Content=" "/>
+                            </DockPanel>
+
+
+                            <!--ppt Model-->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="PPT Model:" Width="120" FontSize="14"/>
+                                <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
+                                <Label Content=" " />
+                            </DockPanel>
+
+                            <!-- Level -->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Level:" Width="120" FontSize="14"/>
+                                <xctk:CheckComboBox   Loaded="CheckComboBox_Loaded"
+                                            Width="200"
+                                            ItemsSource="{Binding Levels}"
+                                            SelectedItemsOverride="{Binding SelectedLevels}"
+                                            />
+                                <Label Content=" "/>
+                            </DockPanel>
+
+
+                            <!-- Device Type -->
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Label Content="Device Type:" Width="120" FontSize="14"/>
+                                <TreeView x:Name="TargetTreeView" Width="200"
+                                        ItemsSource="{Binding DataForTreeViewA}"
+          
+                                    ItemContainerStyle="{StaticResource CheckBoxTreeViewItemStyle}">
+                                </TreeView>
+                                <Label Content=" " />
+                            </DockPanel>
+                           
+                            
+
+                           
+
+
+
+
+
+                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                                <Button Content="Filter"  Width="320" Height="30"/>
+                            </DockPanel>
+
+
+
+                        </StackPanel>
+
+                    </Expander>
+
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Button Content="Add New Task" Click="Btn_Add_Click" Width="320" Height="30"/>
+                    </DockPanel>
+
+
+                    <DockPanel HorizontalAlignment="Center" Visibility="Visible" Margin="0 0 0 7">
+                        <Button Content="Test" Click="Btn_Test_Click" Width="320" Height="30"/>
+                    </DockPanel>
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Button Content="View Log" Click="Btn_QueryLog_Click" Width="320" Height="30"/>
+                    </DockPanel>
+
+                   
+
+                   
+
+
+
+                </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
+
+        <xctk:BusyIndicator x:Name="busyIndicator"  Grid.Column="1"
+               IsBusy="{Binding IsBusy}"
+               BusyContent="{Binding BusyMessage}"
+               DisplayAfter="0">
+            <DataGrid  x:Name="dataGrid" ItemsSource="{Binding TableItemSources}"  SelectedItem="{Binding SelectTableItem, Mode=TwoWay}"
+                            Margin="1 0 0 0"
+                           MouseDoubleClick="doubleClick"
+                           AutoGenerateColumns="False"
+                           IsReadOnly="True"
+                           
+                           HeadersVisibility="Column"
+                           RowHeight="40"
+                           ColumnHeaderHeight="35"
+                           BorderThickness="0"
+                           CanUserSortColumns="False"
+                           GridLinesVisibility="None"
+                           CanUserAddRows="False">
+                <DataGrid.Resources>
+
+                        <Style x:Key="CenteredTextBlockStyle" TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridRow">
+                                        <Border x:Name="DgRowBorder"
+                                         Background="{TemplateBinding Background}"
+                                         BorderBrush="{TemplateBinding BorderBrush}"
+                                         BorderThickness="{TemplateBinding BorderThickness}">
+                                         <SelectiveScrollingGrid>
+                                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                                <SelectiveScrollingGrid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </SelectiveScrollingGrid.RowDefinitions>
+
+                                                <DataGridCellsPresenter Grid.Column="1"
+                                             ItemsPanel="{TemplateBinding ItemsPanel}"
+                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+                                                <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1"
+                                               Visibility="{TemplateBinding DetailsVisibility}"
+                                               SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=AreRowDetailsFrozen, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}}"/>
+
+                                                <DataGridRowHeader Grid.RowSpan="2"
+                                        SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                        Visibility="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Row}}"/>
+                                            </SelectiveScrollingGrid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                        <Setter Property="ContextMenu">
+                            <Setter.Value>
+                                <ContextMenu>
+                                    <MenuItem Header="Commit To Generate PPT"  IsEnabled="{Binding MenuItemCommitIsEnabled, Mode=TwoWay}"
+                                                Command="{Binding CommitCommand}"
+                                                CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Back To Modify Data Sources"  IsEnabled="{Binding MenuItemBackToModifyIsEnabled, Mode=TwoWay}"
+                                                Command="{Binding ModifyCommand}"
+                                                CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#d9d9d9"/>
+                                </Trigger>
+                            </Style.Triggers>
+                            
+                            
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+
+               
+                        <!--ID-->
+                        <DataGridTextColumn Header="ID" Visibility="Collapsed" Binding="{Binding ID}" Width="50" Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
+
+                      
+                     
+                        <!--Task Name-->
+                        <DataGridTemplateColumn Header="Task Name" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TaskName}"
+                                        VerticalAlignment="Center"
+                                         Foreground="#1976D2"
+                                        TextDecorations="Underline"
+                                         Cursor="Hand"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Status-->
+                        <DataGridTemplateColumn Header="Status" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Status}" VerticalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+
+                                                <Setter Property="Foreground" Value="Black"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Completed">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                    </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status}" Value="PPT Ready For Generate">
+                                                    <Setter Property="Foreground" Value="DodgerBlue"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Not Commited">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                <!--chip Number-->
+                <DataGridTextColumn Header="PPT Model"  Binding="{Binding PPTModel}"  Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
+
+                        <!--Level-->
+                        <DataGridTemplateColumn Header="Level" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Level}" VerticalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+
+                                                <Setter Property="Foreground" Value="Black"/>
+                                                <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Level}" Value="Low">
+                                                        <Setter Property="Foreground" Value="Green"/>
+                                                    </DataTrigger>
+                                            <DataTrigger Binding="{Binding Level}" Value="Medium">
+                                                    <Setter Property="Foreground" Value="DodgerBlue"/>
+                                                    </DataTrigger>
+                                            <DataTrigger Binding="{Binding Level}" Value="High">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--Major Type-->
+                        <DataGridTextColumn Header="Major Device Type"  Binding="{Binding Major}"  Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
+
+                        <!--Minor Type-->
+                        <DataGridTextColumn Header="Minor Device Type"  Binding="{Binding Minor}"  Foreground="#000000"   ElementStyle="{StaticResource CenteredTextBlockStyle}" />
+
+                        <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate}" Width="130" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
+
+                        <DataGridTextColumn Header="End Date" Binding="{Binding EndDate}" Width="130" Foreground="#000000" ElementStyle="{StaticResource CenteredTextBlockStyle}"/>
+
+                        
+
+                        <DataGridTemplateColumn Header="Operation" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Button   Command="{Binding PreviewCommand}"
+                                                  CommandParameter="{Binding}" 
+                                         Width="24" Height="24" Background="Transparent" BorderThickness="0">
+                                            <Image Source="/resources/pic/start.png" Stretch="Uniform"/>
+                                        </Button>
+                                        <Border Width="15"/>
+                                    <Button   Command="{Binding DownLoadCommand}" 
+                                                  CommandParameter="{Binding}"  
+                                                  Width="24" Height="24" Background="Transparent" BorderThickness="0"  >
+                                            <Image Source="/resources/pic/download.png" Stretch="Uniform"/>
+                                        </Button>
+                                        <Border Width="15"/>
+
+
+
+                                <Button Command="{Binding DetailShowCommand}"
+                                                  CommandParameter="{Binding}"      
+                                               Width="24" Height="24" Background="Transparent" BorderThickness="0">
+                                            <Image Source="/resources/pic/modify.png" Stretch="Uniform"/>
+                                        </Button>
+
+                                     </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+
+
+                </DataGrid>
+          </xctk:BusyIndicator>
+        <Popup  Name="myPopup" IsOpen="{Binding PopupIsOpen}"
+        
+       
+                 Placement="Center"
+                HorizontalOffset="10"
+                StaysOpen="False">
+            <!--="{Binding ElementName=NewspaperTVItem}"   Placement="Right" -->
+
+
+            <Border BorderThickness="1" Width="500" Height="800" Background="White" CornerRadius="5" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="40"/>
+                        
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="{Binding PopupTitle}"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,5,5" FontSize="18"/>
+                        <Button  Grid.Column="1" Content="X"  Click="ClosePopup" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="5,5,5,5"/>
+
+                    </Grid>
+
+                    <Border Grid.Row="1" BorderThickness="1" BorderBrush="#d9d9d9" CornerRadius="5" Margin="5" >
+                        <Grid>
+                            <TextBlock Grid.Row="1" Text="{Binding PopupTopMessage}"   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="18" />
+
+                        </Grid>
+                    </Border>
+                    
+                    <TextBox Grid.Row="2" Text="{Binding PopupBottomMessage}"  Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="18" />
+                    
+                    <Button   Grid.Row="3" Content="Send"  Click="ClosePopup" HorizontalAlignment="Right" VerticalAlignment="Top"  Height="30" Margin="5,5,5,5"/>
+                </Grid>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

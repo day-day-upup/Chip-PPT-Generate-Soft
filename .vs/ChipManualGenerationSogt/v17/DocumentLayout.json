@@ -1,0 +1,1263 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|ChipManualGenerationSogt||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\taskmangecontrols.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\taskmangecontrols.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|f:\\project\\chipmanualgeneration\\exe\\app\\chipmanualgenerationsogt\\views\\taskmangecontrols.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\taskmangecontrols.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\NewTask.Json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\NewTask.Json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\newtaskwin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\newtaskwin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\ftpclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\ftpclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\global.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\global.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\newtaskwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\newtaskwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\sqlserverdbaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\sqlserverdbaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\jsonpaser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\jsonpaser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\cfg.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\cfg.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\loginw.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\loginw.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\testrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\testrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\logwin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\logwin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\logwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\logwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\logwin.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\logwin.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\curves.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\curves.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\models\\plotmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\models\\plotmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\curves.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\curves.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\tables.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\tables.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\pptmodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\pptmodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\filter.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\filter.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\table.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\table.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\imageadder.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\imageadder.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\imageadder.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\imageadder.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\pdfshowwin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\pdfshowwin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\pdfshowwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\pdfshowwin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\taskmangecontrols.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\taskmangecontrols.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\newtaskwin.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\newtaskwin.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\ppttopdfconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\ppttopdfconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\tables.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\tables.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\models\\pptdatamodel_amp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\models\\pptdatamodel_amp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\leftsider.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\leftsider.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\filefinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\filefinder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\s2pparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\s2pparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\models\\amplifier\\fileterconditionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\models\\amplifier\\fileterconditionmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\resources\\files\\newtask.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\resources\\files\\newtask.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\filter.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\filter.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\loginw.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\loginw.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\leftsider.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\leftsider.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|f:\\project\\chipmanualgeneration\\exe\\app\\consoleapp1\\consoleapp1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\consoleapp1.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\properties\\settings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\properties\\settings.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\models\\tablemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\models\\tablemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\2b4ab4eeae24d9e23d7e27edcfe4c14d3a1b31e2cfa2f541e5dd6812431c08be\\Dispatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\models\\obeservable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\models\\obeservable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\leftsider.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|solutionrelative:demo\\leftsider.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\models\\amplifier\\ampcurvesmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\models\\amplifier\\ampcurvesmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\models\\amplifier\\amptablemodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\models\\amplifier\\amptablemodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|solutionrelative:demo\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\obeservableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|solutionrelative:demo\\obeservableobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\myplot.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\myplot.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|solutionrelative:demo\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\myplot.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\myplot.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\leftsider.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|solutionrelative:demo\\leftsider.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|f:\\project\\chipmanualgeneration\\exe\\app\\consoleapp1\\testrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\testrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|f:\\project\\chipmanualgeneration\\exe\\app\\consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\networkfoldercopier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\networkfoldercopier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|f:\\project\\chipmanualgeneration\\exe\\app\\consoleapp1\\copyformlocalnet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{172ABCA3-EB7C-4A9E-AC4D-0D94D90879F3}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\copyformlocalnet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\filter.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\filter.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|solutionrelative:demo\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\tables.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\tables.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\opentk.dll.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\opentk.dll.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\chipmanualgenerationsogt\\views\\curves.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|solutionrelative:chipmanualgenerationsogt\\views\\curves.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\leftsider.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E9E9C9CB-AC78-4DBA-8ED4-C0BD19ADFBA3}|demo\\demo.csproj|solutionrelative:demo\\leftsider.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\f3773b6e923dabde0abe9b79111185c0d8048f60b0b603f60686df0f07a314ee\\Storyboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\f53d423bcb416f19bd3ab93d1e481b0a320cc0d496aefa19d64e27f33a03f33d\\Window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A9CB3E-02B2-4618-AE4A-C5079B13C069}|ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj|f:\\project\\chipmanualgeneration\\exe\\app\\chipmanualgenerationsogt\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|cc4014f5-b18d-439c-9352-f99d984cca85"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 391,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChipManualGenerationSogt",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj",
+              "RelativeToolTip": "ChipManualGenerationSogt\\ChipManualGenerationSogt.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-10T10:19:36.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "cfg.json",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\cfg.json",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\cfg.json",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\cfg.json",
+              "RelativeToolTip": "ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\cfg.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-10T06:54:18.54Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "MainWindow.g.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.cs",
+              "ViewState": "AgIAADUBAAAAAAAAAAAAAEIBAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T05:29:19.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "MainWindow.g.i.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.i.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.i.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.i.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\obj\\Debug\\MainWindow.g.i.cs",
+              "ViewState": "AgIAALYAAAAAAAAAAAAuwNYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T02:31:31.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "Storyboard.cs",
+              "DocumentMoniker": "C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\f3773b6e923dabde0abe9b79111185c0d8048f60b0b603f60686df0f07a314ee\\Storyboard.cs",
+              "ToolTip": "C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\f3773b6e923dabde0abe9b79111185c0d8048f60b0b603f60686df0f07a314ee\\Storyboard.cs",
+              "ViewState": "AgIAAFMCAAAAAAAAAAAjwIICAAAEAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-24T08:22:14.693Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaskMangeControls.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\TaskMangeControls.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\TaskMangeControls.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\TaskMangeControls.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\TaskMangeControls.xaml.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAYwGcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-20T10:12:47.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NewTaskWin.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\NewTaskWin.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\NewTaskWin.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\NewTaskWin.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\NewTaskWin.xaml.cs",
+              "ViewState": "AgIAAPcAAAAAAAAAAAAQwPoAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-03T02:22:26.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SqlServerDBAccess.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\SqlServerDBAccess.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\SqlServerDBAccess.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\SqlServerDBAccess.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\SqlServerDBAccess.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAQwLsBAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T10:58:56.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "LogWin.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LogWin.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\LogWin.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LogWin.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\LogWin.xaml.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAUwDAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T03:27:57.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Curves.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Curves.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Curves.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Curves.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Curves.xaml.cs",
+              "ViewState": "AgIAANkAAAAAAAAAAAAuwO8AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T06:32:16.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Curves.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Curves.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Curves.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Curves.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Curves.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-26T06:38:36.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\App.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\App.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\App.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\App.xaml.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-20T07:49:06.87Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "JsonPaser.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\JsonPaser.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\JsonPaser.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\JsonPaser.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\JsonPaser.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAA9wPUAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T02:53:24.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "LogWin.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAswA4AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-10T02:04:12.154Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "PptModifier.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\PptModifier.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\PptModifier.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\PptModifier.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\PptModifier.cs",
+              "ViewState": "AgIAAAQIAAAAAAAAAAAcwBIIAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-16T07:31:59.342Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ImageAdder.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\ImageAdder.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\ImageAdder.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\ImageAdder.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\ImageAdder.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-18T10:34:16.251Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "TaskMangeControls.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwBwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-20T10:12:21.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ImageAdder.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\ImageAdder.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\ImageAdder.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\ImageAdder.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\ImageAdder.xaml.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAwDkAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T10:38:07.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "NewTaskWin.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAowGQAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-03T02:25:20.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Tables.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Tables.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Tables.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Tables.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Tables.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-09T02:37:24.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\MainWindow.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\MainWindow.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\MainWindow.xaml",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAewB0BAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-17T11:25:44.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "PptDataModel_Amp.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\PptDataModel_Amp.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\models\\PptDataModel_Amp.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\PptDataModel_Amp.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\models\\PptDataModel_Amp.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowB0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T09:17:55.555Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Obeservable.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Obeservable.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\models\\Obeservable.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Obeservable.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\models\\Obeservable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-24T08:03:37.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Filter.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Filter.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Filter.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Filter.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Filter.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-25T02:49:30.009Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "App.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\App.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\App.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\App.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-24T08:15:45.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Settings.settings",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Properties\\Settings.settings",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\Properties\\Settings.settings",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Properties\\Settings.settings",
+              "RelativeToolTip": "ChipManualGenerationSogt\\Properties\\Settings.settings",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
+              "WhenOpened": "2025-10-29T03:21:31.072Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "App.config",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\App.config",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\App.config",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\App.config",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAmwB0AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-10T00:43:49.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "packages.config",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\packages.config",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\packages.config",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\packages.config",
+              "RelativeToolTip": "ChipManualGenerationSogt\\packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAwwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-24T08:28:24.765Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "demo\\MainViewModel.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\MainViewModel.cs",
+              "RelativeToolTip": "demo\\MainViewModel.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAMBTwJIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T06:35:00.199Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "OpenTK.dll.config",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\OpenTK.dll.config",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\OpenTK.dll.config",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\OpenTK.dll.config",
+              "RelativeToolTip": "ChipManualGenerationSogt\\OpenTK.dll.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-09T08:58:31.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "Curves.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Curves.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Curves.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Curves.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Curves.xaml",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAswCYAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-26T06:33:31.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "LeftSider.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\LeftSider.xaml",
+              "RelativeDocumentMoniker": "demo\\LeftSider.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\LeftSider.xaml",
+              "RelativeToolTip": "demo\\LeftSider.xaml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA8AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-23T08:46:33.013Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 9,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TaskMangeControls.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\TaskMangeControls.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-20T10:18:32.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NewTask.Json",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\NewTask.Json",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\NewTask.Json",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\NewTask.Json",
+              "RelativeToolTip": "ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\NewTask.Json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-06T02:52:16.58Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Common.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Common.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\Common.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Common.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\Common.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAuwKIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T08:03:10.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "NewTaskWin.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\NewTaskWin.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-03T02:51:55.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Global.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Global.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\Global.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Global.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\Global.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA6wBgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T09:30:20.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FtpClient.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\FtpClient.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\FtpClient.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\FtpClient.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\FtpClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T02:09:30.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\MainWindow.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\MainWindow.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAgwIIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-24T02:42:30.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TestRecordRepository.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\TestRecordRepository.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\TestRecordRepository.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\TestRecordRepository.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\TestRecordRepository.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAcwMoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T06:16:46.124Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LoginW.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LoginW.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\LoginW.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LoginW.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\LoginW.xaml.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAEwEMAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-20T07:34:42.561Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "PlotModel.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\PlotModel.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\models\\PlotModel.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\PlotModel.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\models\\PlotModel.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAmwAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T08:19:26.246Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LogWin.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\LogWin.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-29T03:26:12.524Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "PdfShowWin.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\PdfShowWin.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\PdfShowWin.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\PdfShowWin.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\PdfShowWin.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-06T06:39:20.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Tables.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Tables.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Tables.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Tables.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Tables.xaml.cs",
+              "ViewState": "AgIAAGADAAAAAAAAAAAAAG0DAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T08:12:51.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\MainWindow.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\MainWindow.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-05T05:46:36.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "table.json",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\table.json",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\table.json",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\table.json",
+              "RelativeToolTip": "ChipManualGenerationSogt\\bin\\Debug\\resources\\files\\table.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-07T02:37:21.215Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Filter.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Filter.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Filter.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Filter.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Filter.xaml.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAADgv1MAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T03:06:08.125Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "PdfShowWin.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\PdfShowWin.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\PdfShowWin.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\PdfShowWin.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\PdfShowWin.xaml.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAawCkAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T00:47:50.35Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "PptToPdfConverter.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\PptToPdfConverter.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\PptToPdfConverter.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\PptToPdfConverter.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\PptToPdfConverter.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAuwAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T01:09:29.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "S2PParser.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\S2PParser.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\S2PParser.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\S2PParser.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\S2PParser.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAtwEYAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T03:28:47.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "LeftSider.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LeftSider.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\LeftSider.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LeftSider.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\LeftSider.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-09T09:09:32.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "FileFinder.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\FileFinder.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\FileFinder.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\FileFinder.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\FileFinder.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAArwJYAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T07:24:27.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "FileterConditionModel.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Amplifier\\FileterConditionModel.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\models\\Amplifier\\FileterConditionModel.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Amplifier\\FileterConditionModel.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\models\\Amplifier\\FileterConditionModel.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T01:43:30.293Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Logger.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Logger.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\Logger.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Logger.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\Logger.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T09:00:31.48Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "NewTask.Json",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\resources\\files\\NewTask.Json",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\resources\\files\\NewTask.Json",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\resources\\files\\NewTask.Json",
+              "RelativeToolTip": "ChipManualGenerationSogt\\resources\\files\\NewTask.Json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-03T07:08:48.755Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "LeftSider.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LeftSider.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\LeftSider.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LeftSider.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\LeftSider.xaml.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAQwDYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T03:06:02.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "LoginW.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LoginW.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\LoginW.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\LoginW.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\LoginW.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-20T07:26:07.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "ConsoleApp1.csproj",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\ConsoleApp1.csproj",
+              "RelativeDocumentMoniker": "ConsoleApp1\\ConsoleApp1.csproj",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\ConsoleApp1.csproj",
+              "RelativeToolTip": "ConsoleApp1\\ConsoleApp1.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-11T06:00:35.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Settings.Designer.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Properties\\Settings.Designer.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\Properties\\Settings.Designer.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\Properties\\Settings.Designer.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\Properties\\Settings.Designer.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAEwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T00:40:49.923Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "TableModel.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\TableModel.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\models\\TableModel.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\TableModel.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\models\\TableModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T01:13:16.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Dispatcher.cs",
+              "DocumentMoniker": "C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\2b4ab4eeae24d9e23d7e27edcfe4c14d3a1b31e2cfa2f541e5dd6812431c08be\\Dispatcher.cs",
+              "ToolTip": "C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\2b4ab4eeae24d9e23d7e27edcfe4c14d3a1b31e2cfa2f541e5dd6812431c08be\\Dispatcher.cs [\u53EA\u8BFB]",
+              "ViewState": "AgIAAAEFAAAAAAAAAAAjwAwFAAADAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T07:11:26.243Z",
+              "EditorCaption": " [\u53EA\u8BFB]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "LeftSider.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\LeftSider.xaml",
+              "RelativeDocumentMoniker": "demo\\LeftSider.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\LeftSider.xaml",
+              "RelativeToolTip": "demo\\LeftSider.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-23T08:45:11.119Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "AmpTableModels.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Amplifier\\AmpTableModels.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\models\\Amplifier\\AmpTableModels.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Amplifier\\AmpTableModels.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\models\\Amplifier\\AmpTableModels.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T01:09:09.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "AmpCurvesModel.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Amplifier\\AmpCurvesModel.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\models\\Amplifier\\AmpCurvesModel.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\models\\Amplifier\\AmpCurvesModel.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\models\\Amplifier\\AmpCurvesModel.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAhwA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T11:15:00.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "demo\\MainWindow.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\MainWindow.xaml.cs",
+              "RelativeToolTip": "demo\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAAwIMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T08:37:37.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ObeservableObject.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\ObeservableObject.cs",
+              "RelativeDocumentMoniker": "demo\\ObeservableObject.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\ObeservableObject.cs",
+              "RelativeToolTip": "demo\\ObeservableObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-09T03:04:04.525Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "MyPlot.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\MyPlot.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\MyPlot.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\MyPlot.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\MyPlot.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-22T08:27:43.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "demo\\MainWindow.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\MainWindow.xaml",
+              "RelativeToolTip": "demo\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-24T08:29:21.786Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "MyPlot.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\MyPlot.xaml.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\MyPlot.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\MyPlot.xaml.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\MyPlot.xaml.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvxoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T08:32:16.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "LeftSider.xaml.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\LeftSider.xaml.cs",
+              "RelativeDocumentMoniker": "demo\\LeftSider.xaml.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\demo\\LeftSider.xaml.cs",
+              "RelativeToolTip": "demo\\LeftSider.xaml.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T08:51:37.774Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "TestRecordRepository.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\TestRecordRepository.cs",
+              "RelativeDocumentMoniker": "ConsoleApp1\\TestRecordRepository.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\TestRecordRepository.cs",
+              "RelativeToolTip": "ConsoleApp1\\TestRecordRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T05:23:02.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\Program.cs",
+              "RelativeDocumentMoniker": "ConsoleApp1\\Program.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\Program.cs",
+              "RelativeToolTip": "ConsoleApp1\\Program.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAlwDUAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T06:01:53.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "NetworkFolderCopier.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\NetworkFolderCopier.cs",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\NetworkFolderCopier.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\NetworkFolderCopier.cs",
+              "RelativeToolTip": "ChipManualGenerationSogt\\NetworkFolderCopier.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAqwH8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T06:15:44.142Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "CopyFormLocalNet.cs",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\CopyFormLocalNet.cs",
+              "RelativeDocumentMoniker": "ConsoleApp1\\CopyFormLocalNet.cs",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ConsoleApp1\\CopyFormLocalNet.cs",
+              "RelativeToolTip": "ConsoleApp1\\CopyFormLocalNet.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAANgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T03:27:16.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "Filter.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Filter.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Filter.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Filter.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Filter.xaml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-25T02:50:08.853Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "Tables.xaml",
+              "DocumentMoniker": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Tables.xaml",
+              "RelativeDocumentMoniker": "ChipManualGenerationSogt\\views\\Tables.xaml",
+              "ToolTip": "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\views\\Tables.xaml",
+              "RelativeToolTip": "ChipManualGenerationSogt\\views\\Tables.xaml",
+              "ViewState": "AgIAABMAAAAAAAAAAAAkwBMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-15T01:52:43.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "Window.cs",
+              "DocumentMoniker": "C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\f53d423bcb416f19bd3ab93d1e481b0a320cc0d496aefa19d64e27f33a03f33d\\Window.cs",
+              "ToolTip": "C:\\Users\\pengyang\\AppData\\Local\\Temp\\.vsdbgsrc\\f53d423bcb416f19bd3ab93d1e481b0a320cc0d496aefa19d64e27f33a03f33d\\Window.cs",
+              "ViewState": "AgIAAOcRAAAAAAAAAAAjwPgRAAAAAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-23T08:55:24.968Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

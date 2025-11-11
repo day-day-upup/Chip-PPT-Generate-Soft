@@ -1,0 +1,323 @@
+{
+  "ProductName": "GaAs MMIC Low Noise Amplifier",
+  "ModelNumber": "MML806",
+  "Tables": {
+    "BasicParameters": [
+      {
+        "Key": "{Top PN}",
+        "Value": "MML810"
+      },
+      {
+        "Key": "{Version}",
+        "Value": "V1.0.0"
+      },
+      {
+        "Key": "{Product Name}",
+        "Value": "GaAs MMIC Low Noise Amplifier"
+      },
+      {
+        "Key": "{Frequency Range}",
+        "Value": "0-10GHz"
+      },
+      {
+        "Key": "{right bar info}",
+        "Value": "GaAs Low Noise Amplifier MMIC 0-10GHz"
+      }
+    ],
+    "FeatureParameters": [
+      {
+        "Key": "Frequency",
+        "Value": "0-10GHz"
+      },
+      {
+        "Key": "Small Signal Gain",
+        "Value": "15dB Typical"
+      },
+      {
+        "Key": "Gain Flatness",
+        "Value": "\u00B12.5dB Typical"
+      },
+      {
+        "Key": "Noise Figure",
+        "Value": "4.5dB Typical"
+      },
+      {
+        "Key": "P1dB",
+        "Value": "12dBm Typical"
+      },
+      {
+        "Key": "Power Supply",
+        "Value": "VD=\u002B4V@119mA ,VG=-0.4V"
+      },
+      {
+        "Key": "Input/Output",
+        "Value": "50\u03A9"
+      },
+      {
+        "Key": "Chip Size",
+        "Value": "1.766 x 2.0 x 0.05mm"
+      }
+    ],
+    "DetailedPerformance": [
+      {
+        "Name": "Frequency",
+        "Unit": "GHz",
+        "Groups": [
+          {
+            "Min": "",
+            "Typ": "0 - 5",
+            "Max": ""
+          },
+          {
+            "Min": "",
+            "Typ": "5 - 10",
+            "Max": ""
+          }
+        ]
+      },
+      {
+        "Name": "Small Signal Gain",
+        "Unit": "dB",
+        "Groups": [
+          {
+            "Min": "-51.7",
+            "Typ": "-11.3",
+            "Max": "29.2"
+          },
+          {
+            "Min": "24.5",
+            "Typ": "26.7",
+            "Max": "29.0"
+          }
+        ]
+      },
+      {
+        "Name": "Gain Flatness",
+        "Unit": "dB",
+        "Groups": [
+          {
+            "Min": "",
+            "Typ": "\u00B145.0",
+            "Max": ""
+          },
+          {
+            "Min": "",
+            "Typ": "\u00B11.9",
+            "Max": ""
+          }
+        ]
+      },
+      {
+        "Name": "Noise Figure",
+        "Unit": "dB",
+        "Groups": [
+          {
+            "Min": "0.6",
+            "Typ": "1.0",
+            "Max": "1.4"
+          },
+          {
+            "Min": "0.7",
+            "Typ": "0.9",
+            "Max": "1.1"
+          }
+        ]
+      },
+      {
+        "Name": "P1dB - Output 1dB Compression",
+        "Unit": "dBm",
+        "Groups": [
+          {
+            "Min": "9.4",
+            "Typ": "13.8",
+            "Max": "18.3"
+          },
+          {
+            "Min": "15.5",
+            "Typ": "16.5",
+            "Max": "17.6"
+          }
+        ]
+      },
+      {
+        "Name": "Psat - Saturated  Output Power",
+        "Unit": "dBm",
+        "Groups": [
+          {
+            "Min": "16.7",
+            "Typ": "17.7",
+            "Max": "18.6"
+          },
+          {
+            "Min": "18.5",
+            "Typ": "19.0",
+            "Max": "19.5"
+          }
+        ]
+      },
+      {
+        "Name": "OIP3 - Output Third Order Intercept",
+        "Unit": "dBm",
+        "Groups": [
+          {
+            "Min": "20.5",
+            "Typ": "25.2",
+            "Max": "29.9"
+          },
+          {
+            "Min": "26.9",
+            "Typ": "28.4",
+            "Max": "29.9"
+          }
+        ]
+      },
+      {
+        "Name": "Input Return Loss",
+        "Unit": "dB",
+        "Groups": [
+          {
+            "Min": "-19.1",
+            "Typ": "-9.8",
+            "Max": "-0.5"
+          },
+          {
+            "Min": "-21.1",
+            "Typ": "-16.6",
+            "Max": "-12.2"
+          }
+        ]
+      },
+      {
+        "Name": "Output Return Loss",
+        "Unit": "dB",
+        "Groups": [
+          {
+            "Min": "-13.1",
+            "Typ": "-6.6",
+            "Max": "-0.1"
+          },
+          {
+            "Min": "-20.0",
+            "Typ": "-12.9",
+            "Max": "-5.9"
+          }
+        ]
+      }
+    ],
+    "AbsoluteMaximumRatings": [
+      {
+        "Key": "Drain Bias Voltage (VD)",
+        "Value": "\u002B4.5V"
+      },
+      {
+        "Key": "Gate Bias Voltage (VG)",
+        "Value": "-2V to 0V"
+      },
+      {
+        "Key": "RF Input Power (RFIN)",
+        "Value": "\u002B15dBm"
+      },
+      {
+        "Key": "Continuous Pdiss (T = 85 \u00B0C)\n (derate 6.1mW/\u00B0C above 85 \u00B0C) ",
+        "Value": "175\u00B0C"
+      },
+      {
+        "Key": "Thermal Resistance\n (channel to die bottom)",
+        "Value": "0.55W"
+      },
+      {
+        "Key": "Operating Temperature",
+        "Value": "-55\u00B0C to \u002B85 \u00B0C"
+      },
+      {
+        "Key": "Storage Temperature",
+        "Value": "-65\u00B0C to \u002B150 \u00B0C"
+      }
+    ],
+    "SupplyCurrentVdVg": [
+      {
+        "VD": "\u002B3.5",
+        "VG": "-0.38",
+        "Current (mA)": "118"
+      },
+      {
+        "VD": "4.0",
+        "VG": "-0.40",
+        "Current (mA)": "119"
+      },
+      {
+        "VD": "4.0",
+        "VG": "-0.50",
+        "Current (mA)": "71"
+      }
+    ],
+    "Notes": [
+      "1. Die thickness: 50\u03BCm",
+      "2. VD bond pad is 75*75\u03BCm?",
+      "3. VG bond pad is 75*75\u03BCm?",
+      "4. RF IN/OUT bond pad is 50*86\u03BCm?",
+      "5. Bond pad metalization: Gold",
+      "6. Backside metalization: Gold"
+    ],
+    "Description1": [
+      {
+        "Component": "C1",
+        "Description": "100pF Example: Skyworks Part: SC10002430"
+      },
+      {
+        "Component": "C2",
+        "Description": "0.01\u03BCF Example: TDK Part:C1005X7R1H103K050BB (0402)"
+      },
+      {
+        "Component": "C3",
+        "Description": "0.1\u03BCF Example: TDK Part:C1005X7R1H104K050BB (0402)"
+      },
+      {
+        "Component": "R1",
+        "Description": "100\u03A9 Example: Yageo Part:SR0402FR-7T10RL"
+      }
+    ],
+    "Description2": [
+      {
+        "Pin": "1",
+        "Function": "RF IN",
+        "Detail": "RF signal input terminal; no blocking capacitor required."
+      },
+      {
+        "Pin": "2",
+        "Function": "RF OUT",
+        "Detail": "RF signal output terminal; no blocking capacitor required."
+      },
+      {
+        "Pin": "3",
+        "Function": "VD",
+        "Detail": "Drain Biases for the Amplifier ; An external biasing circuit is required."
+      },
+      {
+        "Pin": "4",
+        "Function": "VG",
+        "Detail": "Gate Biases for the Amplifier ; An external biasing circuit is required."
+      },
+      {
+        "Pin": "5",
+        "Function": "Die Bottom",
+        "Detail": "Die bottom must be connected to RF and dc ground."
+      }
+    ],
+    "TurnOnProcedure": [
+      "Turn ON procedure:",
+      "1.    Connect GND to RF and dc ground.",
+      "2.    Set the gate bias voltages VG to -2V.",
+      "3.    Set the drain bias voltages VD to \u002B4V.",
+      "4.    Increase the gate bias voltages to achieve a quiescent supply current of 82 mA.",
+      "5.    Apply RF signal."
+    ],
+    "TurnOffProcedure": [
+      "Turn OFF procedure:",
+      "1.    Turn off the RF signal.",
+      "2.    Decrease the gate bias voltages, VG to -2V to achieve a IDQ = 0 mA (approximately).",
+      "3.    Decrease the drain bias voltages to 0 V.",
+      "4.    Increase the all gate bias voltages to 0 V."
+    ]
+  }
+}
