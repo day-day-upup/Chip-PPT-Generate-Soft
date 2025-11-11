@@ -161,6 +161,8 @@ namespace ChipManualGenerationSogt
                 var entries = await ListDirectoryDetailsAsync(remoteFolder);
                 foreach (var entry in entries)
                 {
+                    if(entry.Name == "." || entry.Name == "..")
+                        continue;
                     string name = entry.Name;
                     string remotePath = $"{remoteFolder}/{name}";
                     string localPath = Path.Combine(localFolder, name);

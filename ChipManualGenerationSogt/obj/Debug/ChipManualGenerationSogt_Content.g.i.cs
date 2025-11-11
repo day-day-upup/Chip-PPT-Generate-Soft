@@ -8,10 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/%e5%8a%9f%e8%83%bd%e5%9b%be.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/%e5%a4%96%e5%bd%a2%e5%9b%be.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/%e6%a1%86%e5%9b%be.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/%e8%8a%af%e7%89%87%e5%ae%89%e8%a3%85%e5%9b%be.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/%e8%a3%85%e9%85%8d%e5%9b%be.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/%e9%98%b2%e9%9d%99%e7%94%b5%e6%a0%87%e5%bf%97.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/pic/forms.ico")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/t_mml806_v3.pptx")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/mml806_v3.pptx")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/newtask.json")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/files/cfg.json")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libharfbuzzsharp.dylib")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libharfbuzzsharp.dylib")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("libharfbuzzsharp.dll")]

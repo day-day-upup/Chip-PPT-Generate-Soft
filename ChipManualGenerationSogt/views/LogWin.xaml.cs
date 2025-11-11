@@ -30,13 +30,13 @@ namespace ChipManualGenerationSogt
 
             vm = new LogWinModel();
             DataContext = vm;
-            vm.LogText = "这是一个日志测试:A Log in\n 这是一个日志测试:A Select Amplifier MM809\n  这是一个日志测试:A Enter SN:L004x,ON:L004x\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,Idd:67mA\n 这是一个日志测试： A Select Filter:M";
+            //vm.LogText = "这是一个日志测试:A Log in\n 这是一个日志测试:A Select Amplifier MM809\n  这是一个日志测试:A Enter SN:L004x,ON:L004x\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,VD 1.5V\n 这是一个日志测试： A Select Filter:MML806\n 这是一个日志测试： A Select Amplifier MM809\n 这是一个日志测试： A Select contion:VG 4.0V,Idd:67mA\n 这是一个日志测试： A Select Filter:M";
             vm.StartTime = DateTime.Now.AddDays(-1);
             vm.EndTime = DateTime.Now;
-            vm.LevelList.Add("DEBUG");
-            vm.LevelList.Add("INFO");
-            vm.LevelList.Add("WARNING");
-            vm.LevelList.Add("ERROR");
+            vm.LevelList.Add("Low");
+            vm.LevelList.Add("Medium");
+            vm.LevelList.Add("High");
+            
         }
 
         private async void Btn_Query_Clicked(object sender, RoutedEventArgs e)
@@ -82,6 +82,8 @@ namespace ChipManualGenerationSogt
         {
             BackEvent?.Invoke(this, EventArgs.Empty);
         }
+
+       
     }
 
     public class LogWinModel : ObeservableObject

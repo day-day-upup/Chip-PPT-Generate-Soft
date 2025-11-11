@@ -35,7 +35,9 @@ namespace ChipManualGenerationSogt
         }
         private void InitializeImageMappings()
         {
-            string BasePath = "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files";
+            //string BasePath = "F:\\PROJECT\\ChipManualGeneration\\exe\\app\\ChipManualGenerationSogt\\bin\\Debug\\resources\\files";
+            string BasePath = Global.FileBasePath;
+
             _imageMappings = new Dictionary<string, (string, string)>
             {
                 //["Functional Block Diagram"] = (

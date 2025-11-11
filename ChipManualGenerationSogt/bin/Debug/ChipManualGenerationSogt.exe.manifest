@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="ChipManualGenerationSogt.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="ChipManualGenerationSogt.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Forms.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChipManualGenerationSogt.exe" size="1317832">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChipManualGenerationSogt.exe" size="1325000">
       <assemblyIdentity name="ChipManualGenerationSogt" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>h9nr1uB2+rPP9D8SygqfiEcFN7BHCbSUZY8qhDUjxQY=</dsig:DigestValue>
+        <dsig:DigestValue>lCB6/SX/ajW+kGJaVmZA0FuGBBtryPNcE1vBgRgMmVk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1065,31 +1065,85 @@
       <dsig:DigestValue>QrBCRujwivY1mpkoIVtW245sK/4BGzANqEUXXJiJjsg=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="resources\files\MML806_V3.pptx" size="1404628">
+  <file name="resources\files\cfg.json" size="212">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>uyD4OllJH/Tg6bGETVLUnNkKpeL/PAjeAZQi3A6S00Q=</dsig:DigestValue>
+      <dsig:DigestValue>cYpq0tnntkKoooNi5mYvLZ4nN7uo8BcW9ZIKo4okmHg=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="resources\files\NewTask.Json" size="1138">
+  <file name="resources\files\NewTask.Json" size="1117">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>3HbMLHINwM+8fxqJgdCvYnASldyuR9vKf31e9n5JqOY=</dsig:DigestValue>
+      <dsig:DigestValue>yFcvRDMtdY+zXbLmUErFAt9+ZPpJbGsWf5rPklyJS7c=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="resources\files\T_MML806_V3.pptx" size="48837">
+  <file name="resources\files\T_MML806_V3.pptx" size="48789">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>A5XyyKcWkClVH2463cTBPNIJQNXcW8TH1I4vn5vpG6w=</dsig:DigestValue>
+      <dsig:DigestValue>sEx7DiHRFds+n4DKWxBcHO1al/dPNua3GIZVYwZvlh4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="resources\files\防静电标志.jpg" size="54050">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>qG4I1uwvim44+l/exhA/qhD5HhuBjxGWm3P9bJGQ7So=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="resources\files\功能图.png" size="30799">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Gt4kwP767VNpf4HvTjtHomwuZ6p1aE840O9tiwe49NU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="resources\files\框图.png" size="39474">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>f+8Jp8Vb69o05Ub4UpyGgYMhSmeoyQJpjMONNkb4hNc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="resources\files\外形图.png" size="55875">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>IRMGhLkFXWboxC5z0lwhxm5aNtp9JZ92rmjzqctjUqQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="resources\files\芯片安装图.png" size="220752">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>sZAlzhE11kN0W9rG/6eohM4Ho5PpuXtNa76EkP/7c0U=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="resources\files\装配图.png" size="223824">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>5ik5QPSN+2vGHm7MoTUHjC9uECd09G3OPWr0JDSe0sQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="resources\pic\Forms.ico" size="67646">

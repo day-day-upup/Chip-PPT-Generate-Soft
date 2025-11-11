@@ -1,0 +1,10 @@
+{
+  "DatabaseConnection": {
+    "Server": "192.168.1.209",
+    "Database": "QotanaTestSystem",
+    "UserID": "sa",
+    "Password": "123456",
+    "Encrypt": false,
+    "TrustServerCertificate": true
+  }
+}

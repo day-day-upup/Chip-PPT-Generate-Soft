@@ -29,6 +29,7 @@ using Xceed.Wpf.Toolkit;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Text.Json;
 using DocumentFormat.OpenXml.Wordprocessing;
+using System.Runtime.CompilerServices;
 namespace ChipManualGenerationSogt
 {
     /// <summary>
@@ -46,6 +47,9 @@ namespace ChipManualGenerationSogt
         public event EventHandler<TaskTableItem> DetailShowEvent;
         TaskMangeControlsViewModel vm;
         User _currentUser;
+        const string K_STATUS_NOT_COMMITED = "Not Commited"; //1
+        const string K_STATUS_PPT_READY = "PPT Ready For Generate";//2
+        const string K_STATUS_COMPLETED = "Completed";//3
         public TaskMangeControls()
         {
             InitializeComponent();
@@ -89,6 +93,37 @@ namespace ChipManualGenerationSogt
             //    //vm.CurrentTasks.Add(uiItem);
             //    vm.TableItemSources.Add(DBTaskToUITaskModel(item));
             //}
+            if ((UserPriority)Global.User.priority == UserPriority.PptMaker)
+            {
+                _addTaskPanel.Visibility = Visibility.Collapsed;
+            }
+            vm.StartTime = DateTime.Now.AddDays(-1);
+            vm.EndTime = DateTime.Now;
+            vm.StatusSources.Add(TaskStatus.NotCommited);
+            vm.StatusSources.Add(TaskStatus.PPTReady);
+            vm.StatusSources.Add(TaskStatus.Completed);
+            vm.Levels.Add("Low");
+            vm.Levels.Add("Medium");
+            vm.Levels.Add("High");
+            var root1 = new DeviceTreeViewItemModel("Amplifier");
+
+            // 创建 Root 1 的子节点
+            root1.Children.Add(new DeviceTreeViewItemModel("Low Noise Amplifier"));
+            root1.Children.Add(new DeviceTreeViewItemModel("Power Amplifier"));
+
+            //var subRoot1 = new DeviceTreeViewItemModel("Low Noise Amplifier");
+            //subRoot1.Children.Add(new DeviceTreeViewItemModel("A-Sub-X1"));
+            //subRoot1.Children.Add(new DeviceTreeViewItemModel("A-Sub-X2"));
+
+            // 将子树添加到 Root 1
+            //root1.Children.Add(subRoot1);
+            var root2 = new DeviceTreeViewItemModel("Switch");
+
+            // 创建 Root 2 的子节点
+            //root2.Children.Add(new DeviceTreeViewItemModel("Actuator Model B1"));
+            //root2.Children.Add(new DeviceTreeViewItemModel("Actuator Model B2"));
+            vm.TreeViewSources.Add(root1);
+            vm.TreeViewSources.Add(root2);
             RefreshTask();
 
 
@@ -112,17 +147,17 @@ namespace ChipManualGenerationSogt
                 Minor = item.Minor,
                 TableUpdate = item.TableUpdate,
             };
-            if (item.Status == "PPT Ready For Generate")
+            if (item.Status == "PPT Ready For Generate"  && (UserPriority)Global.User.priority == UserPriority.PptMaker)
             {
                 uiItem.MenuItemCommitIsEnabled = false;
                 uiItem.MenuItemBackToModifyIsEnabled = true;
             }
 
-            else if (item.Status == "Not Commited")
+            else if (item.Status == "Not Commited" && (UserPriority)Global.User.priority == UserPriority.DataProvider)
             {
                 uiItem.MenuItemCommitIsEnabled = true;
                 uiItem.MenuItemBackToModifyIsEnabled = false;
-            } else if(item.Status == "Completed")
+            } else 
             {
 
                 uiItem.MenuItemCommitIsEnabled = false;
@@ -179,10 +214,32 @@ namespace ChipManualGenerationSogt
         {
             //vm.PopupIsOpen = true;
             //vm.PopupTitle = task.TaskName;
-            
-            //vm.PopupTopMessage = FormatJson(task.Conditions);
 
-            DetailShowEvent?.Invoke(sender, task);
+            //vm.PopupTopMessage = FormatJson(task.Conditions);
+            if ((UserPriority)Global.User.priority == UserPriority.PptMaker)
+            {
+                if (task.Status == K_STATUS_PPT_READY)
+                    TaskExcute?.Invoke(this, task);
+                else
+                {
+                    System.Windows.MessageBox.Show("Please Wating for Data Provide.", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                }
+            }
+            else if ((UserPriority)Global.User.priority == UserPriority.DataProvider)
+            {
+                if (task.Status == K_STATUS_NOT_COMMITED)
+
+                {
+                    //OnModifiedEvent(null, task);
+                    DetailShowEvent?.Invoke(sender, task);
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Please Wating for Data Check.", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                }
+            }
         }
 
         private async void OnDownloadEvent(object _unusedSender, TaskTableItem task)
@@ -236,8 +293,15 @@ namespace ChipManualGenerationSogt
             { 
                 if((UserPriority)Global.User.priority == UserPriority.DataProvider)
                 {
-                    task.Status = "PPT Ready For Generate";
-                    task.MenuItemCommitIsEnabled = false;
+                    
+                    var sqlServer = new TaskSqlServerRepository();
+                    var queryItem = await sqlServer.GetTaskByIdAsync(task.ID);
+                    queryItem.Status = TaskStatus.PPTReady;
+                    if (await sqlServer.UpdateTaskAsync(queryItem))
+                    {
+                        task.Status = TaskStatus.PPTReady;
+                        task.MenuItemCommitIsEnabled = false;
+                    }
                 }
                 
                 
@@ -253,8 +317,14 @@ namespace ChipManualGenerationSogt
             {
                 if ((UserPriority)Global.User.priority == UserPriority.PptMaker)
                 {
-                    task.Status = "PPT Ready For Generate";
-                    task.MenuItemCommitIsEnabled = false;
+                    var sqlServer = new TaskSqlServerRepository();
+                    var queryItem = await sqlServer.GetTaskByIdAsync(task.ID);
+                    queryItem.Status = TaskStatus.NotCommited;
+                    if (await sqlServer.UpdateTaskAsync(queryItem))
+                    {
+                        task.Status = TaskStatus.NotCommited;
+                        task.MenuItemBackToModifyIsEnabled = false;
+                    }
                 }
 
 
@@ -279,8 +349,30 @@ namespace ChipManualGenerationSogt
             Global.TaskModel = task;
             Global.FtpRootPath = $"{task.Major}\\{(task.Minor ?? "")}\\{task.TaskName}";
             //Global.TaskModel = await sqlServer.GetTaskByIdAsync();
+            if ((UserPriority)Global.User.priority == UserPriority.PptMaker)
+            {
+                if (task.Status == K_STATUS_PPT_READY)
+                    TaskExcute?.Invoke(this, task);
+                else
+                {
+                    System.Windows.MessageBox.Show("Please Wating for Data Provide.","", MessageBoxButton.OK, MessageBoxImage.Warning);
+            
+                }
+            }
+            else if ((UserPriority)Global.User.priority == UserPriority.DataProvider)
+            {
+                if (task.Status == K_STATUS_NOT_COMMITED)
+                
+                {
+                    //OnModifiedEvent(null, task);
+                    DetailShowEvent?.Invoke(sender, task);
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("Please Wating for Data Check.", "", MessageBoxButton.OK, MessageBoxImage.Warning);
 
-            TaskExcute?.Invoke(this, task);
+                }
+            }
 
         }
 
@@ -572,11 +664,34 @@ namespace ChipManualGenerationSogt
 
         }
 
+        private void Btn_TopQuery_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show("This Function is not implemented yet.", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
 
+        private void Btn_Filter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class TaskMangeControlsViewModel : ObeservableObject
     {
+        private DateTime _startTime;
+        public DateTime StartTime
+        {
+            get { return _startTime; }
+            set { _startTime = value; RaisePropertyChanged(); }
+        }
+
+        private DateTime _endTime;
+        public DateTime EndTime
+        {
+            get { return _endTime; }
+            set { _endTime = value; RaisePropertyChanged(); }
+        }
+
+
         private bool _popupIsOpen;
         public bool PopupIsOpen { get => _popupIsOpen; set { _popupIsOpen = value; RaisePropertyChanged(); } }
 
@@ -611,7 +726,7 @@ namespace ChipManualGenerationSogt
             }
         }
 
-        public ObservableCollection<string>   Levels { get; set; } = new ObservableCollection<string>() { "Low", "Medium", "High" };
+        public ObservableCollection<string>   Levels { get; set; } = new ObservableCollection<string>();
 
 
         private ObservableCollection<object> _selectedStatus = new ObservableCollection<object>();
@@ -625,7 +740,7 @@ namespace ChipManualGenerationSogt
                 RaisePropertyChanged();
             }
         }
-        public ObservableCollection<string> StatusSources { get; set; } = new ObservableCollection<string>() { "In Progress", "Completed"};
+        public ObservableCollection<string> StatusSources { get; set; } = new ObservableCollection<string>();
 
 
         private TaskTableItem _selectTableItem;
@@ -665,10 +780,16 @@ namespace ChipManualGenerationSogt
         //    DetaileEvent?.Invoke(sender, e);
         //}
 
-        public void OnAddEvent(object sender, EventArgs e)
+        private string _taskName;
+        public string TaskName
         {
-            AddEvent?.Invoke(sender, e);
+            get { return _taskName; }
+            set { _taskName = value; RaisePropertyChanged(); }
         }
+        public ObservableCollection<DeviceTreeViewItemModel> TreeViewSources { get; set; } = new ObservableCollection<DeviceTreeViewItemModel>();
+
+        
+
     }
 
 
@@ -860,8 +981,97 @@ namespace ChipManualGenerationSogt
         {
             ModifyEvent?.Invoke(this, item);
         }
+        private bool _menuItemCommitIsEnabled;
+        public bool MenuItemCommitIsEnabled
+        {
+            get => _menuItemCommitIsEnabled;
+            set => SetProperty(ref _menuItemCommitIsEnabled, value);
+        }
 
-        public bool MenuItemCommitIsEnabled { get; set; }
-        public bool MenuItemBackToModifyIsEnabled { get; set; }
+        private bool _menuItemBackToModifyIsEnabled;
+        public bool MenuItemBackToModifyIsEnabled
+        { 
+            get => _menuItemBackToModifyIsEnabled;
+
+            set => SetProperty(ref _menuItemBackToModifyIsEnabled, value);
+        }
+
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            // 检查值是否发生变化
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false; // 值相同，不进行任何操作
+            }
+
+            storage = value; // 赋值
+
+            // ? 关键：触发事件
+            OnPropertyChanged(propertyName);
+
+            return true;
+        }
     }
+
+    public class DeviceTreeViewItemModel : ObservableObject
+    {
+  
+
+        private string _header;
+        public string Header
+        {
+            get => _header;
+            set => SetProperty(ref _header, value); // 假设 SetProperty 存在于基类
+        }
+
+
+
+        // XAML 中绑定了 IsChecked="{Binding IsSelectedInModel, Mode=TwoWay}"
+        private bool _isSelectedInModel;
+        public bool IsSelectedInModel
+        {
+            get => _isSelectedInModel;
+            set 
+            {
+                if (SetProperty(ref _isSelectedInModel, value))
+                {
+
+                    UpdateChildrenSelection(value);
+                }
+            
+            }
+        }
+        public void UpdateChildrenSelection(bool isSelected)
+        {
+            
+            if (Children.Count > 0)
+            {
+                foreach (var child in Children)
+                {
+                    
+                    child.IsSelectedInModel = isSelected;
+                }
+            }
+        }
+
+        public ObservableCollection<DeviceTreeViewItemModel> Children { get; } =
+            new ObservableCollection<DeviceTreeViewItemModel>();
+
+
+
+        public DeviceTreeViewItemModel(string header)
+        {
+            Header = header;
+        }
+
+        public override string ToString()
+        {
+            return Header;
+        }
+
+     
+
+
+    }
+
 }

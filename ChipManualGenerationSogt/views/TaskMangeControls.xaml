@@ -43,7 +43,7 @@
 
                 <Border BorderBrush="#d9d9d9" BorderThickness="1">
                     <DockPanel>
-                        <Button>
+                        <Button Click="Btn_TopQuery_Click">
                             <Image Source="/resources/pic/search.png" Height="25" Width="25" DockPanel.Dock="Left"/>
                         </Button>
                         <TextBox x:Name="searchBox" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"   VerticalContentAlignment="Center"  FontSize="16"/>
@@ -104,7 +104,7 @@
 
 
                             <!--ppt Model-->
-                            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <DockPanel Visibility="Collapsed" HorizontalAlignment="Center" Margin="0 0 0 7">
                                 <Label Content="PPT Model:" Width="120" FontSize="14"/>
                                 <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
                                 <Label Content=" " />
@@ -126,23 +126,31 @@
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
                                 <Label Content="Device Type:" Width="120" FontSize="14"/>
                                 <TreeView x:Name="TargetTreeView" Width="200"
-                                        ItemsSource="{Binding DataForTreeViewA}"
-          
-                                    ItemContainerStyle="{StaticResource CheckBoxTreeViewItemStyle}">
+                                    ItemsSource="{Binding TreeViewSources}">
+                                    <TreeView.Resources>
+                                        <HierarchicalDataTemplate DataType="{x:Type local:DeviceTreeViewItemModel}" 
+                                            ItemsSource="{Binding Children}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <CheckBox IsChecked="{Binding IsSelectedInModel, Mode=TwoWay}"   VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                <ContentPresenter Content="{Binding Header}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </HierarchicalDataTemplate>
+                                    </TreeView.Resources>
+
                                 </TreeView>
                                 <Label Content=" " />
                             </DockPanel>
-                           
-                            
 
-                           
+
+
+
 
 
 
 
 
                             <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                                <Button Content="Filter"  Width="320" Height="30"/>
+                                <Button Content="Filter"  Click="Btn_Filter_Click" Width="320" Height="30"/>
                             </DockPanel>
 
 
@@ -153,12 +161,12 @@
 
 
 
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                    <DockPanel x:Name="_addTaskPanel" HorizontalAlignment="Center" Margin="0 0 0 7">
                         <Button Content="Add New Task" Click="Btn_Add_Click" Width="320" Height="30"/>
                     </DockPanel>
 
 
-                    <DockPanel HorizontalAlignment="Center" Visibility="Visible" Margin="0 0 0 7">
+                    <DockPanel HorizontalAlignment="Center" Visibility="Collapsed" Margin="0 0 0 7">
                         <Button Content="Test" Click="Btn_Test_Click" Width="320" Height="30"/>
                     </DockPanel>
 

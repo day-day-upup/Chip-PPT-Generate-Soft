@@ -4,36 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChipManualGenerationSogt"
-        
-        mc:Ignorable="d"  ResizeMode="NoResize"
-        Title="LoginW" Height="320" Width="400">
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"  ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
+        Title="Login" Height="320" Width="400">
     <Window.DataContext>
         <local:LogInModel/>
     </Window.DataContext>
-    <Grid>
-        <StackPanel>
+    <xctk:BusyIndicator x:Name="busyIndicator" 
+           IsBusy="{Binding IsBusy}"
+           BusyContent="{Binding BusyMessage}"
+           DisplayAfter="0">
+        <Grid>
+            <StackPanel>
 
-            <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
 
-                <Label Content="Chip Manual Cenerate Soft System" FontSize="20" FontWeight="Bold"/>
-            </DockPanel>
+                    <Label Content="Chip Manual Cenerate Soft System" FontSize="20" FontWeight="Bold"/>
+                </DockPanel>
 
-            <Border Height="20"/>
+                <Border Height="20"/>
 
-            <Label HorizontalAlignment="Left" Content="User"   FontSize="18" Margin="36 0 0 0"/>
+                <Label HorizontalAlignment="Left" Content="User"   FontSize="18" Margin="36 0 0 0"/>
 
-            <Border Height="6"/>
-            <TextBox x:Name="txtUser" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="300" FontSize="16"/>
+                <Border Height="6"/>
+                <TextBox x:Name="txtUser" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="300" FontSize="16"/>
 
-            <Border Height="6"/>
+                <Border Height="6"/>
 
-            <Label HorizontalAlignment="Left" Content="Password"  FontSize="18" Margin="36 0 0 0"/>
+                <Label HorizontalAlignment="Left" Content="Password"  FontSize="18" Margin="36 0 0 0"/>
 
-            <Border Height="6"/>
-            <PasswordBox x:Name="txtPassword"   HorizontalAlignment="Center" Width="300" FontSize="16"/>
-            <Border Height="20"/>
-            <Button  HorizontalAlignment="Center" Content="Login" Width="300"  FontSize="16" Click="Btn_LogIn_Clicked"/>
-        </StackPanel>
-        
-    </Grid>
+                <Border Height="6"/>
+                <PasswordBox x:Name="txtPassword"   HorizontalAlignment="Center" Width="300" FontSize="16"/>
+                <Border Height="20"/>
+                <Button  HorizontalAlignment="Center" Content="Login" Width="300"  FontSize="16" Click="Btn_LogIn_Clicked"/>
+
+                <Border Height="20"/>
+                <Label Content="v1.0.0"  HorizontalAlignment="Right"/>
+            </StackPanel>
+
+        </Grid>
+    </xctk:BusyIndicator>
 </Window>

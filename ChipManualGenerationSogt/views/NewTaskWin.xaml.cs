@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 using System.IO;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 namespace ChipManualGenerationSogt
 {
     /// <summary>
@@ -114,7 +115,11 @@ namespace ChipManualGenerationSogt
             //vm.SelectedPPTModel = task.PPTModel;
             _button.Content = EDIT_TASK_STRING;
 
-
+            if (task.Status != TaskStatus.NotCommited  || (UserPriority)Global.User.priority != UserPriority.DataProvider)
+            {
+                _button.IsEnabled = false;
+            }
+        
         }
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -315,34 +320,41 @@ namespace ChipManualGenerationSogt
                 System.Windows.MessageBox.Show("Please fill in all the required fields!");
                
             }
-            // 1?? 添加任务
-            if (await AddTaskToDB())
+            var ok = System.Windows.MessageBox.Show("Are you sure to add this task?", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (ok == MessageBoxResult.OK)
             {
-                // 2?? 上传文件夹
-                string ftpRootPath = $"{vm.SelectedMajor}\\{(vm.SelectedMinor ?? "")}\\{vm.TaskName}";
-                bool uploadResult = await FtpClient.UploadFolderAsync(vm.FolderPath, ftpRootPath);
-
-                if (uploadResult)
+                vm.IsBusy = true;
+                vm.BusyMessage = "Adding Task...";
+                if (await AddTaskToDB())
                 {
-                    message = "Add Task Success!";
-                    success = true;
+                    // 2?? 上传文件夹
+                    string ftpRootPath = $"{vm.SelectedMajor}\\{(vm.SelectedMinor ?? "")}\\{vm.TaskName}";
+                    bool uploadResult = await FtpClient.UploadFolderAsync(vm.FolderPath, ftpRootPath);
+
+                    if (uploadResult)
+                    {
+                        message = "Add Task Success!";
+                        success = true;
+                    }
+                    else
+                    {
+                        message = "Add Task Success, but Upload Folder Failed!";
+                    }
                 }
                 else
                 {
-                    message = "Add Task Success, but Upload Folder Failed!";
+                    message = "Add Task Failed!";
                 }
-            }
-            else
-            {
-                message = "Add Task Failed!";
+
+
+                System.Windows.MessageBox.Show(message, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+                if (success)
+                    BackEvent?.Invoke(this, EventArgs.Empty);
             }
 
-           
-            System.Windows.MessageBox.Show(message, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-
-          
-            if (success)
-                BackEvent?.Invoke(this, EventArgs.Empty);
+            vm.IsBusy = false;
         }
 
 
@@ -912,6 +924,19 @@ namespace ChipManualGenerationSogt
         {
             get { return _band3; }
             set { _band3 = value; RaisePropertyChanged(nameof(Band3)); }
+        }
+        bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { _isBusy = value; RaisePropertyChanged(nameof(IsBusy)); }
+        }
+
+        private string _busyMessage;
+        public string BusyMessage
+        {
+            get { return _busyMessage; }
+            set { _busyMessage = value; RaisePropertyChanged(nameof(BusyMessage)); }
         }
     }
 

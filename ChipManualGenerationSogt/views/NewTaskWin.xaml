@@ -61,276 +61,282 @@
     <UserControl.DataContext>
         <local:NewTaskWinModel/>
     </UserControl.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="Gray" >
-        <!--lef sider-->
+    <xctk:BusyIndicator x:Name="busyIndicator" 
+               IsBusy="{Binding IsBusy}"
+               BusyContent="{Binding BusyMessage}"
+               DisplayAfter="0">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition  Height="30" />
-                <RowDefinition  Height="*" />
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <Border BorderBrush="Gray" BorderThickness="1 1 1 0">
-                    <DockPanel>
-                        
-                        <Button  Width="40" Style="{StaticResource CleanImageButtonStyle}">
-                            <Image Source="/resources/pic/back.png" Height="16" />
-                        </Button>
-                        <Border Width="10"/>
-                        <Label Content="{Binding ParentObjectName}" FontSize="14"/>
+            <Border BorderBrush="Gray" >
+                <!--lef sider-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="30" />
+                        <RowDefinition  Height="*" />
+                    </Grid.RowDefinitions>
 
-                    </DockPanel>
-            </Border>
-            <TreeView   x:Name="treeView"  Grid.Row="1" ItemsSource="{Binding DeviceTreeResources}"
-                          SelectedItemChanged="TreeView_SelectedItemChanged"  
-                          ItemTemplate="{StaticResource TreeViewItemTemplate}"
-             >
-                
-            </TreeView>
-            
-        </Grid>
-
-        </Border>
-
-
-        <Border Grid.Column="1" Background="Transparent" AllowDrop="True"   DragEnter="Border_DragEnter"   Drop="Border_Drop"  BorderBrush="Gray" BorderThickness="1 1 1 1" Margin="0 0 1 1" >
-            
-            
-            <StackPanel >
-               
+                    <Border BorderBrush="Gray" BorderThickness="1 1 1 0">
                         <DockPanel>
 
-                            <Button  Width="40" Click="Btn_Preview_Click" Style="{StaticResource CleanImageButtonStyle}">
+                            <Button  Width="40" Style="{StaticResource CleanImageButtonStyle}">
                                 <Image Source="/resources/pic/back.png" Height="16" />
                             </Button>
                             <Border Width="10"/>
                             <Label Content="{Binding ParentObjectName}" FontSize="14"/>
 
                         </DockPanel>
+                    </Border>
+                    <TreeView   x:Name="treeView"  Grid.Row="1" ItemsSource="{Binding DeviceTreeResources}"
+                          SelectedItemChanged="TreeView_SelectedItemChanged"  
+                          ItemTemplate="{StaticResource TreeViewItemTemplate}"
+             >
 
-                        <Border Height="10"/>
-               
+                    </TreeView>
+
+                </Grid>
+
+            </Border>
+
+
+            <Border Grid.Column="1" Background="Transparent" AllowDrop="True"   DragEnter="Border_DragEnter"   Drop="Border_Drop"  BorderBrush="Gray" BorderThickness="1 1 1 1" Margin="0 0 1 1" >
+
+
+                <StackPanel >
+
+                    <DockPanel>
+
+                        <Button  Width="40" Click="Btn_Preview_Click" Style="{StaticResource CleanImageButtonStyle}">
+                            <Image Source="/resources/pic/back.png" Height="16" />
+                        </Button>
+                        <Border Width="10"/>
+                        <Label Content="{Binding ParentObjectName}" FontSize="14"/>
+
+                    </DockPanel>
+
+                    <Border Height="10"/>
 
 
 
 
+
+
+                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                        <Button Content="Select Folder:" Click="Btn_SelectFolder_Click" Width="140" FontSize="14"/>
+                        <TextBox Width="600" Text="{Binding FolderPath}" VerticalContentAlignment="Center" FontSize="14"/>
+                        <Label Content="*" FontSize="14" Foreground="Red"/>
+                    </DockPanel>
+
+
+
+
+
+
+
+
+
+
+                    <!-- second part -->
+                    <StackPanel Orientation="Vertical" Visibility="Collapsed" x:Name="secondPartStackPanel" >
+
+
+                        <!--task name-->
 
                         <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                            <Button Content="Select Folder:" Click="Btn_SelectFolder_Click" Width="140" FontSize="14"/>
-                            <TextBox Width="600" Text="{Binding FolderPath}" VerticalContentAlignment="Center" FontSize="14"/>
-                            <Label Content="*" FontSize="14" Foreground="Red"/>
+                            <Label Content="Task Name:" Width="140" FontSize="14"/>
+                            <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
+                            <Label Content="*"  Foreground="Red" FontSize="14" Width="50"/>
                         </DockPanel>
 
-             
+                        <DockPanel Visibility="Collapsed" HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="PPT Name:" Width="140" FontSize="14"/>
 
+                            <TextBox Width="200" Visibility="Collapsed" Text="{Binding PptName}" VerticalContentAlignment="Center" FontSize="14"/>
+                            <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
+                        </DockPanel>
 
+                        <!--status-->
 
-
-
-
-
-
-                <!-- second part -->
-                <StackPanel Orientation="Vertical" Visibility="Collapsed" x:Name="secondPartStackPanel" >
-
-
-                    <!--task name-->
-
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Task Name:" Width="140" FontSize="14"/>
-                        <TextBox Width="200" Text="{Binding TaskName}" VerticalContentAlignment="Center"   FontSize="14"/>
-                        <Label Content="*"  Foreground="Red" FontSize="14" Width="50"/>
-                    </DockPanel>
-
-                    <DockPanel Visibility="Collapsed" HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="PPT Name:" Width="140" FontSize="14"/>
-
-                        <TextBox Width="200" Visibility="Collapsed" Text="{Binding PptName}" VerticalContentAlignment="Center" FontSize="14"/>
-                        <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
-                    </DockPanel>
-
-                    <!--status-->
-
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Status:" Width="140" FontSize="14"/>
-                        <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Status:" Width="140" FontSize="14"/>
+                            <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
                         Width="200"
                 ItemsSource="{Binding StatusSource}"
                 SelectedIndex="0"
                 SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
                             />
-                        <Label Content=" " FontSize="14" Width="50"/>
-                    </DockPanel>
-                    <!-- Level -->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Level:" Width="140" FontSize="14"/>
-                        <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
+                            <Label Content=" " FontSize="14" Width="50"/>
+                        </DockPanel>
+                        <!-- Level -->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Level:" Width="140" FontSize="14"/>
+                            <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
             Width="200" 
             ItemsSource="{Binding LevelSource}"
             SelectedItem="{Binding SelectedLevel, Mode=TwoWay}"
             SelectedIndex="1"
             />
-                        <Label Content=" " FontSize="14" Width="50"/>
-                    </DockPanel>
+                            <Label Content=" " FontSize="14" Width="50"/>
+                        </DockPanel>
 
 
-                    <!-- Major Device -->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Device Major:" Width="140" FontSize="14"/>
-                        <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
+                        <!-- Major Device -->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Device Major:" Width="140" FontSize="14"/>
+                            <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
          Width="200"
                 SelectedIndex="0"
                 ItemsSource="{Binding MajorSource}"
                 SelectedItem="{Binding SelectedMajor, Mode=TwoWay}"
 
          />
-                        <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
-                    </DockPanel>
+                            <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
+                        </DockPanel>
 
 
-                    <!-- Minor Device -->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Device Minor:" Width="140" FontSize="14"/>
-                        <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
+                        <!-- Minor Device -->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Device Minor:" Width="140" FontSize="14"/>
+                            <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
                   Width="200"
                  SelectedIndex="0"
                  ItemsSource="{Binding MinorSource}"
                  SelectedItem="{Binding SelectedMinor, Mode=TwoWay}"
 
                   />
-                        <Label Content="*" FontSize="14" Foreground="Red" Width="50" />
-                    </DockPanel>
+                            <Label Content="*" FontSize="14" Foreground="Red" Width="50" />
+                        </DockPanel>
 
 
-                    <!-- PPT Model -->
-                    <DockPanel Visibility="Collapsed" HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="PPT Model:" Width="140" FontSize="14"/>
-                        <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
+                        <!-- PPT Model -->
+                        <DockPanel Visibility="Collapsed" HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="PPT Model:" Width="140" FontSize="14"/>
+                            <ComboBox   Loaded="CheckComboBox_Loaded" VerticalContentAlignment="Center"
                 Width="200"
                 SelectedIndex="0"
                 ItemsSource="{Binding PPTModelSource}"
                 SelectedItem="{Binding SelectedPPTModel, Mode=TwoWay}"
 
                 />
-                        <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
-                    </DockPanel>
-                    
-                    <!--parameters-->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Parameters:" Width="140" FontSize="14"/>
-                        <xctk:CheckComboBox   Loaded="CheckComboBox_Loaded"
+                            <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
+                        </DockPanel>
+
+                        <!--parameters-->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Parameters:" Width="140" FontSize="14"/>
+                            <xctk:CheckComboBox   Loaded="CheckComboBox_Loaded"
                                         Width="200"
                                         ItemsSource="{Binding ParametersSource}"
                                         SelectedItemsOverride="{Binding ParameterITem}"
                         />
-                        <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
-                    </DockPanel>
-                    
-                    <!--selected entry-->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Selected Entrie:" Width="140" FontSize="14"/>
-                        <ComboBox Width="200" ItemsSource="{Binding ParametersSource}" 
+                            <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
+                        </DockPanel>
+
+                        <!--selected entry-->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Selected Entrie:" Width="140" FontSize="14"/>
+                            <ComboBox Width="200" ItemsSource="{Binding ParametersSource}" 
                                     SelectedIndex="1"
                                     SelectedItem="{Binding SelectedEntry, Mode=TwoWay}" VerticalContentAlignment="Center"  FontSize="14"/>
 
-                        <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
+                            <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
 
-                    </DockPanel>
+                        </DockPanel>
 
-                    <!--min frequency-->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Min Frequency:" Width="140" FontSize="14"/>
-                        <xctk:DecimalUpDown  Width="200" FormatString="F1" Increment="0.1" DefaultValue="0.0" Minimum="0.0"
+                        <!--min frequency-->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Min Frequency:" Width="140" FontSize="14"/>
+                            <xctk:DecimalUpDown  Width="200" FormatString="F1" Increment="0.1" DefaultValue="0.0" Minimum="0.0"
                                               Text="{Binding MinFrequency, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz" FontSize="14"  Width="50"/>
+                            <Label Content="GHz" FontSize="14"  Width="50"/>
 
-                    </DockPanel>
+                        </DockPanel>
 
-                    <!--max frequency-->
+                        <!--max frequency-->
 
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Max Frequency:" Width="140" FontSize="14"/>
-                        <xctk:DecimalUpDown  Width="200" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Max Frequency:" Width="140" FontSize="14"/>
+                            <xctk:DecimalUpDown  Width="200" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
                                              Text="{Binding MaxFrequency, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz" FontSize="14" Width="50"/>
-                    </DockPanel>
+                            <Label Content="GHz" FontSize="14" Width="50"/>
+                        </DockPanel>
 
-                    <!--frequency bands-->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Frequency Bands: " Width="140" FontSize="14"/>
-                        <ComboBox  x:Name="combox" Width="200"
+                        <!--frequency bands-->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Frequency Bands: " Width="140" FontSize="14"/>
+                            <ComboBox  x:Name="combox" Width="200"
                                     ItemsSource="{Binding BandsSource}"
                           SelectedIndex="1"  SelectionChanged="CB_Bands_SelectionChanged" VerticalContentAlignment="Center"  FontSize="14">
 
-                        </ComboBox>
-                        <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
+                            </ComboBox>
+                            <Label Content="*" FontSize="14" Foreground="Red" Width="50"/>
 
-                    </DockPanel>
+                        </DockPanel>
 
 
-                    <!--band -->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Band 1: " Width="140" FontSize="14" />
-                        <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                        <!--band -->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Band 1: " Width="140" FontSize="14" />
+                            <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
                           Text="{Binding Band1MinValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz(Min)" Width="100" FontSize="14"/>
-                        
-                        <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                            <Label Content="GHz(Min)" Width="100" FontSize="14"/>
+
+                            <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
                                   Text="{Binding Band1MaxValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz(Max)" FontSize="14" Width="100"/>
+                            <Label Content="GHz(Max)" FontSize="14" Width="100"/>
 
-                    </DockPanel>
-                    <!--band2-->
-                    <DockPanel x:Name="_band2" HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="Band 2: " Width="140" FontSize="14" />
-                        <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                        </DockPanel>
+                        <!--band2-->
+                        <DockPanel x:Name="_band2" HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Band 2: " Width="140" FontSize="14" />
+                            <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
                         Text="{Binding Band2MinValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz(Min)" Width="100" FontSize="14"/>
+                            <Label Content="GHz(Min)" Width="100" FontSize="14"/>
 
-                       <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                            <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
                         Text="{Binding Band2MaxValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz(Max)" FontSize="14"  Width="100"/>
-                    </DockPanel>
+                            <Label Content="GHz(Max)" FontSize="14"  Width="100"/>
+                        </DockPanel>
 
-                    <!--band3-->
-                    <DockPanel x:Name="_band3" HorizontalAlignment="Center" Margin="0 0 0 7" Visibility="Collapsed">
-                        <Label Content="Band 3: " Width="140" FontSize="14" />
-                        <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                        <!--band3-->
+                        <DockPanel x:Name="_band3" HorizontalAlignment="Center" Margin="0 0 0 7" Visibility="Collapsed">
+                            <Label Content="Band 3: " Width="140" FontSize="14" />
+                            <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
                              Text="{Binding Band3MinValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz(Min)" Width="100" FontSize="14"/>
+                            <Label Content="GHz(Min)" Width="100" FontSize="14"/>
 
-                        <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
+                            <xctk:DecimalUpDown  Width="100" FormatString="F2" Increment="0.5" DefaultValue="10.0" Minimum="0.0"
                          Text="{Binding Band3MaxValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus ,Mode=TwoWay}"/>
-                        <Label Content="GHz(Max)" FontSize="14"  Width="100"/>
-                    </DockPanel>
+                            <Label Content="GHz(Max)" FontSize="14"  Width="100"/>
+                        </DockPanel>
 
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Label Content="(Band Range Format : Min Frequency - Max Frequency eg: 5 - 10)" Foreground="Red"/>
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="(Band Range Format : Min Frequency - Max Frequency eg: 5 - 10)" Foreground="Red"/>
 
-                    </DockPanel>
+                        </DockPanel>
 
-                    <!-- btn add new task-->
-                    
+                        <!-- btn add new task-->
 
-                    <!-- btn add new task-->
-                    <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
-                        <Button x:Name="_button" Content="Add New Task" Click="Btn_Add_Click"   Width="340" Height="30"/>
 
-                        <Label Content="" FontSize="14" Foreground="Red" Width="50"/>
-                    </DockPanel>
+                        <!-- btn add new task-->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Button x:Name="_button" Content="Add New Task" Click="Btn_Add_Click"   Width="340" Height="30"/>
+
+                            <Label Content="" FontSize="14" Foreground="Red" Width="50"/>
+                        </DockPanel>
+                    </StackPanel>
+
+
+
                 </StackPanel>
 
 
-                
-            </StackPanel>
+            </Border>
 
-
-        </Border>
-    
-    </Grid>
+        </Grid>
+    </xctk:BusyIndicator>
 </UserControl>

@@ -1,3 +1,2 @@
-2025/11/06-14:59:12.337 88a8 Reusing MANIFEST F:\PROJECT\ChipManualGeneration\exe\app\ChipManualGenerationSogt\bin\Debug\ChipManualGenerationSogt.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
-2025/11/06-14:59:12.341 88a8 Recovering log #3
-2025/11/06-14:59:12.342 88a8 Reusing old log F:\PROJECT\ChipManualGeneration\exe\app\ChipManualGenerationSogt\bin\Debug\ChipManualGenerationSogt.exe.WebView2\EBWebView\Default\Local Storage\leveldb/000003.log 
+2025/11/11-17:20:31.824 136c Creating DB F:\PROJECT\ChipManualGeneration\exe\app\ChipManualGenerationSogt\bin\Debug\ChipManualGenerationSogt.exe.WebView2\EBWebView\Default\Local Storage\leveldb since it was missing.
+2025/11/11-17:20:32.118 136c Reusing MANIFEST F:\PROJECT\ChipManualGeneration\exe\app\ChipManualGenerationSogt\bin\Debug\ChipManualGenerationSogt.exe.WebView2\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001

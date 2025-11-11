@@ -46,6 +46,7 @@ using DocumentFormat.OpenXml.Bibliography;
 using System.Text.Json;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using CommunityToolkit.Mvvm.ComponentModel;
 namespace ChipManualGenerationSogt
 {
     /// <summary>
@@ -150,7 +151,26 @@ namespace ChipManualGenerationSogt
                 home.Visibility = Visibility.Visible;
             };
 
-            
+            var root1 = new DeviceTreeViewItemModel("Amplifier");
+
+            // 创建 Root 1 的子节点
+            //root1.Children.Add(new DeviceTreeViewItemModel("Low Noise Amplifier"));
+            //root1.Children.Add(new DeviceTreeViewItemModel("Power Amplifier"));
+
+            var subRoot1 = new DeviceTreeViewItemModel("Low Noise Amplifier");
+            var item = new DeviceTreeViewItemModel("MML");
+            item.IsSelectedInModel = true;
+            subRoot1.Children.Add(item);
+            //subRoot1.Children.Add(new DeviceTreeViewItemModel("A-Sub-X2"));
+
+            // 将子树添加到 Root 1
+            root1.Children.Add(subRoot1);
+          
+
+            // 创建 Root 2 的子节点
+            //root2.Children.Add(new DeviceTreeViewItemModel("Actuator Model B1"));
+            //root2.Children.Add(new DeviceTreeViewItemModel("Actuator Model B2"));
+            vm.TreeViewSources.Add(root1);
 
             //var win = new LoginW();
             //win.Show();
@@ -163,7 +183,7 @@ namespace ChipManualGenerationSogt
             //    Children =
             //        {
             //            new NewTreeViewItem{ Content = "MML806" },
-                        
+
             //        }
             //});
             //vm.Records.Add(new NewTreeViewItem
@@ -3484,6 +3504,9 @@ namespace ChipManualGenerationSogt
             get { return _logText; }
             set { this._logText = value; RaisePropertyChanged(nameof(LogText)); }
         }
+
+        public ObservableCollection<DeviceTreeViewItemModel> TreeViewSources { get; set; } = new ObservableCollection<DeviceTreeViewItemModel>();
+
     }
 
     public class NewTreeViewItem : ObeservableObject
@@ -3535,6 +3558,68 @@ namespace ChipManualGenerationSogt
                 parent.AddChild(new NewTreeViewItem { Content = content });
             }
         }
+    }
+
+
+    public class DeviceTreeViewItemModelSigle : ObservableObject
+    {
+
+
+        private string _header;
+        public string Header
+        {
+            get => _header;
+            set => SetProperty(ref _header, value); // 假设 SetProperty 存在于基类
+        }
+
+
+
+        // XAML 中绑定了 IsChecked="{Binding IsSelectedInModel, Mode=TwoWay}"
+        private bool _isSelectedInModel;
+        public bool IsSelectedInModel
+        {
+            get => _isSelectedInModel;
+            set
+            {
+                if (SetProperty(ref _isSelectedInModel, value))
+                {
+
+                    UpdateChildrenSelection(value);
+                }
+
+            }
+        }
+        public void UpdateChildrenSelection(bool isSelected)
+        {
+
+            if (Children.Count > 0)
+            {
+                foreach (var child in Children)
+                {
+
+                    child.IsSelectedInModel = isSelected;
+                }
+            }
+        }
+
+        public ObservableCollection<DeviceTreeViewItemModel> Children { get; } =
+            new ObservableCollection<DeviceTreeViewItemModel>();
+
+
+
+        public DeviceTreeViewItemModelSigle(string header)
+        {
+            Header = header;
+        }
+
+        public override string ToString()
+        {
+            return Header;
+        }
+
+
+
+
     }
 
 }

@@ -21,69 +21,6 @@ namespace ChipManualGenerationSogt
         {
             this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             base.OnStartup(e);
-
-            // 1. 显示登录窗口
-            //var loginWindow = new LoginW();
-            //loginWindow.Show(); // 模态显示
-            //var mainWindow = new MainWindow();
-            //mainWindow.Show();
-            //string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-            //var task = new TaskModel2
-            //{
-            //    ID = 1001,
-            //    TaskName = "图像处理任务",
-            //    Status = 1,                 // 假设 1=进行中，0=未开始
-            //    StartDate = DateTime.Now,
-            //    Consumed = 30,              // 已消耗时间（分钟？）
-            //    DataStatus = true,          // 数据已就绪
-            //    FilesStatus = true,         // 文件已下载
-            //    CheckStatus = false         // 尚未审核
-            //};
-            //var repo = new TestRecordRepository(connStr);
-            //repo.SaveTask(connStr, task);
-
-            //string connStr = "Server=192.168.1.77,1433;Database=QotanaTestSystem;User ID=sa;Password=123456;Encrypt=false;TrustServerCertificate=true;";
-
-            //var userRepository = new UserRepository(connStr);
-            //var tasRepository = new TaskRepository(connStr);
-            //// 3. 调用方法（注意：这是 async 方法！）
-            //try
-            //{
-            //    //List<User> users = await userRepository.GetAllUsersAsync();
-
-            //    //foreach (var user in users)
-            //    //{
-            //    //    //Console.WriteLine($"{user.ID}: {user.Name}, Priority: {user.Priority}");
-            //    //}
-            //    List<TaskModel_DB> users = await tasRepository.GetAllFinishedTasksAsync();
-
-            //    foreach (var user in users)
-            //    {
-            //        //Console.WriteLine($"{user.ID}: {user.Name}, Priority: {user.Priority}");
-            //    }
-            //    users = await tasRepository.GetAllCurrentTasksAsync();
-
-            //    foreach (var user in users)
-            //    {
-            //        //Console.WriteLine($"{user.ID}: {user.Name}, Priority: {user.Priority}");
-            //    }
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"加载用户失败: {ex.Message}");
-            //}
-
-            //var control = new WpfPlot();
-            //control.Show();
-
-            var user = new User
-            {
-                ID = 1001,
-                UserName = "admin",
-                Password = "123456",
-                
-            };
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
             string dir = System.IO.Path.Combine(appDir, "resources", "settings");
             if (!System.IO.Directory.Exists(dir))
@@ -118,7 +55,7 @@ namespace ChipManualGenerationSogt
                 }
                 else
                 {
-                    //Shutdown(); // 用户取消登录
+                    Shutdown(); // 用户取消登录
                 }
 
 
@@ -153,7 +90,8 @@ namespace ChipManualGenerationSogt
                 }
                 else
                 {
-                    //Shutdown(); // 用户取消登录
+                    //Application.Current.Shutdown();
+                    Shutdown(); // 用户取消登录
                 }
 
             }

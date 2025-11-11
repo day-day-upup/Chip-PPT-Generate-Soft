@@ -160,6 +160,13 @@ namespace ChipManualGenerationSogt
         public const string Fatal = "FATAL";
     }
 
+    public static class TaskStatus
+    {
+        public const string NotCommited = "Not Commited";
+        public const string PPTReady = "PPT Ready For Generate";
+        public const string Completed = "Completed";
+       
+    }   
     public enum UserPriority
     {
         Admin = 0,

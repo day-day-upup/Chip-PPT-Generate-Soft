@@ -43,7 +43,8 @@ namespace ChipManualGenerationSogt
         private async void Btn_LogIn_Clicked(object sender, RoutedEventArgs e)
         {
             string connStr = "Server=192.168.1.209;Database=mlChips;User ID=sa;Password=qotana;Encrypt=false;TrustServerCertificate=true;";
-
+            vm.IsBusy = true;
+            vm.BusyMessage = "Logining...";
             var repo = new TestRecordRepository(connStr);
             var users = repo.GetUsers(connStr);
             foreach (var user in users)
@@ -92,6 +93,7 @@ namespace ChipManualGenerationSogt
 
                 //await sqlServer.InsertLogAsync(logmodel);
             }
+            vm.IsBusy = false;
         }
     }
 
@@ -127,10 +129,22 @@ namespace ChipManualGenerationSogt
         }
 
 
+        bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { _isBusy = value; RaisePropertyChanged(nameof(IsBusy)); }
+        }
+
+        private string _busyMessage;
+        public string BusyMessage
+        {
+            get { return _busyMessage; }
+            set { _busyMessage = value; RaisePropertyChanged(nameof(BusyMessage)); }
+        }
 
 
-    
-    
+
     }
 
 }

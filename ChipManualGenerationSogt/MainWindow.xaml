@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChipManualGenerationSogt"
-        mc:Ignorable="d"  
+        mc:Ignorable="d"  WindowStartupLocation="CenterScreen"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="Chip Manual Soft" Height="900" Width="1400">
     <Window.Resources>
@@ -259,8 +259,40 @@
                         </DockPanel>
 
                         <Border Height="50"/>
-                       
+                        <!-- Device Type -->
+                        <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
+                            <Label Content="Device Type:" Width="120" FontSize="14"/>
+                            <TreeView x:Name="TargetTreeView" Width="200"
+              ItemsSource="{Binding TreeViewSources}">
+                                <TreeView.Resources>
+                                    <HierarchicalDataTemplate DataType="{x:Type local:DeviceTreeViewItemModel}" 
+                              ItemsSource="{Binding Children}">
 
+                                        <StackPanel Orientation="Horizontal">
+                                            <RadioButton IsChecked="{Binding IsSelectedInModel, Mode=TwoWay}"
+                         GroupName="DeviceSelectionGroup"  
+                         VerticalAlignment="Center" 
+                         Margin="0,0,5,0">
+                                                <RadioButton.Style>
+                                                    <Style TargetType="{x:Type RadioButton}">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Children.Count}" Value="0">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </RadioButton.Style>
+                                            </RadioButton>
+
+                                            <ContentPresenter Content="{Binding Header}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </HierarchicalDataTemplate>
+                                </TreeView.Resources>
+                            </TreeView>
+                            <Label Content=" " />
+                        </DockPanel>
                         <DockPanel HorizontalAlignment="Center" Margin="0 0 0 7">
                             <Button Content="View Curves" Click="Btn_ViewCurves_Click" Width="320" Height="30"/>
                         </DockPanel>
