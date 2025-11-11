@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChipManualGenerationSogt.exe" size="1385928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ChipManualGenerationSogt.exe" size="1317832">
       <assemblyIdentity name="ChipManualGenerationSogt" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rBS1WV+qFK7nd/61atQVFerVUGjyu4Mtp0yO80w7fXk=</dsig:DigestValue>
+        <dsig:DigestValue>h9nr1uB2+rPP9D8SygqfiEcFN7BHCbSUZY8qhDUjxQY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
